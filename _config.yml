@@ -1,0 +1,72 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Tommy Reddad
+author: Tommy Reddad
+tagline: "portfolio and blog"
+email: tommy.reddad@gmail.com
+description: "Montreal-based programmer and computer scientist. Applied probability theory, statistics, analysis of algorithms. Python, JavaScript, C."
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://www.reddad.ca"
+#twitter_username: jekyllrb
+github_username:  tommyreddad
+
+# Build settings
+markdown: kramdown
+mathjax: true
+theme: jekyll-whiteglass
+plugins:
+  - jekyll-feed
+  - jekyll-archives
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-scholar
+
+permalink: pretty
+paginate_path: /posts/:num/
+paginate: 5
+
+timezone: America/Montreal
+
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layout: category_archives
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
+
+# Google analytics
+google_analytics: UA-142724010-1
+
+# jekyll-scholar bibtex citation style
+scholar:
+  sort_by: year
+  order: descending
+  style: assets/ima-joam.csl
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+exclude:
+   - Gemfile
+   - Gemfile.lock
+   - node_modules
+   - vendor/bundle/
+   - vendor/cache/
+   - vendor/gems/
+   - vendor/ruby/
+   - deploy.sh
