@@ -4,7 +4,7 @@ title: "About"
 permalink: /about/
 ---
 
-**[Curriculum Vitae (pdf)][cv]**
+**[Resume/CV (pdf)][resume]**
 
 I'm a developer and computer scientist based in Montréal. My academic
 work concerns applied probability theory, statistics, and the analysis
@@ -24,7 +24,7 @@ thesis on <em>Encoding Arguments</em>.
 [pat-morin]: https://www.cglab.ca/~morin/
 [vida-dujmovic]: https://cglab.ca/~vida/
 [jit-bose]: https://jitbose.ca/
-[cv]: /assets/cv.pdf
+[resume]: /assets/resume.pdf
 
 # Contact
 * **[tommy.reddad@gmail.com](mailto:tommy.reddad@gmail.com)**
