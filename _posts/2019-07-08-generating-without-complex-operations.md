@@ -313,6 +313,10 @@ on $\mathbb{S}^2$ with only one square root.
 
 Try dragging the sphere to rotate it with your mouse!
 
+Is it possible to generate a uniform point on $\mathbb{S}^2$ without a
+square root or other complex function? If so, is there a minimum $d$
+for which it becomes impossible on $\mathbb{S}^{d - 1}$?
+
 ## The $(d - 1)$-sphere
 
 The rejection method from earlier does not scale well with $d$ for
