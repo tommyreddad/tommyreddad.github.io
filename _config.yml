@@ -56,7 +56,8 @@ google_analytics: UA-142724010-1
 scholar:
   sort_by: year
   order: descending
-  style: assets/ima-joam.csl
+  style: assets/elsevier.csl
+  bibliography_template: bibtemplate
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

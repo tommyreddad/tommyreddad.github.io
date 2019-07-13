@@ -279,7 +279,7 @@ same technique shows that
 \\[
 	\mathbf{P}\\{X_1 \le t\\} = 1 - \frac{1}{\pi} \arccos(t) .
 \\]
-So, $2 X_1 - 1$ has the well-known arcsine distribution. This
+So, $X_1^2$ has the well-known arcsine distribution. This
 illustrates that the case $d = 3$ is in fact special.
 In general, if $X$ is the one-dimensional marginal of a uniform point
 on $\mathbb{S}^{d - 1}$, then

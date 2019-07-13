@@ -1,0 +1,29 @@
+---
+---
+
+{{ reference }}
+
+<br>
+
+{% if entry.abs %}
+<blockquote>
+ {{ entry.abs }}
+</blockquote>
+{% endif %}
+<ul class="referencelinks">
+{% if entry.hyperlink %}
+<li>
+  <p class="post-continue">
+    <a href="{{ entry.hyperlink }}">Link</a>
+  </p>
+</li>
+{% endif %}
+{% if entry.abs %}
+<li>
+  <p class="tooltip">
+    <a>BibTeX</a>
+    <span class="tooltiptext">{{ entry.bibtex }}</span>
+  </p>
+</li>
+{% endif %}
+</ul>
