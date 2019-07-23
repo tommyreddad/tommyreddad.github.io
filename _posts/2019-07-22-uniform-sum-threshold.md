@@ -77,11 +77,19 @@ the expectation,
 \\[
 	\mathbf{P}\\{N \ge i\\} = \frac{1}{i!} , \qquad \mathbf{P}\\{N = i\\} = \frac{1}{(i - 1)! (i + 1)} .
 \\]
-Consider also the value of the uniform sum
+
+Consider also the value of the first uniform sum exceeding $1$,
 \\[
 	S_N = U_1 + \dots + U_N .
 \\]
-Since $N$ is a stopping time, by Wald's lemma,
+Deterministically, this quantity must be between $1$ and
+$2$. Intuitively, it seems likely that it will be at most $3/2$, since
+uniforms have expected value $1/2$, and since we're adding one last
+uniform before exceeding the threshold $1$.
+
+Since $N$ is a stopping time, by Wald's lemma, we can easily nail the
+expectation of $S_N$,
 \\[
-	\mathbf{E}\\{S_N\\} = \mathbf{E}\\{N\\} \mathbf{E}\\{U\\} = e/2 \approx 1.359.
+	\mathbf{E}\\{S_N\\} = \mathbf{E}\\{N\\} \mathbf{E}\\{U\\} = e/2 \approx 1.359,
 \\]
+which is indeed less than $3/2$.
