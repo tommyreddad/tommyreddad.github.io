@@ -44,7 +44,7 @@ particular $x$, let $w(x)$ denote the number of distinct elements of
 $D$ which have been queried since $x$ was last queried. For example,
 if $x_1 = x_2 = x_3 = 1$ and we are performing the fourth query, then
 $w(1) = 0$. On the other hand, if $x_1 = x_2 = 1$ and $x_3 = 2$, then
-$w(1) = 1$. If $\texttt{SEARCH}(x)$ takes time $O(\log (1 + w(x)))$,
+$w(1) = 1$. If $\texttt{SEARCH}(x)$ takes time $O(\log w(x))$,
 then $D$ is said to have the *working set property.* If a structure
 has this property, then this structure allows us to efficiently
 perform sequences of queries in which there are many recurring
@@ -140,14 +140,14 @@ of the static optimality meta-theorem.
 >**The Working-Set Theorem.**  
 > The cost of the query sequence $x\_1, x\_2, \dots, x\_m$ in a splay tree is at most
 >\\[
->	O\left(n \log n + m + \sum_{i = 1}^m \log (1 + w(x\_i)) \right) .
+>	O\left(n \log n + m + \sum_{i = 1}^m \log w(x\_i) \right) .
 >\\]
 
 Every year that I've TA'd the undergraduate honours data structures
 class at McGill University, students have been asked to design a data
 structure which has the *dynamic finger property*, where if $\Delta$
 is the difference in keys between the current and preceding queries,
-then the current operation should cost $O(\log (1 + \Delta))$. It's a
+then the current operation should cost $O(\log \Delta)$. It's a
 tricky problem, but with some work, this can be accomplished using
 a self-balancing binary search tree with level-linked lists, some
 smart traversal, and a bit of careful thinking... But who has the time
