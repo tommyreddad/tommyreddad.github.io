@@ -3,7 +3,7 @@ layout: post
 title: Splay trees and optimality
 use_math: true
 use_d3: true
-tags: trees
+tags: trees algorithms
 ---
 
 The splay tree is probably my favourite data structure. Is it useful

@@ -3,7 +3,7 @@ layout: post
 title: Generating spherical points without complex operations
 use_math: true
 use_d3: true
-tags: sphere random-generation
+tags: sphere random-generation algorithms
 ---
 
 These days, most of everyone's favourite languages and libraries for

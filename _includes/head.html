@@ -28,6 +28,10 @@
     <meta name="keywords" content="{{ keywords }}">
   {% endif %}
 
+  {% if page.use_bootstrap %}
+    {% include bootstrap_support.html %}
+  {% endif %}
+    
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <link rel="canonical" href="{{ canonical }}">
   {% assign feed_path = "/feed.xml" %}
@@ -84,4 +88,5 @@
   {% if page.use_d3 %}
     {% include d3_support.html %}
   {% endif %}
+    
 </head>
