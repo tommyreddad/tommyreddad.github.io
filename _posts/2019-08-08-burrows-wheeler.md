@@ -99,7 +99,6 @@ textarea {
 </div>
 </div>
 <script type="text/javascript" src="/assets/2019-08-08-burrows-wheeler/bwt.js"></script>
-
 The above form implements algorithms to code and decode from the
 move-to-front compression scheme, with or without an additional
 application of the Burrows-Wheeler transform. These extremely slick
