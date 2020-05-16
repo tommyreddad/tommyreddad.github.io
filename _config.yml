@@ -57,12 +57,14 @@ scholar:
   sort_by: year
   order: descending
   style: assets/elsevier.csl
+  #style: mla
   bibliography_template: bibtemplate
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 exclude:
+   - publications.md
    - Gemfile
    - Gemfile.lock
    - node_modules
