@@ -1,10 +1,717 @@
----
-# You don't need to edit this file, it's empty on purpose.
-# Edit whiteglass' home layout instead if you want to make some changes.
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-layout: home
-title: "Home"
-use_bootstrap: true
-use_math: true
-use_d3: true
----
+<!DOCTYPE html>
+<html lang="en">
+
+  <!--
+    Webpage powered by Jekyll with a modified version of the whiteglass
+    theme (https://github.com/yous/whiteglass).
+-->
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142724010-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142724010-1');
+  </script>
+
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  
+  
+  <title>Tommy Reddad · portfolio and blog</title>
+  <meta name="description" content="Montreal-based programmer and computer scientist. Applied probability theory, statistics, analysis of algorithms. Python, JavaScript, C.">
+  
+
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  
+    
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://www.reddad.ca/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Tommy Reddad" href="https://www.reddad.ca/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="Tommy Reddad · portfolio and blog">
+  <meta property="og:site_name" content="Tommy Reddad">
+  <meta property="og:url" content="https://www.reddad.ca/">
+  <meta property="og:description" content="Montreal-based programmer and computer scientist. Applied probability theory, statistics, analysis of algorithms. Python, JavaScript, C.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Tommy Reddad · portfolio and blog">
+  <meta name="twitter:description" content="Montreal-based programmer and computer scientist. Applied probability theory, statistics, analysis of algorithms. Python, JavaScript, C.">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      TeX: {
+          equationNumbers: {
+              autoNumber: "AMS"
+          }
+      },
+      tex2jax: {
+          inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+          processEscapes: true,
+      }
+  });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>-->
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+  
+    
+</head>
+
+  
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Tommy Reddad</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/publications/">Publications</a>
+      
+        
+        <a class="page-link" href="/archive/">Archive</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+
+  
+
+  <ul class="post-list">
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2019/08/08/burrows-wheeler/">The Burrows-Wheeler transform and move-to-front compression</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Aug 8, 2019
+            
+              
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/compression/">compression</a>,
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/algorithms/">algorithms</a>
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <style type="text/css">
+.bitContent {
+  display: inline;
+  }
+.bitCount {
+  display: inline;
+ 	    font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+  }
+.bitCountLabel {
+  font-weight: 700;
+    display: inline;
+      padding-right: 10px;
+      }
+.alphabetContent {
+  display: table-cell;
+    width: 100%;
+      border: 1px solid #e1e1e1;
+        margin-bottom: 16px;
+		    font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+	}
+.alphabet {
+  display: table;
+    width: 100%;
+    }
+label {
+  font-weight: 700;
+    display: table-cell;
+      width: 1px;
+        padding-right: 10px;
+	}
+textarea {
+  width: 100%;
+    display: block;
+      height: 300px;
+        border: 1px solid #e1e1e1;
+	  margin: 0 0 10px;
+	    padding: 10px;
+	    font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+	    }
+.tab-pane {
+  min-height: 300px;
+  }
+.nav-tabs {
+  margin: 19px 0px 18px;
+    visibility: visible;
+      border-bottom: 1px solid #ddd;
+      }
+.nav-tabs > li.active {
+  font-weight: 700;
+  }
+.nav-tabs > li {
+  float: left;
+    margin-bottom: -1px;
+    }
+.tab-content {
+  margin-bottom: 10px;
+  }
+</style>
+
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#inputContents">Input</a></li>
+<li><a data-toggle="tab" href="#bwtContents">BWT</a></li>
+<li><a data-toggle="tab" href="#mtfContents">MTF</a></li>
+<li><a data-toggle="tab" href="#bwtmtfContents">BWT + MTF</a></li>
+</ul>
+<div class="tab-content">
+<div id="inputContents" class="tab-pane active">
+<textarea id="input" placeholder="Text to compress..."></textarea>
+</div>
+<div id="bwtContents" class="tab-pane">
+<textarea id="bwt" placeholder="Burrows-Wheeler transform to invert..."></textarea>
+</div>
+<div id="mtfContents" class="tab-pane">
+<div class="alphabet">
+<label for="mtfSigma">Alphabet: </label>
+<input class="alphabetContent" type="text" id="mtfSigma" />
+</div>
+<textarea id="mtf" placeholder="MTF-compressed binary to decode..."></textarea>
+<div class="bitCount">
+<div class="bitCountLabel">Bit count: </div><div class="bitContent" id="mtfCount"></div>
+</div>
+</div>
+<div id="bwtmtfContents" class="tab-pane">
+<div class="alphabet">
+<label for="bwtmtfSigma">Alphabet: </label>
+<input class="alphabetContent" type="text" id="bwtmtfSigma" />
+</div>
+<textarea id="bwtmtf" placeholder="BWT+MTF-compressed binary to decode..."></textarea>
+<div class="bitCount">
+<div class="bitCountLabel">Bit count: </div><div class="bitContent" id="bwtmtfCount"></div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="/assets/2019-08-08-burrows-wheeler/bwt.js"></script>
+
+<p>The above form implements algorithms to code and decode from the
+move-to-front compression scheme, with or without an additional
+application of the Burrows-Wheeler transform. These extremely slick
+algorithms blew my mind when I first heard of them. They are currently
+in use, among other places, in
+<a href="https://en.wikipedia.org/wiki/Bzip2">bzip2</a> file compression.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2019/08/08/burrows-wheeler/">Read more &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2019/07/27/splay-trees/">Splay trees and optimality</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jul 27, 2019
+            
+              
+
+ •
+  
+    
+    
+      
+    
+      
+        <a href="/tags/trees/">trees</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/algorithms/">algorithms</a>
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>The splay tree is probably my favourite data structure. Is it useful
+in practice? Probably not, but its remarkable optimality properties
+coupled with its bare simplicity are so tantalizing that I’ve fallen
+in love with splaying. In the rest of this post, I’ll describe the
+splay tree structure, and present some of my favourite splay tree
+properties. You will also find an instructive D3 visualization of a
+splay tree in motion.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2019/07/27/splay-trees/">Read more &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2019/07/22/uniform-sum-threshold/">A uniform sum threshold problem</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jul 22, 2019
+            
+              
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/random-generation/">random-generation</a>
+      
+    
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>Let $U_1, U_2, \dots$ be an infinite sequence of independent
+$\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum
+index for which
+\[
+	U_1 + U_2 + \dots + U_N &gt; 1 .
+\]
+What is the expected value $\mathbf{E}\{N\}$?</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2019/07/22/uniform-sum-threshold/">Read more &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2019/07/08/generating-without-complex-operations/">Generating spherical points without complex operations</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jul 8, 2019
+            
+              
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/sphere/">sphere</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/random-generation/">random-generation</a>,
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/algorithms/">algorithms</a>
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>These days, most of everyone’s favourite languages and libraries for
+scientific computing come ready-equipped with random number generators
+for most common univariate distributions: the uniform, binomial,
+normal, geometric, exponential, beta, etc. In my experience,
+multivariate generation is comparatively hit-or-miss. But in any case,
+since documentation usually doesn’t specify implementation methods or
+running time, you usually can’t be sure of the efficiency of one of
+these functions without personally examining some source code, or
+being lucky and finding that someone else on StackExchange already
+did. Thankfully, when in doubt, one can always refer to the excellent
+and totally free book <a href="http://nrbook.com/devroye/">Non-Uniform Random Variate
+Generation</a> by my old PhD supervisor Luc Devroye. In
+fact, it seems this book is even more than free, as stated in this
+plea posted by the author on the book’s webpage.</p>
+<blockquote>
+  <p><strong>I give anyone the permission, even without asking me, to take these PDF files to a printer, print as many copies as you like, and sell them for profit.</strong> If you would like me to advertise the sales points of the hard copies, please let me know. <strong>To the libraries: Please do not charge patrons for copying this book. I grant everyone the right to copy at will, for free.</strong></p>
+</blockquote>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2019/07/08/generating-without-complex-operations/">Read more &rarr;</a>
+          </p>
+        
+      </li>
+    
+      
+      
+
+      <li>
+        <header class="post-header">
+          <h1 class="post-title">
+            
+              <a class="post-link" href="/2019/06/27/density-trees/">Discrete minimax estimation with trees</a>
+            
+          </h1>
+
+          <p class="post-meta">
+            Jun 27, 2019
+            
+              
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+        <a href="/tags/minimax/">minimax</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/density-estimation/">density-estimation</a>,
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+    
+    
+      
+    
+      
+        <a href="/tags/trees/">trees</a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+
+            
+            
+          </p>
+        </header>
+
+        <div class="post-content">
+          <p>This morning, I submitted the final version of my paper <a href="https://arxiv.org/abs/1812.06063">Discrete
+minimax estimation with trees</a> <a class="citation" href="#density-trees">(Devroye and Reddad, (2019)</a>, which is to appear in the Electronic
+Journal of Statistics. I think this paper is conceptually quite
+interesting, and I’m very happy with the final result, so in this post
+I’ll describe some of the main ideas present in the work.</p>
+
+
+        </div>
+        
+          <p class="post-continue">
+            <a href="/2019/06/27/density-trees/">Read more &rarr;</a>
+          </p>
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="pagination">
+    
+      <a class="previous" href="/posts/2/">&laquo; Older</a>
+    
+
+    
+  </div>
+
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; 2020. All rights reserved.
+
+    </p>
+
+  </div>
+  
+</footer>
+
+
+  </body>
+
+</html>
