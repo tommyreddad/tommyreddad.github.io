@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!--
+    Webpage powered by Jekyll with a modified version of the whiteglass
+    theme (https://github.com/yous/whiteglass).
+-->
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142724010-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142724010-1');
+  </script>
+
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  
+  
+  <title>A uniform sum threshold problem · Tommy Reddad</title>
+  <meta name="description" content="Let $U_1, U_2, \dots$ be an infinite sequence of independent $\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum index for which \[ U_1 + U_2 + \dots + U_N &amp;gt; 1 . \] What is the expected value $\mathbf{E}\{N\}$?">
+  
+
+  
+    
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Tommy Reddad" href="https://www.reddad.ca/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="A uniform sum threshold problem · Tommy Reddad">
+  <meta property="og:site_name" content="Tommy Reddad">
+  <meta property="og:url" content="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/">
+  <meta property="og:description" content="Let $U_1, U_2, \dots$ be an infinite sequence of independent $\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum index for which \[ U_1 + U_2 + \dots + U_N &amp;gt; 1 . \] What is the expected value $\mathbf{E}\{N\}$?">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="A uniform sum threshold problem · Tommy Reddad">
+  <meta name="twitter:description" content="Let $U_1, U_2, \dots$ be an infinite sequence of independent $\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum index for which \[ U_1 + U_2 + \dots + U_N &amp;gt; 1 . \] What is the...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      TeX: {
+          equationNumbers: {
+              autoNumber: "AMS"
+          }
+      },
+      tex2jax: {
+          inlineMath: [ ['$','$'], ['\\(', '\\)'] ],
+          processEscapes: true,
+      }
+  });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+    
+</head>
+
+  
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Tommy Reddad</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/publications/">Publications</a>
+      
+        
+        <a class="page-link" href="/archive/">Archive</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">A uniform sum threshold problem</h1>
+    
+    <p class="post-meta"><time datetime="2019-07-22T00:00:00-04:00" itemprop="datePublished">Jul 22, 2019</time>
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/random-generation/">random-generation</a>
+      
+    
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Let $U_1, U_2, \dots$ be an infinite sequence of independent
+$\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum
+index for which
+\[
+	U_1 + U_2 + \dots + U_N &gt; 1 .
+\]
+What is the expected value $\mathbf{E}\{N\}$?</p>
+
+<p>This problem was originally posed to me by some students of a course I
+was TA-ing, as part of a homework problem in another course they were
+taking. It didn’t take long for me to find the solution, but I was
+unsatisfied with the cleanliness of the proof. At the time, my
+ex-labmate Xing Shi Cai was visiting my lab, and I relayed the problem
+to him. He cleaned up the messy bits and presented to me the slickest
+possible proof.</p>
+
+<p>Firstly, by what is sometimes called the tail formula for
+expectations, we have that
+\[
+\begin{align*}
+	\mathbf{E}\{N\} &amp;= \sum_{i \ge 0} \mathbf{P}\{N \ge i\} \\
+			  &amp;= \sum_{i \ge 0} \mathbf{P}\{U_1 + \dots + U_i \le 1\} .
+\end{align*}
+\]
+Rearranging,
+\[
+\begin{align*}
+	\mathbf{P}\{U_1 + \dots + U_i \le 1\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1 - U_i\} \\
+	       		 &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} ,
+\end{align*}
+\]
+where $U_i’ \sim \mathrm{Uniform}[0, 1]$, and $U_i’$ is independent of $U_1, \dots, U_{i - 1}$.</p>
+
+<p>Consider the event $\mathcal{E}_i$ that
+\[
+	U_i’ = \max\{U_1, \dots, U_{i - 1}, U_i’\} .
+\]</p>
+
+<p>Since this is just a collection of independent uniform random
+variables, then $U_i’$ is maximum among them with probability exactly
+$\mathbf{P}\{\mathcal{E}_i\} = 1/i$. Moreover, conditionally upon
+$\mathcal{E}_i$, then $U_1/U_i’, \dots, U_{i - 1}/U_i’$
+normalizes the variables to lie in the interval $[0, 1]$, and in fact
+now each of these is independent and distributed as
+$\mathrm{Uniform}[0, 1]$. On the other hand, conditionally upon
+$\overline{\mathcal{E}_i}$, one of the other variables is larger than
+$U_i’$, and in particular,
+\[
+	U_1 + \dots + U_{i - 1} &gt; U_i’ .
+\]
+Therefore,
+\[
+\begin{align*}
+	 \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’ \mid \mathcal{E}_i\} \mathbf{P}\{\mathcal{E}_i\} \\
+	 		   &amp;= \frac{1}{i} \mathbf{P}\left\{\frac{U_1}{U_i’} + \dots + \frac{U_{i - 1}}{U_i’} \le 1 \,\Big|\, \mathcal{E}_i\right\} \\
+			   &amp;= \frac{1}{i} \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1\} ,
+\end{align*}
+\]
+and upon iterating, we get the following very satisfying equation,
+\[
+	\mathbf{P}\{U_1 + \dots + U_i \le 1\} = \frac{1}{i!} .
+\]
+Replacing this into the formula for the expectation, we get the magical result
+\[
+	\mathbf{E}\{N\} = \sum_{i \ge 0} \frac{1}{i!} = e .
+\]</p>
+
+<p>Incidentally, we’ve derived the entire distribution above, not just
+the expectation,
+\[
+	\mathbf{P}\{N \ge i\} = \frac{1}{i!} , \qquad \mathbf{P}\{N = i\} = \frac{1}{(i - 1)! (i + 1)} .
+\]</p>
+
+<p>Consider also the value of the first uniform sum exceeding $1$,
+\[
+	S_N = U_1 + \dots + U_N .
+\]
+Deterministically, this quantity must be between $1$ and
+$2$. Intuitively, it seems likely that it will be at most $3/2$, since
+uniforms have expected value $1/2$, and since we’re adding one last
+uniform before exceeding the threshold $1$.</p>
+
+<p>Since $N$ is a stopping time, by Wald’s lemma, we can easily nail the
+expectation of $S_N$,
+\[
+	\mathbf{E}\{S_N\} = \mathbf{E}\{N\} \mathbf{E}\{U\} = e/2 \approx 1.359,
+\]
+which is indeed less than $3/2$.</p>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; 2020. All rights reserved.
+
+    </p>
+
+  </div>
+  
+</footer>
+
+
+  </body>
+
+</html>
