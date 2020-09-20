@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="3.8.7">Jekyll</generator>
   
   
-  <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2020-05-16T15:52:24-04:00</updated>
-  <id>http://localhost:4000//</id>
+  <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
+  <updated>2020-09-19T21:19:31-04:00</updated>
+  <id>https://www.reddad.ca//</id>
 
   
     <title type="html">Tommy Reddad</title>
@@ -31,12 +31,12 @@
       <title type="html">The Burrows-Wheeler transform and move-to-front compression</title>
       
       
-      <link href="http://localhost:4000/2019/08/08/burrows-wheeler/" rel="alternate" type="text/html" title="The Burrows-Wheeler transform and move-to-front compression" />
+      <link href="https://www.reddad.ca/2019/08/08/burrows-wheeler/" rel="alternate" type="text/html" title="The Burrows-Wheeler transform and move-to-front compression" />
       
       <published>2019-08-08T00:00:00-04:00</published>
       <updated>2019-08-08T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/08/08/burrows-wheeler</id>
-      <content type="html" xml:base="http://localhost:4000/2019/08/08/burrows-wheeler/">&lt;style type=&quot;text/css&quot;&gt;
+      <id>https://www.reddad.ca/2019/08/08/burrows-wheeler</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/08/08/burrows-wheeler/">&lt;style type=&quot;text/css&quot;&gt;
 .bitContent {
   display: inline;
   }
@@ -293,12 +293,12 @@ the Burrows-Wheeler transform, this is brought all the way down to
       <title type="html">Splay trees and optimality</title>
       
       
-      <link href="http://localhost:4000/2019/07/27/splay-trees/" rel="alternate" type="text/html" title="Splay trees and optimality" />
+      <link href="https://www.reddad.ca/2019/07/27/splay-trees/" rel="alternate" type="text/html" title="Splay trees and optimality" />
       
       <published>2019-07-27T00:00:00-04:00</published>
       <updated>2019-07-27T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/07/27/splay-trees</id>
-      <content type="html" xml:base="http://localhost:4000/2019/07/27/splay-trees/">&lt;p&gt;The splay tree is probably my favourite data structure. Is it useful
+      <id>https://www.reddad.ca/2019/07/27/splay-trees</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/07/27/splay-trees/">&lt;p&gt;The splay tree is probably my favourite data structure. Is it useful
 in practice? Probably not, but its remarkable optimality properties
 coupled with its bare simplicity are so tantalizing that I’ve fallen
 in love with splaying. In the rest of this post, I’ll describe the
@@ -508,12 +508,12 @@ Let $T$ be a binary search tree and $x_1, x_2, \dots, x_m$ be a sequence of quer
       <title type="html">A uniform sum threshold problem</title>
       
       
-      <link href="http://localhost:4000/2019/07/22/uniform-sum-threshold/" rel="alternate" type="text/html" title="A uniform sum threshold problem" />
+      <link href="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/" rel="alternate" type="text/html" title="A uniform sum threshold problem" />
       
       <published>2019-07-22T00:00:00-04:00</published>
       <updated>2019-07-22T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/07/22/uniform-sum-threshold</id>
-      <content type="html" xml:base="http://localhost:4000/2019/07/22/uniform-sum-threshold/">&lt;p&gt;Let $U_1, U_2, \dots$ be an infinite sequence of independent
+      <id>https://www.reddad.ca/2019/07/22/uniform-sum-threshold</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/">&lt;p&gt;Let $U_1, U_2, \dots$ be an infinite sequence of independent
 $\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum
 index for which
 \[
@@ -637,12 +637,12 @@ which is indeed less than $3/2$.&lt;/p&gt;</content>
       <title type="html">Generating spherical points without complex operations</title>
       
       
-      <link href="http://localhost:4000/2019/07/08/generating-without-complex-operations/" rel="alternate" type="text/html" title="Generating spherical points without complex operations" />
+      <link href="https://www.reddad.ca/2019/07/08/generating-without-complex-operations/" rel="alternate" type="text/html" title="Generating spherical points without complex operations" />
       
       <published>2019-07-08T00:00:00-04:00</published>
       <updated>2019-07-08T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/07/08/generating-without-complex-operations</id>
-      <content type="html" xml:base="http://localhost:4000/2019/07/08/generating-without-complex-operations/">&lt;p&gt;These days, most of everyone’s favourite languages and libraries for
+      <id>https://www.reddad.ca/2019/07/08/generating-without-complex-operations</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/07/08/generating-without-complex-operations/">&lt;p&gt;These days, most of everyone’s favourite languages and libraries for
 scientific computing come ready-equipped with random number generators
 for most common univariate distributions: the uniform, binomial,
 normal, geometric, exponential, beta, etc. In my experience,
@@ -1022,12 +1022,12 @@ $O(d)$.&lt;/p&gt;</content>
       <title type="html">Discrete minimax estimation with trees</title>
       
       
-      <link href="http://localhost:4000/2019/06/27/density-trees/" rel="alternate" type="text/html" title="Discrete minimax estimation with trees" />
+      <link href="https://www.reddad.ca/2019/06/27/density-trees/" rel="alternate" type="text/html" title="Discrete minimax estimation with trees" />
       
       <published>2019-06-27T00:00:00-04:00</published>
       <updated>2019-06-27T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/06/27/density-trees</id>
-      <content type="html" xml:base="http://localhost:4000/2019/06/27/density-trees/">&lt;p&gt;This morning, I submitted the final version of my paper &lt;a href=&quot;https://arxiv.org/abs/1812.06063&quot;&gt;Discrete
+      <id>https://www.reddad.ca/2019/06/27/density-trees</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/06/27/density-trees/">&lt;p&gt;This morning, I submitted the final version of my paper &lt;a href=&quot;https://arxiv.org/abs/1812.06063&quot;&gt;Discrete
 minimax estimation with trees&lt;/a&gt; &lt;a class=&quot;citation&quot; href=&quot;#density-trees&quot;&gt;(Devroye and Reddad, (2019)&lt;/a&gt;, which is to appear in the Electronic
 Journal of Statistics. I think this paper is conceptually quite
 interesting, and I’m very happy with the final result, so in this post
@@ -1351,12 +1351,12 @@ articulated argument, &lt;a href=&quot;https://arxiv.org/abs/1812.06063&quot;&gt
       <title type="html">Some conditioned Galton-Watson trees never grow</title>
       
       
-      <link href="http://localhost:4000/2019/06/26/conditioned-gw-trees/" rel="alternate" type="text/html" title="Some conditioned Galton-Watson trees never grow" />
+      <link href="https://www.reddad.ca/2019/06/26/conditioned-gw-trees/" rel="alternate" type="text/html" title="Some conditioned Galton-Watson trees never grow" />
       
       <published>2019-06-26T00:00:00-04:00</published>
       <updated>2019-06-26T00:00:00-04:00</updated>
-      <id>http://localhost:4000/2019/06/26/conditioned-gw-trees</id>
-      <content type="html" xml:base="http://localhost:4000/2019/06/26/conditioned-gw-trees/">&lt;p&gt;When programmers hear the phrase “random tree,” they most likely think
+      <id>https://www.reddad.ca/2019/06/26/conditioned-gw-trees</id>
+      <content type="html" xml:base="https://www.reddad.ca/2019/06/26/conditioned-gw-trees/">&lt;p&gt;When programmers hear the phrase “random tree,” they most likely think
 of a random binary search tree, i.e., a binary search tree built from
 the insertion of a uniformly random permutation of $n$ keys—denote such
 a tree by $\mathrm{BST}_n$. A mathematician might instead think that a
