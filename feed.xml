@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-09-20T14:37:39-04:00</updated>
+  <updated>2020-09-25T22:38:03-04:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -147,36 +147,36 @@ attains at most a constant factor of the empirical entropy of the
 input stream.&lt;/p&gt;
 
 &lt;p&gt;We first suppose that our input stream has characters drawn from the
-alphabet $\Sigma$; for binary inputs, $\Sigma = {0, 1}$. If the
+alphabet \(\Sigma\); for binary inputs, \(\Sigma = {0, 1}\). If the
 encoder and decoder were both aware of the alphabet maintained in a
 fixed and agreed upon order, then we could encode the input stream by
 simply sending the stream of indices in the alphabet corresponding to
-each character. For example, with the alphabet $\Sigma = (a, b, c,
-\dots, z)$, we could represent the message &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; with the
+each character. For example, with the alphabet \(\Sigma = (a, b, c,
+\dots, z)\), we could represent the message &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; with the
 sequence of indices &lt;code class=&quot;highlighter-rouge&quot;&gt;13, 9, 19, 19, 9, 19, 19, 9, 16, 16,
 9&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Move-to-front makes the simple change over this trivial scheme that
 each time a character is polled, it is moved to the front of the
 alphabet. For example, in the first step of encoding &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt;,
-the alphabet $\Sigma$ is scanned from left to right until the symbol
+the alphabet \(\Sigma\) is scanned from left to right until the symbol
 &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; is encountered in the 13-th index, so we write &lt;code class=&quot;highlighter-rouge&quot;&gt;13&lt;/code&gt; and move &lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt;
-to the front of the alphabet, which now becomes $\Sigma = (m, a, b, c,
-\dots, l, n, \dots, z)$. Each step of encoding &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; is
+to the front of the alphabet, which now becomes \(\Sigma = (m, a, b, c,
+\dots, l, n, \dots, z)\). Each step of encoding &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; is
 detailed below:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;13&lt;/code&gt;, $\Sigma = (m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;, $\Sigma = (i, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;19&lt;/code&gt;, $\Sigma = (s, i, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, $\Sigma = (s, i, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, $\Sigma = (i, s, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, $\Sigma = (s, i, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, $\Sigma = (s, i, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, $\Sigma = (i, s, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;17&lt;/code&gt;, $\Sigma = (p, i, s, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, $\Sigma = (p, i, s, m, a, b, \dots, z)$.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, $\Sigma = (i, p, s, m, a, b, \dots, z)$.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;m&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;13&lt;/code&gt;, \(\Sigma = (m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;, \(\Sigma = (i, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;19&lt;/code&gt;, \(\Sigma = (s, i, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, \(\Sigma = (s, i, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, \(\Sigma = (i, s, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, \(\Sigma = (s, i, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, \(\Sigma = (s, i, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, \(\Sigma = (i, s, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;17&lt;/code&gt;, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;p&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; index &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;, \(\Sigma = (i, p, s, m, a, b, \dots, z)\).&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;With move-to-front, &lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; is thus encoded with the sequence
@@ -186,7 +186,7 @@ characters.&lt;/p&gt;
 
 &lt;p&gt;We still have to encode the integers in this index sequence. When we
 know that these indices are bounded within some range, as they are in
-this case between $1$ and $|\Sigma|$, it is common to use a
+this case between \(1\) and \(|\Sigma|\), it is common to use a
 fixed-width encoding; in computing terms, each character is
 represented using a fixed number of bits or bytes. However, in order
 to take advantage of the magnitude reduction of indices in
@@ -198,34 +198,34 @@ is prefix-free if no codeword is the prefix of another. Note that it
 is possible to decode a sequence of codewords from a prefix-free code
 immediately once each new codeword is encountered. The simplest
 prefix-free code for natural numbers is the &lt;em&gt;unary code&lt;/em&gt;, where the
-integer &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is encoded using a sequence of $i - 1$ &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; characters,
+integer &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt; is encoded using a sequence of \(i - 1\) &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; characters,
 followed by a single &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;. This last &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt; is necessary to delimit
 codewords in order to make the code prefix-free. It’s obvious that the
-unary codeword for $i$ has length $i$.&lt;/p&gt;
+unary codeword for \(i\) has length \(i\).&lt;/p&gt;
 
-&lt;p&gt;The Elias $\gamma$-code is another prefix-free code of natural
+&lt;p&gt;The Elias \(\gamma\)-code is another prefix-free code of natural
 numbers. Observe first that the binary codeword for the integer &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;
-has length $\lfloor \log_2 i \rfloor + 1$ bits, and the
+has length \(\lfloor \log_2 i \rfloor + 1\) bits, and the
 most-significant bit here is always a &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;. This by itself is not a
-prefix-free code. The Elias $\gamma$-code prepends a sequence of
-$\lfloor \log_2 i \rfloor$ &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; bits to the binary codeword for &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;,
-thereby creating a prefix-free code of length $2 \lfloor \log_2 i
-\rfloor + 1$ for the integer &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;.&lt;/p&gt;
+prefix-free code. The Elias \(\gamma\)-code prepends a sequence of
+\(\lfloor \log_2 i \rfloor\) &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; bits to the binary codeword for &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;,
+thereby creating a prefix-free code of length \(2 \lfloor \log_2 i
+\rfloor + 1\) for the integer &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;In principle, the Elias $\gamma$-code presents the number $\lfloor
-\log_2 i \rfloor + 1$ in a unary encoding through the most
+&lt;p&gt;In principle, the Elias \(\gamma\)-code presents the number \(\lfloor
+\log_2 i \rfloor + 1\) in a unary encoding through the most
 significant bits of the codeword for &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;, which tells us the remaining
 bits to be read in order to guarantee prefix-freeness. If we encode
-this integer instead with an Elias $\gamma$-code itself instead of
-unary, then we obtain the Elias $\delta$-code. For the integer $i$,
-the Elias $\delta$-code has length $\log_2 i + O(\log \log i)$. It’s
+this integer instead with an Elias \(\gamma\)-code itself instead of
+unary, then we obtain the Elias \(\delta\)-code. For the integer \(i\),
+the Elias \(\delta\)-code has length \(\log_2 i + O(\log \log i)\). It’s
 actually possible to iterate this process as much as possible to
-obtain the Elias $\omega$-code, but the Elias $\delta$-code is
-powerful enough for most purposes that the $\omega$-code is rarely
+obtain the Elias \(\omega\)-code, but the Elias \(\delta\)-code is
+powerful enough for most purposes that the \(\omega\)-code is rarely
 used, even in theoretical works.&lt;/p&gt;
 
 &lt;p&gt;You can try to use the form at the top of this post to encode
-&lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; in move-to-front with Elias $\delta$-codes, by typing it
+&lt;code class=&quot;highlighter-rouge&quot;&gt;mississippi&lt;/code&gt; in move-to-front with Elias \(\delta\)-codes, by typing it
 in the input tab and switching to the MTF tab.&lt;/p&gt;
 
 &lt;p&gt;There is one simple and reversible transformation which we can make to
@@ -233,7 +233,7 @@ the input in order to greatly improve move-to-front compression
 performance on highly structured inputs: this is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform&quot;&gt;Burrows-Wheeler
 transform&lt;/a&gt;. Simply
 put, the Burrows-Wheeler transform of an input string &lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt; takes all
-all cyclic rotations of the string &lt;code class=&quot;highlighter-rouge&quot;&gt;str + $&lt;/code&gt;, where &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; is an
+all cyclic rotations of the string &lt;code class=&quot;highlighter-rouge&quot;&gt;str + \\(&lt;/code&gt;, where &lt;code class=&quot;highlighter-rouge&quot;&gt;\\)&lt;/code&gt; is an
 otherwise unused character, and sorts these rotations in lexicographic
 order, taking the last character of each of these sorted
 rotations.&lt;/p&gt;
@@ -307,13 +307,13 @@ properties. You will also find an instructive D3 visualization of a
 splay tree in motion.&lt;/p&gt;
 
 &lt;p&gt;Splay trees are a kind of binary search tree, so they support the
-crucial search tree query $\texttt{SEARCH}(k)$ which returns the
-smallest value $x \ge k$ stored in the tree. As an aside, many
+crucial search tree query \(\texttt{SEARCH}(k)\) which returns the
+smallest value \(x \ge k\) stored in the tree. As an aside, many
 students ignore the difference between this search query, and what we
-may call a $\texttt{FIND}(k)$ query of dictionaries, which only should
-return $k$ if $k$ is present in the structure, and nothing
-otherwise. Obviously, we can always implement $\texttt{FIND}$ with
-$\texttt{SEARCH}$, but the reverse is not true. These are
+may call a \(\texttt{FIND}(k)\) query of dictionaries, which only should
+return \(k\) if \(k\) is present in the structure, and nothing
+otherwise. Obviously, we can always implement \(\texttt{FIND}\) with
+\(\texttt{SEARCH}\), but the reverse is not true. These are
 fundamentally different queries with different goals and limitations,
 which is sometimes not emphasized in undergraduate computer science
 courses, and indeed, the ignorance of this difference may lend
@@ -330,14 +330,14 @@ self-adjust also on queries, to be adaptive to input query
 sequences. Before describing this transformation in more detail, I’ll
 present a problem which happens to be solved by splay trees.&lt;/p&gt;
 
-&lt;p&gt;Let $D$ be some data structure implementing $\texttt{SEARCH}$. We
-perform a sequence of queries $x_1, x_2, \dots$ on $D$. For a
-particular $x$, let $w(x)$ denote the number of distinct elements of
-$D$ which have been queried since $x$ was last queried. For example,
-if $x_1 = x_2 = x_3 = 1$ and we are performing the fourth query, then
-$w(1) = 0$. On the other hand, if $x_1 = x_2 = 1$ and $x_3 = 2$, then
-$w(1) = 1$. If $\texttt{SEARCH}(x)$ takes time $O(\log w(x))$,
-then $D$ is said to have the &lt;em&gt;working set property.&lt;/em&gt; If a structure
+&lt;p&gt;Let \(D\) be some data structure implementing \(\texttt{SEARCH}\). We
+perform a sequence of queries \(x_1, x_2, \dots\) on \(D\). For a
+particular \(x\), let \(w(x)\) denote the number of distinct elements of
+\(D\) which have been queried since \(x\) was last queried. For example,
+if \(x_1 = x_2 = x_3 = 1\) and we are performing the fourth query, then
+\(w(1) = 0\). On the other hand, if \(x_1 = x_2 = 1\) and \(x_3 = 2\), then
+\(w(1) = 1\). If \(\texttt{SEARCH}(x)\) takes time \(O(\log w(x))\),
+then \(D\) is said to have the &lt;em&gt;working set property.&lt;/em&gt; If a structure
 has this property, then this structure allows us to efficiently
 perform sequences of queries in which there are many recurring
 items. It’s not totally obvious how to implement a structure which has
@@ -347,12 +347,12 @@ the working set property, but one relatively easy example is given by
 &lt;p&gt;Intuitively, if we wanted to make a binary search tree which has the
 working set property, we might simply rotate any queried element all
 the way up to the root. This isn’t quite right. Take for example the
-sequence of insertions $x_1 = 1, x_2 = 2, \dots, x_n = n$. Each
+sequence of insertions \(x_1 = 1, x_2 = 2, \dots, x_n = n\). Each
 insertion in this structure will take constant time, and the final
-tree looks like a root with one right child, and a path of $n - 2$
-nodes hanging off its left child. Then, the query $x_{n + 1} = 1$
-takes $\varOmega(n)$ time. In fact, if $x_{n + i} = i$ for each $i$,
-then the queries will even take $\varOmega(n)$ amortized time. So, the
+tree looks like a root with one right child, and a path of \(n - 2\)
+nodes hanging off its left child. Then, the query \(x_{n + 1} = 1\)
+takes \(\varOmega(n)\) time. In fact, if \(x_{n + i} = i\) for each \(i\),
+then the queries will even take \(\varOmega(n)\) amortized time. So, the
 most obvious suggestion fails to implement the working set property.&lt;/p&gt;
 
 &lt;p&gt;Splay trees are the next simplest choice. Instead of performing
@@ -366,16 +366,16 @@ of a target splayed node: the zig, the zig-zig, and the zig-zag.&lt;/p&gt;
 
 &lt;p&gt;This is an ordinary binary tree rotation, as seen for example in
 red-black trees. The zig is only performed when the splayed node is a
-child of the root. On the left, the node to be splayed is $x$, and the
-root is $y$. The zig transforms the left tree into the right tree.&lt;/p&gt;
+child of the root. On the left, the node to be splayed is \(x\), and the
+root is \(y\). The zig transforms the left tree into the right tree.&lt;/p&gt;
 
 &lt;div id=&quot;zig&quot; align=&quot;center&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;/assets/2019-07-27-splay-trees/zig.min.js&quot;&gt;&lt;/script&gt;
 
 &lt;h3 id=&quot;the-zig-zig&quot;&gt;The zig-zig&lt;/h3&gt;
 
-&lt;p&gt;A zig-zig is performed whenever the splayed node $x$ is the left-left
-child or the right-right child of its grandparent. A zig-zig of $x$
+&lt;p&gt;A zig-zig is performed whenever the splayed node \(x\) is the left-left
+child or the right-right child of its grandparent. A zig-zig of \(x\)
 transforms the left tree into the right tree.&lt;/p&gt;
 
 &lt;div id=&quot;zigzig&quot; align=&quot;center&quot;&gt;&lt;/div&gt;
@@ -404,30 +404,30 @@ power.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;The Static Optimality Meta-Theorem.&lt;/strong&gt;&lt;br /&gt;
-Let $T$ be some fixed binary search tree, and let $d(x)$ be the depth of the node $x$ in $T$. Let $x_1, x_2, \dots, x_m$ be a sequence of queries in $T$. The cost of accessing $x_1, x_2, \dots, x_m$ in a splay tree is at most&lt;br /&gt;
+Let \(T\) be some fixed binary search tree, and let \(d(x)\) be the depth of the node \(x\) in \(T\). Let \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most&lt;br /&gt;
 \[
 	O\left(n \log n + m + \sum_{i = 1}^m d(x_i)\right) .
 \]&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;The $n \log n + m$ part can be thought of as the cost of doing
+&lt;p&gt;The \(n \log n + m\) part can be thought of as the cost of doing
 business in any balanced binary tree. The remaining part is the cost
-of the sequence of queries $x_1, \dots, x_m$ in $T$. So what this
+of the sequence of queries \(x_1, \dots, x_m\) in \(T\). So what this
 result says is that, for long enough query sequences, splay trees
 perform as well as any static binary search tree. In particular, if we
-pick $T$ to be a balanced complete binary tree, then we get the
+pick \(T\) to be a balanced complete binary tree, then we get the
 following corollary.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;The Balance Theorem.&lt;/strong&gt;&lt;br /&gt;
-The cost of any sequence of $m$ queries in a splay tree is at most
+The cost of any sequence of \(m\) queries in a splay tree is at most
 \[
 	O(n\log n + m \log n) .
 \]&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;From this, we learn that the amortized cost of each operation is
-$O(\log n)$, so splay trees behave like balanced binary search trees.&lt;/p&gt;
+\(O(\log n)\), so splay trees behave like balanced binary search trees.&lt;/p&gt;
 
 &lt;p&gt;As it turns out, splay trees also have the amortized working set
 property which we discussed earlier, though this is not a consequence
@@ -435,7 +435,7 @@ of the static optimality meta-theorem.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;The Working-Set Theorem.&lt;/strong&gt;&lt;br /&gt;
-The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O\left(n \log n + m + \sum_{i = 1}^m \log w(x_i) \right) .
 \]&lt;/p&gt;
@@ -443,9 +443,9 @@ The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
 
 &lt;p&gt;Every year that I’ve TA’d the undergraduate honours data structures
 class at McGill University, students have been asked to design a data
-structure which has the &lt;em&gt;dynamic finger property&lt;/em&gt;, where if $\Delta$
+structure which has the &lt;em&gt;dynamic finger property&lt;/em&gt;, where if \(\Delta\)
 is the difference in keys between the current and preceding queries,
-then the current operation should cost $O(\log \Delta)$. It’s a
+then the current operation should cost \(O(\log \Delta)\). It’s a
 tricky problem, but with some work, this can be accomplished using
 a self-balancing binary search tree with level-linked lists, some
 smart traversal, and a bit of careful thinking… But who has the time
@@ -453,11 +453,11 @@ for that?&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;The Dynamic Finger Theorem.&lt;/strong&gt;&lt;br /&gt;
-The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O\left(n + m + \sum_{i = 1}^m \log(1 + |x_i - x_{i - 1}|)\right) ,
 \]
-where $x_0 = 0$.&lt;/p&gt;
+where \(x_0 = 0\).&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Is there anything splay trees can’t do? We simply do not yet know,
@@ -465,7 +465,7 @@ considering the following conjecture remains open.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;The Dynamic Optimality Conjecture.&lt;/strong&gt;&lt;br /&gt;
-Let $T$ be a binary search tree and $x_1, x_2, \dots, x_m$ be a sequence of queries in $T$. Suppose that we are allowed to modify $T$ by rotations after each query. Let $S(T)$ be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing $x_1, x_2, \dots, x_m$ in a splay tree is at most
+Let \(T\) be a binary search tree and \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). Suppose that we are allowed to modify \(T\) by rotations after each query. Let \(S(T)\) be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O(n + S(T)) .
 \]&lt;/p&gt;
@@ -513,13 +513,13 @@ Let $T$ be a binary search tree and $x_1, x_2, \dots, x_m$ be a sequence of quer
       <published>2019-07-22T00:00:00-04:00</published>
       <updated>2019-07-22T00:00:00-04:00</updated>
       <id>https://www.reddad.ca/2019/07/22/uniform-sum-threshold</id>
-      <content type="html" xml:base="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/">&lt;p&gt;Let $U_1, U_2, \dots$ be an infinite sequence of independent
-$\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum
+      <content type="html" xml:base="https://www.reddad.ca/2019/07/22/uniform-sum-threshold/">&lt;p&gt;Let \(U_1, U_2, \dots\) be an infinite sequence of independent
+\(\mathrm{Uniform}[0, 1]\) random variables. Let \(N\) be the minimum
 index for which
 \[
 	U_1 + U_2 + \dots + U_N &amp;gt; 1 .
 \]
-What is the expected value $\mathbf{E}\{N\}$?&lt;/p&gt;
+What is the expected value \(\mathbf{E}\{N\}\)?&lt;/p&gt;
 
 &lt;p&gt;This problem was originally posed to me by some students of a course I
 was TA-ing, as part of a homework problem in another course they were
@@ -532,44 +532,44 @@ possible proof.&lt;/p&gt;
 &lt;p&gt;Firstly, by what is sometimes called the tail formula for
 expectations, we have that
 \[
-\begin{align*}
+\begin{aligned}
 	\mathbf{E}\{N\} &amp;amp;= \sum_{i \ge 0} \mathbf{P}\{N \ge i\} \\
 			  &amp;amp;= \sum_{i \ge 0} \mathbf{P}\{U_1 + \dots + U_i \le 1\} .
-\end{align*}
+\end{aligned}
 \]
 Rearranging,
 \[
-\begin{align*}
+\begin{aligned}
 	\mathbf{P}\{U_1 + \dots + U_i \le 1\} &amp;amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1 - U_i\} \\
 	       		 &amp;amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} ,
-\end{align*}
+\end{aligned}
 \]
-where $U_i’ \sim \mathrm{Uniform}[0, 1]$, and $U_i’$ is independent of $U_1, \dots, U_{i - 1}$.&lt;/p&gt;
+where \(U_i’ \sim \mathrm{Uniform}[0, 1]\), and \(U_i’\) is independent of \(U_1, \dots, U_{i - 1}\).&lt;/p&gt;
 
-&lt;p&gt;Consider the event $\mathcal{E}_i$ that
+&lt;p&gt;Consider the event \(\mathcal{E}_i\) that
 \[
 	U_i’ = \max\{U_1, \dots, U_{i - 1}, U_i’\} .
 \]&lt;/p&gt;
 
 &lt;p&gt;Since this is just a collection of independent uniform random
-variables, then $U_i’$ is maximum among them with probability exactly
-$\mathbf{P}\{\mathcal{E}_i\} = 1/i$. Moreover, conditionally upon
-$\mathcal{E}_i$, then $U_1/U_i’, \dots, U_{i - 1}/U_i’$
-normalizes the variables to lie in the interval $[0, 1]$, and in fact
+variables, then \(U_i’\) is maximum among them with probability exactly
+\(\mathbf{P}\{\mathcal{E}_i\} = 1/i\). Moreover, conditionally upon
+\(\mathcal{E}_i\), then \(U_1/U_i’, \dots, U_{i - 1}/U_i’\)
+normalizes the variables to lie in the interval \([0, 1]\), and in fact
 now each of these is independent and distributed as
-$\mathrm{Uniform}[0, 1]$. On the other hand, conditionally upon
-$\overline{\mathcal{E}_i}$, one of the other variables is larger than
-$U_i’$, and in particular,
+\(\mathrm{Uniform}[0, 1]\). On the other hand, conditionally upon
+\(\overline{\mathcal{E}_i}\), one of the other variables is larger than
+\(U_i’\), and in particular,
 \[
 	U_1 + \dots + U_{i - 1} &amp;gt; U_i’ .
 \]
 Therefore,
 \[
-\begin{align*}
+\begin{aligned}
 	 \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} &amp;amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’ \mid \mathcal{E}_i\} \mathbf{P}\{\mathcal{E}_i\} \\
 	 		   &amp;amp;= \frac{1}{i} \mathbf{P}\left\{\frac{U_1}{U_i’} + \dots + \frac{U_{i - 1}}{U_i’} \le 1 \,\Big|\, \mathcal{E}_i\right\} \\
 			   &amp;amp;= \frac{1}{i} \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1\} ,
-\end{align*}
+\end{aligned}
 \]
 and upon iterating, we get the following very satisfying equation,
 \[
@@ -586,21 +586,21 @@ the expectation,
 	\mathbf{P}\{N \ge i\} = \frac{1}{i!} , \qquad \mathbf{P}\{N = i\} = \frac{1}{(i - 1)! (i + 1)} .
 \]&lt;/p&gt;
 
-&lt;p&gt;Consider also the value of the first uniform sum exceeding $1$,
+&lt;p&gt;Consider also the value of the first uniform sum exceeding \(1\),
 \[
 	S_N = U_1 + \dots + U_N .
 \]
-Deterministically, this quantity must be between $1$ and
-$2$. Intuitively, it seems likely that it will be at most $3/2$, since
-uniforms have expected value $1/2$, and since we’re adding one last
-uniform before exceeding the threshold $1$.&lt;/p&gt;
+Deterministically, this quantity must be between \(1\) and
+\(2\). Intuitively, it seems likely that it will be at most \(3/2\), since
+uniforms have expected value \(1/2\), and since we’re adding one last
+uniform before exceeding the threshold \(1\).&lt;/p&gt;
 
-&lt;p&gt;Since $N$ is a stopping time, by Wald’s lemma, we can easily nail the
-expectation of $S_N$,
+&lt;p&gt;Since \(N\) is a stopping time, by Wald’s lemma, we can easily nail the
+expectation of \(S_N\),
 \[
 	\mathbf{E}\{S_N\} = \mathbf{E}\{N\} \mathbf{E}\{U\} = e/2 \approx 1.359,
 \]
-which is indeed less than $3/2$.&lt;/p&gt;</content>
+which is indeed less than \(3/2\).&lt;/p&gt;</content>
 
       
       
@@ -623,7 +623,7 @@ which is indeed less than $3/2$.&lt;/p&gt;</content>
       
 
       
-        <summary type="html">Let $U_1, U_2, \dots$ be an infinite sequence of independent $\mathrm{Uniform}[0, 1]$ random variables. Let $N$ be the minimum index for which \[ U_1 + U_2 + \dots + U_N &amp;gt; 1 . \] What is the expected value $\mathbf{E}\{N\}$?</summary>
+        <summary type="html">Let \(U_1, U_2, \dots\) be an infinite sequence of independent \(\mathrm{Uniform}[0, 1]\) random variables. Let \(N\) be the minimum index for which \[ U_1 + U_2 + \dots + U_N &amp;gt; 1 . \] What is the expected value \(\mathbf{E}\{N\}\)?</summary>
       
 
       
@@ -663,12 +663,12 @@ plea posted by the author on the book’s webpage.&lt;/p&gt;
 &lt;p&gt;The book is a wonder, even with its age. It is a massive resource for
 efficient and extremely clever algorithms for generating random
 numbers with almost every distribution one could dream of. The
-starting point is access to an infinite source of $\mathrm{Uniform}[0,
-1]$ random samples. We should note that this is a sensible starting
-point for computer science, since we can generate $\mathrm{Uniform}[0,
-1]$ random samples with a source of uniformly random bits $X_i \in
-\{0, 1\}$. Specifically, if $0.x_1 x_2 x_3 \dots$ denotes the
-binary expansion of a number in $[0, 1]$, then
+starting point is access to an infinite source of \(\mathrm{Uniform}[0,
+1]\) random samples. We should note that this is a sensible starting
+point for computer science, since we can generate \(\mathrm{Uniform}[0,
+1]\) random samples with a source of uniformly random bits \(X_i \in
+\{0, 1\}\). Specifically, if \(0.x_1 x_2 x_3 \dots\) denotes the
+binary expansion of a number in \([0, 1]\), then
 \[
 	0.X_1 X_2 X_3 \dots \sim \mathrm{Uniform}[0, 1] .
 \]
@@ -676,24 +676,24 @@ With this, it’s possible to generating any other
 random variable, using the simple &lt;em&gt;inversion method&lt;/em&gt;.&lt;/p&gt;
 
 &lt;p&gt;The inversion method can be used if we know the CDF of the target
-distribution. Indeed, if $X$ is a random variable with the target
-distribution which has CDF $F$, and $U \sim \mathrm{Uniform}[0, 1]$,
+distribution. Indeed, if \(X\) is a random variable with the target
+distribution which has CDF \(F\), and \(U \sim \mathrm{Uniform}[0, 1]\),
 then
 \[
 	\mathbf{P}\{F^{-1}(U) \le t\} = \mathbf{P}\{U \le F(t)\} = F(t) ,
 \]
-so $F^{-1}(U)$ has the same distribution as $X$. In other words, we
-can generate $X$ by generating $F^{-1}(U)$. This isn’t always
-practical, considering $F^{-1}$ might be a difficult function, and
+so \(F^{-1}(U)\) has the same distribution as \(X\). In other words, we
+can generate \(X\) by generating \(F^{-1}(U)\). This isn’t always
+practical, considering \(F^{-1}\) might be a difficult function, and
 working directly with it might introduce some floating point precision
 errors. Even more likely and much worse, we might not even be able to
-express $F^{-1}$ in a closed form, and it may only be expressed by an
-implicit equation involving an integral or a sum. Take, for instance, $X \sim
-\mathcal{N}(0, 1)$, the standard normal distribution. Then,
+express \(F^{-1}\) in a closed form, and it may only be expressed by an
+implicit equation involving an integral or a sum. Take, for instance, \(X \sim
+\mathcal{N}(0, 1)\), the standard normal distribution. Then,
 \[
 	F(t) = \int_{-\infty}^t \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \,\mathrm{d}x ,
 \]
-and $F^{-1}(s)$ is defined implicitly as satisfying
+and \(F^{-1}(s)\) is defined implicitly as satisfying
 \[
 	s = \int_{-\infty}^{F^{-1}(s)} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \,\mathrm{d}x .
 \]
@@ -716,42 +716,42 @@ random variables according to some special distributions.&lt;/p&gt;
 uniform points on the surface of a sphere. This content is covered in
 Chapter 5 of &lt;a href=&quot;http://nrbook.com/devroye/&quot;&gt;the book&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-1-sphere&quot;&gt;The $1$-sphere&lt;/h2&gt;
+&lt;h2 id=&quot;the-1-sphere&quot;&gt;The \(1\)-sphere&lt;/h2&gt;
 
-&lt;p&gt;We define the unit $(d - 1)$-sphere $\mathbb{S}^{d - 1}$ as
+&lt;p&gt;We define the unit \((d - 1)\)-sphere \(\mathbb{S}^{d - 1}\) as
 \[
 	\mathbb{S}^{d - 1} = \{x \in \mathbb{R}^d \colon \|x\|_2 = 1\} ,
 \]&lt;/p&gt;
 
-&lt;p&gt;where $\|\cdot\|_2$ denotes the Euclidean norm. One natural way to
-generate a uniform point on $\mathbb{S}^{d - 1}$ is to generate a high
-dimensional normal vector $Z \sim \mathcal{N}(0, I_d)$, and
-normalize it. In other words, $Z/\|Z||_2$ is uniformly distributed
-on $\mathbb{S}^{d - 1}$. In fact, it may be intuitively clear that if $X$ is
-any random variable with a &lt;em&gt;radially symmetric&lt;/em&gt; distribution on $\mathbb{R}^d$, then
-$X/\|X\|_2$ will be uniformly distributed on $\mathbb{S}^{d - 1}$, and the
+&lt;p&gt;where \(\|\cdot\|_2\) denotes the Euclidean norm. One natural way to
+generate a uniform point on \(\mathbb{S}^{d - 1}\) is to generate a high
+dimensional normal vector \(Z \sim \mathcal{N}(0, I_d)\), and
+normalize it. In other words, \(Z/\|Z||_2\) is uniformly distributed
+on \(\mathbb{S}^{d - 1}\). In fact, it may be intuitively clear that if \(X\) is
+any random variable with a &lt;em&gt;radially symmetric&lt;/em&gt; distribution on \(\mathbb{R}^d\), then
+\(X/\|X\|_2\) will be uniformly distributed on \(\mathbb{S}^{d - 1}\), and the
 normal distribution is probably the simplest such choice.&lt;/p&gt;
 
 &lt;p&gt;Unfortunately, it’s not clear to begin with whether generating high
 dimensional normals is harder than generating high dimensional
 spherical points, so from a first-principles standpoint we’re
-stuck. To get anywhere, let’s begin with the simplest case, $d = 2$,
-so $\mathbb{S}^1$ is the usual unit circle
+stuck. To get anywhere, let’s begin with the simplest case, \(d = 2\),
+so \(\mathbb{S}^1\) is the usual unit circle
 \[
 	\mathbb{S}^1 = \{(x, y) \in \mathbb{R}^2 \colon x^2 + y^2 = 1\} .
 \]
 In this particular case, there is the well-known &lt;a href=&quot;https://en.wikipedia.org/wiki/Box-Muller_transform&quot;&gt;Box-Muller
-transform&lt;/a&gt; for generating $X \sim \mathcal{N}(0, I_2)$,
+transform&lt;/a&gt; for generating \(X \sim \mathcal{N}(0, I_2)\),
 whence the above approach becomes applicable, but again it’s not
 exactly clear if the Box-Muller method is technically harder than the
 problem we’re already trying to solve. Considering Box-Muller involves
 trigonometric functions, we’d like to avoid it if possible.&lt;/p&gt;
 
 &lt;p&gt;It’s actually easy to generate a radially symmetric random variable
-using our source of $\mathrm{Uniform}[0, 1]$ samples by
+using our source of \(\mathrm{Uniform}[0, 1]\) samples by
 &lt;em&gt;rejection&lt;/em&gt;. First, trivially note that we can generate
-$\mathrm{Uniform}[-1, 1]$ random variables by simply taking
-$2\mathrm{Uniform}[0, 1] - 1$. The following extremely simple
+\(\mathrm{Uniform}[-1, 1]\) random variables by simply taking
+\(2\mathrm{Uniform}[0, 1] - 1\). The following extremely simple
 algorithm generates a uniformly random point in the unit disc, which
 has a radially symmetric distribution:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;do:
@@ -761,10 +761,10 @@ return (U, V)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The loop runs until a point falls within the unit disc, so the number
-of iterations $N$ is distributed as $\mathrm{Geometric}(\pi/4)$. In
-particular, the expected number of iterations is $\mathbf{E} N =
-4/\pi \approx 1.27$, and highly concentrated. This is great! We can get a uniform
-point on $\mathbb{S}^1$ as before, by simply normalizing the vector on
+of iterations \(N\) is distributed as \(\mathrm{Geometric}(\pi/4)\). In
+particular, the expected number of iterations is \(\mathbf{E} N =
+4/\pi \approx 1.27\), and highly concentrated. This is great! We can get a uniform
+point on \(\mathbb{S}^1\) as before, by simply normalizing the vector on
 output.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;do:
     U, V = Uniform[-1, 1]
@@ -781,8 +781,8 @@ position.&lt;/p&gt;
 &lt;div id=&quot;S1gen&quot; align=&quot;center&quot; style=&quot;padding-bottom: 1em&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;/assets/2019-07-08-generating-without-complex-operations/S1gen.js&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;On average, this costs $8/\pi \approx 2.54$ multiplications.  A simple
-optimization, by fitting the unit sphere into an $\ell_1$ ball, allows
+&lt;p&gt;On average, this costs \(8/\pi \approx 2.54\) multiplications.  A simple
+optimization, by fitting the unit sphere into an \(\ell_1\) ball, allows
 us to slightly reduce the average number of multiplications.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;do:
     U, V = Uniform[-1, 1]
@@ -797,47 +797,47 @@ return (U/D, V/D)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;A quick computation shows that the average number of multiplications
-is reduced to $(2 + 4\sqrt{2})/\pi \approx 2.43$. Both of the above
+is reduced to \((2 + 4\sqrt{2})/\pi \approx 2.43\). Both of the above
 algorithms still requires one square root (since the constant
-$\sqrt{2}$ can be computed beforehand), which is not the worst
+\(\sqrt{2}\) can be computed beforehand), which is not the worst
 function to compute and can be approximated in multiple robust ways,
 but we’d still like to avoid it. It may feel like a square root is
-inevitable, but with a clever trick, uniform points on $\mathbb{S}^1$
+inevitable, but with a clever trick, uniform points on \(\mathbb{S}^1\)
 can in fact be generated without any complex function invocations.&lt;/p&gt;
 
 &lt;p&gt;To get towards this, first observe that a uniform point on
-$\mathbb{S}^1$ can also be generated by picking a uniform angle in
-$[0, 2\pi]$ and finding the appropriate polar coordinate. Simply stated:&lt;/p&gt;
+\(\mathbb{S}^1\) can also be generated by picking a uniform angle in
+\([0, 2\pi]\) and finding the appropriate polar coordinate. Simply stated:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;U = Uniform[0, 1]
 return (cos(2*pi*U), sin(2*pi*U))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;This is easy enough, and intuitively obvious, but requires two
 trigonometric function calls, or one trigonometric function call and
-one square root, using the identity $\cos^2 \theta + \sin^2 \theta =
-1$.&lt;/p&gt;
+one square root, using the identity \(\cos^2 \theta + \sin^2 \theta =
+1\).&lt;/p&gt;
 
-&lt;p&gt;Here’s the trick: Doubling the angle range from $[0, 2\pi]$ to $[0,
-4\pi]$ changes nothing—the resulting point is still uniformly
+&lt;p&gt;Here’s the trick: Doubling the angle range from \([0, 2\pi]\) to \([0,
+4\pi]\) changes nothing—the resulting point is still uniformly
 distributed. But now, with the following high-school trigonometric
 identities
 \[
-\begin{align*}
+\begin{aligned}
 	\cos(4\pi U) &amp;amp;= \cos^2(2\pi U) - \sin^2(2\pi U) , \\
 	\sin(4\pi U) &amp;amp;= 2 \sin(2\pi U) \cos(2\pi U) ,
-\end{align*}
+\end{aligned}
 \]&lt;/p&gt;
 
-&lt;p&gt;we see that if $(X, Y)$ is uniformly distributed on $\mathbb{S}^1$,
-then so is $(X^2 - Y^2, 2 X Y)$. As a sanity check, we can verify that
+&lt;p&gt;we see that if \((X, Y)\) is uniformly distributed on \(\mathbb{S}^1\),
+then so is \((X^2 - Y^2, 2 X Y)\). As a sanity check, we can verify that
 this point lives on the sphere:
 \[
-\begin{align*}
+\begin{aligned}
 	\|(X^2 - Y^2, 2 XY)\|_2 &amp;amp;= \sqrt{(X^2 - Y^2)^2 + 4 X^2 Y^2} \\
 		&amp;amp;= \sqrt{X^4 + 2 X^2 Y^2 + Y^4} \\
 		&amp;amp;= \sqrt{(X^2 + Y^2)^2} \\
 		&amp;amp;= 1 .
-\end{align*}
+\end{aligned}
 \]
 With this, we implement another
 algorithm, this time with no complex function calls:&lt;/p&gt;
@@ -859,9 +859,9 @@ normal. Since this distribution is radially symmetric, and since we’ve
 just described an efficient method of generating radially symmetric
 vectors, it suffices to generate the magnitude of a two-dimensional
 normal vector. It’s well-known that this length is distributed as
-$\sqrt{2 E}$ for $E \sim \mathrm{Exponential}(1)$, and we can also
-observe by the inversion method that $\log(1/U) \sim
-\mathrm{Exponential}(1)$ for $U \sim \mathrm{Uniform}[0, 1]$. This
+\(\sqrt{2 E}\) for \(E \sim \mathrm{Exponential}(1)\), and we can also
+observe by the inversion method that \(\log(1/U) \sim
+\mathrm{Exponential}(1)\) for \(U \sim \mathrm{Uniform}[0, 1]\). This
 finally gives us a manner of generating two-dimensional normal vectors
 using one square root, one logarithm, and three total uniform samples,
 by the following algorithm:&lt;/p&gt;
@@ -884,59 +884,59 @@ one-dimensional standard normals, so we could turn this into a batch
 one-dimensional normal generator, saving the second coordinate for the
 next invocation.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-2-sphere&quot;&gt;The $2$-sphere&lt;/h2&gt;
+&lt;h2 id=&quot;the-2-sphere&quot;&gt;The \(2\)-sphere&lt;/h2&gt;
 
-&lt;p&gt;In the next smallest case, $d = 3$. As it turns out, this case is a
-little bit special. In particular, if $(X_1, X_2, X_3)$ is uniformly
-distributed in $\mathbb{S}^2$, then $X_1, X_2, X_3 \sim
-\mathrm{Uniform}[-1, 1]$. Of course, these points are not
-independent. But this special property is unique to case $d = 3$, and
+&lt;p&gt;In the next smallest case, \(d = 3\). As it turns out, this case is a
+little bit special. In particular, if \((X_1, X_2, X_3)\) is uniformly
+distributed in \(\mathbb{S}^2\), then \(X_1, X_2, X_3 \sim
+\mathrm{Uniform}[-1, 1]\). Of course, these points are not
+independent. But this special property is unique to case \(d = 3\), and
 can actually help us for the purpose of random point generation.&lt;/p&gt;
 
 &lt;p&gt;It’s not too hard to see why this is the case. First, it’s clear that
-$X_1, X_2, X_3$ are identically distributed, so it suffices to show
-the claim for $X_1$, which we denote by $X$. We can interpret
-$\mathbf{P}\{X \le t\}$ as the normalized surface area of the
-spherical cap to the left of $t$. Since the unit $2$-sphere has
-surface area $4\pi$, and the aforementioned spherical cap has area $2
-\pi (1 + t)$ by high-school geometry, then
+\(X_1, X_2, X_3\) are identically distributed, so it suffices to show
+the claim for \(X_1\), which we denote by \(X\). We can interpret
+\(\mathbf{P}\{X \le t\}\) as the normalized surface area of the
+spherical cap to the left of \(t\). Since the unit \(2\)-sphere has
+surface area \(4\pi\), and the aforementioned spherical cap has area \(2
+\pi (1 + t)\) by high-school geometry, then
 \[
 	\mathbf{P}\{X \le t\} = \frac{2 \pi (1 + t)}{4 \pi} = \frac{1 + t}{2} ,
 \]
-and indeed $X \sim \mathrm{Uniform}[-1, 1]$.&lt;/p&gt;
+and indeed \(X \sim \mathrm{Uniform}[-1, 1]\).&lt;/p&gt;
 
-&lt;p&gt;In comparison, when $(X_1, X_2)$ is uniform on $\mathbb{S}^1$, the
+&lt;p&gt;In comparison, when \((X_1, X_2)\) is uniform on \(\mathbb{S}^1\), the
 same technique shows that
 \[
 	\mathbf{P}\{X_1 \le t\} = 1 - \frac{1}{\pi} \arccos(t) .
 \]
-So, $X_1^2$ has the well-known arcsine distribution. This
-illustrates that the case $d = 3$ is in fact special.
-In general, if $X$ is the one-dimensional marginal of a uniform point
-on $\mathbb{S}^{d - 1}$, then
+So, \(X_1^2\) has the well-known arcsine distribution. This
+illustrates that the case \(d = 3\) is in fact special.
+In general, if \(X\) is the one-dimensional marginal of a uniform point
+on \(\mathbb{S}^{d - 1}\), then
 \[
 	X^2 \sim \mathrm{Beta}\left(1, \frac{d - 1}{2} \right) .
 \]&lt;/p&gt;
 
-&lt;p&gt;It may be intuitively clear that if $(X_1, \dots, X_d)$ is uniform on
-$\mathbb{S}^{d - 1}$, then for any index set $I \subseteq {1, \dots,
-d}$ of size $k$, writing
+&lt;p&gt;It may be intuitively clear that if \((X_1, \dots, X_d)\) is uniform on
+\(\mathbb{S}^{d - 1}\), then for any index set \(I \subseteq {1, \dots,
+d}\) of size \(k\), writing
 \[
 	S = \sqrt{\sum_{i \in I} X_i^2} ,
 \]
-then $(X_i/S \colon i \in I)$ is uniformly distributed on the sphere
-$\mathbb{S}^{k - 1}$. In English, uniform points on high-dimensional
+then \((X_i/S \colon i \in I)\) is uniformly distributed on the sphere
+\(\mathbb{S}^{k - 1}\). In English, uniform points on high-dimensional
 spheres are uniform along every sub-sphere.&lt;/p&gt;
 
-&lt;p&gt;When $d = 3$, this makes some more sense. If we fix $X_1$, then
+&lt;p&gt;When \(d = 3\), this makes some more sense. If we fix \(X_1\), then
 writing
 \[
 	(X_1, X_2, X_3) = \left(X_1, \sqrt{1 - X_1^2} Y_2, \sqrt{1 - X_1^2} Y_3\right) ,
 \]
-then $(Y_2, Y_3)$ is uniformly distributed on $\mathbb{S}^1$. Using
-the fact that $X_1 \sim \mathrm{Uniform}[-1, 1]$, and our method from
+then \((Y_2, Y_3)\) is uniformly distributed on \(\mathbb{S}^1\). Using
+the fact that \(X_1 \sim \mathrm{Uniform}[-1, 1]\), and our method from
 the preceding section, we then have a method of generating uniform points
-on $\mathbb{S}^2$ with only one square root.&lt;/p&gt;
+on \(\mathbb{S}^2\) with only one square root.&lt;/p&gt;
 
 &lt;div id=&quot;S2gen&quot; align=&quot;center&quot; style=&quot;padding-bottom: 1em&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;/assets/2019-07-08-generating-without-complex-operations/S2gen.js&quot;&gt;
@@ -944,26 +944,26 @@ on $\mathbb{S}^2$ with only one square root.&lt;/p&gt;
 
 &lt;p&gt;Try dragging the sphere to rotate it with your mouse!&lt;/p&gt;
 
-&lt;p&gt;Is it possible to generate a uniform point on $\mathbb{S}^2$ without a
-square root or other complex function? If so, is there a minimum $d$
-for which it becomes impossible on $\mathbb{S}^{d - 1}$?&lt;/p&gt;
+&lt;p&gt;Is it possible to generate a uniform point on \(\mathbb{S}^2\) without a
+square root or other complex function? If so, is there a minimum \(d\)
+for which it becomes impossible on \(\mathbb{S}^{d - 1}\)?&lt;/p&gt;
 
-&lt;h2 id=&quot;the-d---1-sphere&quot;&gt;The $(d - 1)$-sphere&lt;/h2&gt;
+&lt;h2 id=&quot;the-d---1-sphere&quot;&gt;The \((d - 1)\)-sphere&lt;/h2&gt;
 
-&lt;p&gt;The rejection method from earlier does not scale well with $d$ for
+&lt;p&gt;The rejection method from earlier does not scale well with \(d\) for
 generating uniform points on higher-dimensional spheres. Indeed, the
-volume of the unit $(d - 1)$-sphere is
+volume of the unit \((d - 1)\)-sphere is
 \[
 	\frac{\pi^{d/2}}{\Gamma\left(\frac{d}{2} + 1\right)} \sim \frac{\pi^{d/2}}{\sqrt{\pi d} \left(\frac{d}{2e}\right)^{d/2}} ,
 \]
-while the volume of the unit cube $[-1, 1]^d$ is $2^d$. So the average
+while the volume of the unit cube \([-1, 1]^d\) is \(2^d\). So the average
 number of rounds taken by the rejection algorithm is asymptotically
-superexponential in $d$,
+superexponential in \(d\),
 \[
 	\frac{2^d \sqrt{\pi d} \left(\frac{d}{2e}\right)^{d/2}}{\pi^{d/2}} .
 \]&lt;/p&gt;
 
-&lt;p&gt;When $d$ is even, we can avoid the rejection method using algorithm
+&lt;p&gt;When \(d\) is even, we can avoid the rejection method using algorithm
 based on uniform spacings, which we outline below.&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;U_1, U_2, ..., U_{d/2 - 1} = Uniform[0, 1]
 V_1, V_2, ..., V_{d/2 - 1} = sort(U_1, U_2, ..., U_{d/2 - 1})
@@ -979,9 +979,9 @@ return (X_1*sqrt(S_1), Y_1*sqrt(_1), X_2*sqrt(S_2), Y_2*sqrt(S_2), ..., X_{d/2}*
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;I won’t describe why this algorithm works, but I’ll just note that it
-uses $d/2$ square roots using our algorithm for generating uniform
-points on $\mathbb{S}^1$, and can be made to run in expected time
-$O(d)$.&lt;/p&gt;</content>
+uses \(d/2\) square roots using our algorithm for generating uniform
+points on \(\mathbb{S}^1\), and can be made to run in expected time
+\(O(d)\).&lt;/p&gt;</content>
 
       
       
@@ -1033,30 +1033,30 @@ Journal of Statistics. I think this paper is conceptually quite
 interesting, and I’m very happy with the final result, so in this post
 I’ll describe some of the main ideas present in the work.&lt;/p&gt;
 
-&lt;p&gt;The setting is elementary. We observe $n$ independent and identically
+&lt;p&gt;The setting is elementary. We observe \(n\) independent and identically
 distributed samples coming from an unknown discrete distribution, and
 our goal is to concoct an estimate of the underlying distribution
-using our observations. In general, we will write $f$ for the
-probability mass function of the true distribution $\mu$, and
-$\hat{f}$ for an estimate of $f$ with corresponding distribution
-$\hat{\mu}$. Note that $\hat{\mu}$ and $\hat{f}$ are random functions.
-Our goal is to make a choice of $\hat{f}$ which minimizes
-the expected &lt;em&gt;total variation (TV) distance&lt;/em&gt; between $\mu$ and $\hat{\mu}$,
+using our observations. In general, we will write \(f\) for the
+probability mass function of the true distribution \(\mu\), and
+\(\hat{f}\) for an estimate of \(f\) with corresponding distribution
+\(\hat{\mu}\). Note that \(\hat{\mu}\) and \(\hat{f}\) are random functions.
+Our goal is to make a choice of \(\hat{f}\) which minimizes
+the expected &lt;em&gt;total variation (TV) distance&lt;/em&gt; between \(\mu\) and \(\hat{\mu}\),
 where this quantity is defined as
 \[
 	\mathrm{TV}(\mu, \hat{\mu}) = \sup_A |\mu(A) - \hat{\mu}(A)| .
 \]
-If this quantity is small, then $\mu$ and $\hat{\mu}$ assign nearly
+If this quantity is small, then \(\mu\) and \(\hat{\mu}\) assign nearly
 the same probabilities to all events.&lt;/p&gt;
 
 &lt;p&gt;The TV-distance has several equivalent formulations which makes it
 particularly attractive to us. Among them is the following &lt;em&gt;coupling
-characterization&lt;/em&gt;, where if $X$ and $\hat{X}$ are random variables
-distributed as $\mu$ and $\hat{\mu}$, then
+characterization&lt;/em&gt;, where if \(X\) and \(\hat{X}\) are random variables
+distributed as \(\mu\) and \(\hat{\mu}\), then
 \[
 	\mathrm{TV}(\mu, \hat{\mu}) = \inf_{(X, \hat{X})} \mathbf{P}\{X \neq \hat{X}\} ,
 \]
-where the infimum is over all couplings of $X$ and $\hat{X}$. In this sense, we see how the TV-distance really captures our capacity to be able to tell $X$ and $\hat{X}$ apart by any means.&lt;/p&gt;
+where the infimum is over all couplings of \(X\) and \(\hat{X}\). In this sense, we see how the TV-distance really captures our capacity to be able to tell \(X\) and \(\hat{X}\) apart by any means.&lt;/p&gt;
 
 &lt;p&gt;It is also not hard to see that
 \[
@@ -1068,32 +1068,32 @@ mass functions instead of probability measures in what follows:
 	\mathrm{TV}(f, \hat{f}) = \frac{1}{2} \sum_i |f(i) - \hat{f}(i)| .
 \]
 We also will refer to probability mass functions as densities.
-All in all, if we know that $f$ belongs to some class of functions
-$\mathcal{F}$, then we are interested in the following quantity,
+All in all, if we know that \(f\) belongs to some class of functions
+\(\mathcal{F}\), then we are interested in the following quantity,
 \[
 	\mathcal{R}_n(\mathcal{F}) = \inf_{\hat{f}} \sup_{f \in \mathcal{F}} \mathbf{E}\{\mathrm{TV}(f, \hat{f})\} ,
 \]
 known as the &lt;em&gt;minimax risk&lt;/em&gt; or &lt;em&gt;minimax rate&lt;/em&gt; of the class
-$\mathcal{F}$. This represents the best worst-case error over all
-events and estimators of an unknown density in $\mathcal{F}$.&lt;/p&gt;
+\(\mathcal{F}\). This represents the best worst-case error over all
+events and estimators of an unknown density in \(\mathcal{F}\).&lt;/p&gt;
 
 &lt;p&gt;As a warm-up, let us suppose that the true density comes the class of
-all densities $\mathcal{F}$ supported on $\{1, \dots, k\}$. Write $X_1, \dots,
-X_n$ for the observed samples. Since we have no extra information, is
-sensible then to choose $\hat{\mu}$ as the empirical measure, i.e., for
-each $i \in \{1, \dots, k\}$,
+all densities \(\mathcal{F}\) supported on \(\{1, \dots, k\}\). Write \(X_1, \dots,
+X_n\) for the observed samples. Since we have no extra information, is
+sensible then to choose \(\hat{\mu}\) as the empirical measure, i.e., for
+each \(i \in \{1, \dots, k\}\),
 \[
 	\hat{f}(i) = \frac{1}{n} \sum_{j = 1}^n \mathbf{1}\{ X_j = i\} = \frac{N_i}{n} ,
 \]
-where $N_i$ denotes the number of samples equal to $i$. Note that
-$N_i$ is distributed as $\mathrm{Binomial}(n, f(i))$. The error of
+where \(N_i\) denotes the number of samples equal to \(i\). Note that
+\(N_i\) is distributed as \(\mathrm{Binomial}(n, f(i))\). The error of
 this estimate can be easily measured:
 \[
-\begin{align*}
+\begin{aligned}
 	\mathbf{E} \{\mathrm{TV}(f, \hat{f})\} &amp;amp;= \frac{1}{2} \sum_{i = 1}^k \mathbf{E}\{|f(i) - \hat{f}(i)|\} \\
 	&amp;amp;= \frac{1}{2n} \sum_{i = 1}^k \mathbf{E}\{|n f(i) - N_i|\} \\
 	&amp;amp;\le \frac{1}{2n} \sum_{i = 1}^k \sqrt{\mathbf{E}\{(n f(i) - N_i)^2\}} ,
-\end{align*}
+\end{aligned}
 \]
 by the Cauchy-Schwarz inequality. Each term here is simply the
 variance of a binomial random variable, whence
@@ -1106,12 +1106,12 @@ optimal rate up to a constant factor, i.e.,
 	\mathcal{R}_n(\mathcal{F}) \asymp \sqrt{\frac{k}{n}} .
 \]&lt;/p&gt;
 
-&lt;p&gt;The estimate $\hat{f}$ above is technically a type of
+&lt;p&gt;The estimate \(\hat{f}\) above is technically a type of
 &lt;em&gt;histogram&lt;/em&gt;. Histogram estimates create piecewise constant functions
 determined by a partition of the support into bins, where each bin
 receives a total mass proportional to the number of samples falling
-within it. The estimate $\hat{f}$ is a histogram with bins of size
-$1$. Histograms can be used to study classes other than $\mathcal{F}$
+within it. The estimate \(\hat{f}\) is a histogram with bins of size
+\(1\). Histograms can be used to study classes other than \(\mathcal{F}\)
 above, in which case it becomes important to make a good choice of
 bins, which is not always an easy move.&lt;/p&gt;
 
@@ -1120,92 +1120,92 @@ develop a recursive scheme for determining a histogram partition for
 estimating discrete non-increasing and non-increasing convex
 densities. I’ll focus on the first case.&lt;/p&gt;
 
-&lt;p&gt;First, write $\mathcal{F}_k$ for the class of all non-increasing
-densities supported on $\{1, \dots, k\}$, where $k$ is a power of
-two. Let $f \in \mathcal{F}_k$ be the unknown density generating the
-$n$ observations $X_1, \dots, X_n$. We construct a binary tree with a
-corresponding partition of the support. Let $\rho$ be the root of the
-tree, corresponding to the interval $I_\rho = \{1, \dots, k\}$. Let
+&lt;p&gt;First, write \(\mathcal{F}_k\) for the class of all non-increasing
+densities supported on \(\{1, \dots, k\}\), where \(k\) is a power of
+two. Let \(f \in \mathcal{F}_k\) be the unknown density generating the
+\(n\) observations \(X_1, \dots, X_n\). We construct a binary tree with a
+corresponding partition of the support. Let \(\rho\) be the root of the
+tree, corresponding to the interval \(I_\rho = \{1, \dots, k\}\). Let
 \[
-\begin{align*}
+\begin{aligned}
 	I_v &amp;amp;= \{1, \dots, k/2\} , \\
 	I_w &amp;amp;= \{k/2 + 1, \dots, k\} 
-\end{align*}
+\end{aligned}
 \]
-denote the left and right halves of $I_\rho$. We need to decide
-whether or not to split $I_\rho$ into $I_v$ and $I_w$ and recurse, or
-use $I_\rho$ as a bin itself. If it appears that $f$ is constant on
-$I_\rho$, then we would do well not to recurse, and vice versa. To
-this end, let $N_v$ and $N_w$ denote the number of samples falling
-into the intervals $I_v$ and $I_w$. Let also $f_v$ and $f_w$ denote
-the total mass of $f$ in $I_v$ and $I_w$. Since $f$ is non-increasing,
+denote the left and right halves of \(I_\rho\). We need to decide
+whether or not to split \(I_\rho\) into \(I_v\) and \(I_w\) and recurse, or
+use \(I_\rho\) as a bin itself. If it appears that \(f\) is constant on
+\(I_\rho\), then we would do well not to recurse, and vice versa. To
+this end, let \(N_v\) and \(N_w\) denote the number of samples falling
+into the intervals \(I_v\) and \(I_w\). Let also \(f_v\) and \(f_w\) denote
+the total mass of \(f\) in \(I_v\) and \(I_w\). Since \(f\) is non-increasing,
 then we expect that
 \[
 	N_v \ge N_w 
 \]
-much of the time, so we should not recurse if $N_v &amp;lt; N_w$. In fact,
-since $N_v \sim \mathrm{Binomial}(n, f_v)$ and $N_w \sim
-\mathrm{Binomial}(n, f_w)$, then with constant probability,
+much of the time, so we should not recurse if \(N_v &amp;lt; N_w\). In fact,
+since \(N_v \sim \mathrm{Binomial}(n, f_v)\) and \(N_w \sim
+\mathrm{Binomial}(n, f_w)\), then with constant probability,
 \[
-\begin{equation}
-	N_v - N_w \ge \sqrt{N_v + N_w} , \label{greedy-rule}
-\end{equation}
+\begin{aligned}
+	N_v - N_w \ge \sqrt{N_v + N_w} , \qquad (2)
+\end{aligned}
 \]
 for example by Chebyshev’s inequality. We call this the &lt;em&gt;greedy
-splitting rule&lt;/em&gt;, and we split $\rho$ and recurse if and only if either
-$(\ref{greedy-rule})$ holds and $|I_\rho| &amp;gt; 1$.&lt;/p&gt;
+splitting rule&lt;/em&gt;, and we split \(\rho\) and recurse if and only if either
+\((2)\) holds and \(|I_\rho| &amp;gt; 1\).&lt;/p&gt;
 
-&lt;p&gt;In the end, we obtain a partition of the interval $\{1, \dots, k\}$,
-which can be used to make a histogram estimate $\hat{f}$, which we
-call the &lt;em&gt;greedy tree-based estimate&lt;/em&gt; for $f$. Our simulations suggest
-that $\hat{f}$ well-estimates $f$, but the proof of this eludes
-us. Instead, we can use the construction of $\hat{f}$ to develop
+&lt;p&gt;In the end, we obtain a partition of the interval \(\{1, \dots, k\}\),
+which can be used to make a histogram estimate \(\hat{f}\), which we
+call the &lt;em&gt;greedy tree-based estimate&lt;/em&gt; for \(f\). Our simulations suggest
+that \(\hat{f}\) well-estimates \(f\), but the proof of this eludes
+us. Instead, we can use the construction of \(\hat{f}\) to develop
 another estimate which, along with some black magic, can allow us to
-obtain the optimal minimax rate $\mathcal{R}_n(\mathcal{F})$.&lt;/p&gt;
+obtain the optimal minimax rate \(\mathcal{R}_n(\mathcal{F})\).&lt;/p&gt;
 
-&lt;p&gt;If we replace the quantities in $(\ref{greedy-rule})$ with their
+&lt;p&gt;If we replace the quantities in \((2)\) with their
 expectations, we get what we call the &lt;em&gt;idealized splitting rule&lt;/em&gt;
 \[
-\begin{equation}
-	f_v - f_w \ge \sqrt{\frac{f_v + f_w}{n}} . \label{ideal-rule}
-\end{equation}
+\begin{aligned}
+	f_v - f_w \ge \sqrt{\frac{f_v + f_w}{n}} . \qquad (1)
+\end{aligned}
 \]
 We can still use the idealized splitting rule to construct a
-piecewise-constant function $f^*$ which has, on each bin, the average
-value of $f$ along that bin.&lt;/p&gt;
+piecewise-constant function \(f^*\) which has, on each bin, the average
+value of \(f\) along that bin.&lt;/p&gt;
 
 &lt;p&gt;This may seem contrary to the point of the problem, considering this
 construction depends heavily upon prior knowledge of the true density
-$f$. This is where the black magic kicks in, but we need a few
+\(f\). This is where the black magic kicks in, but we need a few
 definitions first.&lt;/p&gt;
 
-&lt;p&gt;For a class of functions $\mathcal{G}$, define its &lt;em&gt;Yatracos class&lt;/em&gt;
-$\mathcal{A}$ as
+&lt;p&gt;For a class of functions \(\mathcal{G}\), define its &lt;em&gt;Yatracos class&lt;/em&gt;
+\(\mathcal{A}\) as
 \[
 	\mathcal{A} = \{\{x \colon f(x) &amp;gt; g(x)\} \colon f \neq g \in \mathcal{G}\} .
 \]
 Define also the Vapnik-Chervonenkis (VC) dimension of a class
-$\mathcal{A}$ of subsets of $\mathcal{X}$ as the size of the largest
-$X \subseteq \mathcal{X}$ such that for every $Y \subseteq X$, there
-exists $B \in \mathcal{A}$ such that $X \cap B = Y$. This is an
+\(\mathcal{A}\) of subsets of \(\mathcal{X}\) as the size of the largest
+\(X \subseteq \mathcal{X}\) such that for every \(Y \subseteq X\), there
+exists \(B \in \mathcal{A}\) such that \(X \cap B = Y\). This is an
 important quantity in combinatorial statistics and machine learning.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Theorem 1.&lt;/strong&gt;
-Let $\mathcal{G}$ be some class of density estimates with Yatracos class $\mathcal{A}$. Then, there is a universal constant $c &amp;gt; 0$ for which
+Let \(\mathcal{G}\) be some class of density estimates with Yatracos class \(\mathcal{A}\). Then, there is a universal constant \(c &amp;gt; 0\) for which
 \[
 	\mathcal{R}_n(\mathcal{F}) \le 3 \sup_{f \in \mathcal{F}} \inf_{g \in \mathcal{G}} \mathrm{TV}(f, g) + c \sqrt{\frac{\mathrm{VC}(\mathcal{A})}{n}} + \frac{3}{2n} .
 \]&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Let $T^*$ denote the underlying binary tree in the construction of
-$f^*$, and say it has leaves $L^*$. Suppose that $\mathcal{G}$ is
-the class of all density estimates with at most $\ell$
-piecewise constant parts, for $\ell \ge |L^*|$. Then, $f^* \in \mathcal{G}$. Furthermore,
-if $\mathcal{A}$ is the Yatracos class of $\mathcal{G}$, then
-$\mathcal{A} \subset \mathcal{B}$, where $\mathcal{B}$ is the class of
-unions of at most $\ell$ intervals. In particular, it is well-known
-that $\mathrm{VC}(\mathcal{B}) = 2 \ell$, so applying Theorem 1,
+&lt;p&gt;Let \(T^*\) denote the underlying binary tree in the construction of
+\(f^*\), and say it has leaves \(L^*\). Suppose that \(\mathcal{G}\) is
+the class of all density estimates with at most \(\ell\)
+piecewise constant parts, for \(\ell \ge |L^*|\). Then, \(f^* \in \mathcal{G}\). Furthermore,
+if \(\mathcal{A}\) is the Yatracos class of \(\mathcal{G}\), then
+\(\mathcal{A} \subset \mathcal{B}\), where \(\mathcal{B}\) is the class of
+unions of at most \(\ell\) intervals. In particular, it is well-known
+that \(\mathrm{VC}(\mathcal{B}) = 2 \ell\), so applying Theorem 1,
 \[
 	\mathcal{R}_n(\mathcal{F}_k) \le 3 \sup_{f \in \mathcal{F}} \mathrm{TV}(f, f^*) + c \sqrt{\frac{\ell}{n}} + \frac{3}{2n} .
 \]&lt;/p&gt;
@@ -1213,59 +1213,59 @@ that $\mathrm{VC}(\mathcal{B}) = 2 \ell$, so applying Theorem 1,
 &lt;p&gt;We can also control the total-variation distance to the idealized
 tree-based estimate:
 \[
-\begin{align*}
+\begin{aligned}
 	\mathrm{TV}(f, f^*) &amp;amp;= \frac{1}{2} \sum_{i = 1}^k |f(i) - f^*(i)| \\
 		       &amp;amp;= \frac{1}{2} \sum_{u \in L^*} \sum_{i \in I_u} |f(i) - f^*(i)| \\
 		       &amp;amp;= \frac{1}{2} \sum_{u \in L^*} \sum_{i \in I_u} |f(i) - \bar{f}_u| ,
-\end{align*}
+\end{aligned}
 \]
-where $\bar{f}_u = f_u/|I_u|$ is the average value of $f$ on
-$I_u$. For $u \in L^*$, write
+where \(\bar{f}_u = f_u/|I_u|\) is the average value of \(f\) on
+\(I_u\). For \(u \in L^*\), write
 \[
 	A_u = \sum_{x \in I_u} |f(i) - \bar{f}_u| .
 \]&lt;/p&gt;
 
-&lt;p&gt;If $|I_u| = 1$, then $A_u = 0$, so we assume that $|I_u| &amp;gt; 1$. In this
-case, let $I_v$ and $I_w$ be the left and right halves of $I_u$. Write
+&lt;p&gt;If \(|I_u| = 1\), then \(A_u = 0\), so we assume that \(|I_u| &amp;gt; 1\). In this
+case, let \(I_v\) and \(I_w\) be the left and right halves of \(I_u\). Write
 also
 \[
-\begin{align*}
+\begin{aligned}
 	B_v &amp;amp;= \sum_{x \in I_v} |f(i) - \bar{f}_v| , \\
 	B_w &amp;amp;= \sum_{x \in I_w} |f(i) - \bar{f}_w| .
-\end{align*}
+\end{aligned}
 \]
 By the triangle inequality,
 \[
-\begin{align*}
+\begin{aligned}
 	A_u &amp;amp;\le (\bar{f}_v - \bar{f}_u) |I_v| + (\bar{f}_u - \bar{f}_w) |I_w| + B_v + B_w \\
 	&amp;amp;= (f_v - f_w) + B_v + B_w .
-\end{align*}
+\end{aligned}
 \]
-Let $i_v$ be the largest point in $I_v$ for which $f(i) \ge \bar{f}_v$. Then,
+Let \(i_v\) be the largest point in \(I_v\) for which \(f(i) \ge \bar{f}_v\). Then,
 \[
-\begin{align*}
+\begin{aligned}
 	B_v &amp;amp;= \sum_{i \in I_v, i \le i_v} (f(i) - \bar{f}_v) + \sum_{i \in I_v, i &amp;gt; i_v} (\bar{f}_v - f(i)) \\
 	    &amp;amp;= 2 \sum_{i \in I_v, i &amp;gt; i_v} (\bar{f}_v - f(i)) \\
 	    &amp;amp;\le 2 |I_v| (\bar{f}_v - \bar{f}_w) \\
 	    &amp;amp;= 2 (f_v - f_w) .
-\end{align*}
+\end{aligned}
 \]
-A similar relation holds for $B_w$, whence
+A similar relation holds for \(B_w\), whence
 \[
 	A_u \le 5 (f_v - f_w) \le 5 \sqrt{f_u/n} 
 \]
-by the idealized splitting rule $(\ref{ideal-rule})$. Putting this all together,
+by the idealized splitting rule \((1)\). Putting this all together,
 \[
 	\mathrm{TV}(f, f^*) \le \frac{5}{2 \sqrt{n}} \sum_{u \in L^*} \sqrt{f_u} \le \frac{5}{2} \sqrt{\frac{\ell}{n}} 
 \]
-by the Cauchy-Schwarz inequality. So for some universal constant $c &amp;gt; 0$,
+by the Cauchy-Schwarz inequality. So for some universal constant \(c &amp;gt; 0\),
 \[
 	\mathcal{R}_(\mathcal{F}_k) \le c \sqrt{\ell/n} .
 \]
-So it suffices to find a uniform upper bound on $|L^*|$.&lt;/p&gt;
+So it suffices to find a uniform upper bound on \(|L^*|\).&lt;/p&gt;
 
 &lt;p&gt;The idea here is that each time a split occurs on a fixed level in
-$T^*$ creating children $v, w$ in order from left to right, we know
+\(T^*\) creating children \(v, w\) in order from left to right, we know
 that
 \[
 	f_v - f_w \ge  + \sqrt{\frac{f_v + f_w}{n}} .
@@ -1275,24 +1275,24 @@ towards the origin. The above equation ressembles a differential equation,
 \[
 	\mathrm{d} f \ge \sqrt{f/n} ,
 \]
-which has the solution $f(x) \ge x^2/(4n)$. More formally, if $U_j$ is
-the set of nodes at depth $j - 1$ in $T^*$ which have at least one
-leaf as a child, with all the children of nodes in $U_j$ labelled
-$u_1, \dots, u_{2|U_j|}$, then it can be shown that
+which has the solution \(f(x) \ge x^2/(4n)\). More formally, if \(U_j\) is
+the set of nodes at depth \(j - 1\) in \(T^*\) which have at least one
+leaf as a child, with all the children of nodes in \(U_j\) labelled
+\(u_1, \dots, u_{2|U_j|}\), then it can be shown that
 \[
 	f_{u_{2i}} \ge \frac{i^2}{n} .
 \]
-Let $L_j$ be the set of leaves at level $j$ in $T^*$, with total mass $q_j$. Then, ignoring integer effects,
+Let \(L_j\) be the set of leaves at level \(j\) in \(T^*\), with total mass \(q_j\). Then, ignoring integer effects,
 \[
 	q_j \ge \sum_{i = 1}^{|L_j|/2} f_{u_{2i}} \ge \sum_{i = 1}^{|L_j|/2} \frac{i^2}{n} \ge \frac{|L_j|^3}{24n} ,
 \]
-and $|L_j| \le (24 n q_j)^{1/3}$, so by Hölder’s inequality,
+and \(|L_j| \le (24 n q_j)^{1/3}\), so by Hölder’s inequality,
 \[
-\begin{align*}
+\begin{aligned}
 	|L^*| &amp;amp;\le (24 n)^{1/3} \sum_{i = 1}^{\log_2 k} q_j^{1/3} \\
 	       &amp;amp;\le (24 n)^{1/3} \left(\sum_{i = 1}^{\log_2 k} q_j \right)^{1/3} \left( \sum_{i = 1}^{\log_2 k} 1 \right)^{2/3} \\
 	       &amp;amp;= (24 n)^{1/3} (\log_2 k)^{2/3} ,
-\end{align*}
+\end{aligned}
 \]
 and finally
 \[
@@ -1302,14 +1302,6 @@ This is just a sketch of the full computation—for the fully
 articulated argument, &lt;a href=&quot;https://arxiv.org/abs/1812.06063&quot;&gt;read our paper&lt;/a&gt;.&lt;/p&gt;
 
 &lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;density-trees&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Devroye, L.&lt;/span&gt;, and &lt;span style=&quot;font-variant: small-caps&quot;&gt;Reddad, T.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2019). &lt;b&gt;Discrete minimax estimation with trees&lt;/b&gt;. &lt;i&gt;Electron. J. Stat.&lt;/i&gt; 50, 2595–2623.&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;&lt;/ol&gt;</content>
 
       
@@ -1358,11 +1350,11 @@ articulated argument, &lt;a href=&quot;https://arxiv.org/abs/1812.06063&quot;&gt
       <id>https://www.reddad.ca/2019/06/26/conditioned-gw-trees</id>
       <content type="html" xml:base="https://www.reddad.ca/2019/06/26/conditioned-gw-trees/">&lt;p&gt;When programmers hear the phrase “random tree,” they most likely think
 of a random binary search tree, i.e., a binary search tree built from
-the insertion of a uniformly random permutation of $n$ keys—denote such
-a tree by $\mathrm{BST}_n$. A mathematician might instead think that a
+the insertion of a uniformly random permutation of \(n\) keys—denote such
+a tree by \(\mathrm{BST}_n\). A mathematician might instead think that a
 ``random tree’’ is more likely to be a uniformly random tree taken
-from some class, like the set of all ordered binary trees with $n$ nodes—denote
-such a tree by $\mathrm{UNIF}_n$. Of course, neither would be wrong. It
+from some class, like the set of all ordered binary trees with \(n\) nodes—denote
+such a tree by \(\mathrm{UNIF}_n\). Of course, neither would be wrong. It
 should be clear, though, that these two distributions on the space of
 binary trees are quite different. In particular, most undergraduate
 students of computer science learn, through the study of
@@ -1390,16 +1382,16 @@ random number of children, and so on. The distribution of the
 underlying ordered family tree is known as a &lt;em&gt;Galton-Watson tree,&lt;/em&gt;
 which is determined by its &lt;em&gt;offspring distribution,&lt;/em&gt; i.e., the
 distribution of the number of children which each individual
-births. We write $\xi$ for a random variable distributed as such. For
+births. We write \(\xi\) for a random variable distributed as such. For
 example, we might have the following offspring distribution:
 \[
 \mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/4, \quad \mathbf{P}\{\xi = 1\} = 1/2 ;
 \]
-in words, each individual has $0$ or $2$ children with probability
-$1/4$, and $1$ child with probability $1/2$. Importantly, in this
+in words, each individual has \(0\) or \(2\) children with probability
+\(1/4\), and \(1\) child with probability \(1/2\). Importantly, in this
 case, there is a positive probability that individuals can have no
 progeny, so there is a positive probability that the Galton-Watson
-tree determined by $\xi$ dies off. If each individual represents a
+tree determined by \(\xi\) dies off. If each individual represents a
 person with a given family name, this would indicate the extinction of
 the family name.&lt;/p&gt;
 
@@ -1408,14 +1400,14 @@ tree extinction:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Theorem 1.&lt;/strong&gt;&lt;br /&gt;
-Let $q$ denote the probability that a $\xi$-Galton-Watson tree goes extinct. Then, $q = 1$ if and only if $\mathbf{E} \xi \le 1$.&lt;/p&gt;
+Let \(q\) denote the probability that a \(\xi\)-Galton-Watson tree goes extinct. Then, \(q = 1\) if and only if \(\mathbf{E} \xi \le 1\).&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Accordingly, there are three regimes:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;the &lt;em&gt;subcritical&lt;/em&gt; regime, when $\mathbf{E} \xi &amp;lt; 1$;&lt;/li&gt;
-  &lt;li&gt;the &lt;em&gt;critical&lt;/em&gt; regime, when $\mathbf{E} \xi = 1$, and;&lt;/li&gt;
-  &lt;li&gt;the &lt;em&gt;supercritical&lt;/em&gt; regime, when $\mathbf{E} \xi &amp;gt; 1$.&lt;/li&gt;
+  &lt;li&gt;the &lt;em&gt;subcritical&lt;/em&gt; regime, when \(\mathbf{E} \xi &amp;lt; 1\);&lt;/li&gt;
+  &lt;li&gt;the &lt;em&gt;critical&lt;/em&gt; regime, when \(\mathbf{E} \xi = 1\), and;&lt;/li&gt;
+  &lt;li&gt;the &lt;em&gt;supercritical&lt;/em&gt; regime, when \(\mathbf{E} \xi &amp;gt; 1\).&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;The critical regime is of paramount importance. Though it may not be
@@ -1426,54 +1418,54 @@ Galton-Watson trees model many kinds of “uniform” random trees.&lt;/p&gt;
 &lt;p&gt;To see this fact about uniformly random binary trees, we must first
 control the number of nodes in a Galton-Watson tree. We define a
 &lt;em&gt;conditioned Galton-Watson tree&lt;/em&gt; to be a Galton-Watson tree
-conditioned to have $n$ nodes, and denote it by $T_n$. So, for the
-$\xi$-Galton-Watson tree $T$ and specific tree $t$ on $n$ nodes, 
+conditioned to have \(n\) nodes, and denote it by \(T_n\). So, for the
+\(\xi\)-Galton-Watson tree \(T\) and specific tree \(t\) on \(n\) nodes, 
 \[
 	\mathbf{P}\{T_n = t\} = \mathbf{P}\{T = t \mid |T| = n\} = \frac{\mathbf{P}\{T = t\}}{\mathbf{P}\{|T| = n\}} ,
 \]
-where $|T|$ denotes the number of nodes in $T$.&lt;/p&gt;
+where \(|T|\) denotes the number of nodes in \(T\).&lt;/p&gt;
 
 &lt;p&gt;For certain offspring distributions, we may be conditioning on an
 event which occurs with zero probability. For example, if
 \[
 	\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/2 ,
 \]
-then every $\xi$-Galton-Watson tree has an odd number of nodes, so $n$
+then every \(\xi\)-Galton-Watson tree has an odd number of nodes, so \(n\)
 must be odd. We will ignore this technicality.&lt;/p&gt;
 
-&lt;p&gt;Sticking with this choice of $\xi$, observe that if $t$ is a binary
-tree with $n = 2k + 1$ nodes, then $n$ has $k$ internal nodes and $k +
-1$ leaves, so by independence of the number of offspring of each node
+&lt;p&gt;Sticking with this choice of \(\xi\), observe that if \(t\) is a binary
+tree with \(n = 2k + 1\) nodes, then \(n\) has \(k\) internal nodes and \(k +
+1\) leaves, so by independence of the number of offspring of each node
 in the Galton-Watson process,
 \[
 	\mathbf{P}\{T = t\} = ( \mathbf{P} \{\xi = 0\} )^{k + 1} ( \mathbf{P}\{\xi = 2 \} )^k = 2^{-n} .
 \]
-Since $t$ was an arbitrary binary tree on $n$ nodes, this means that $T_n$ is, after all, a uniformly random binary tree.&lt;/p&gt;
+Since \(t\) was an arbitrary binary tree on \(n\) nodes, this means that \(T_n\) is, after all, a uniformly random binary tree.&lt;/p&gt;
 
 &lt;p&gt;This is just one way of viewing a uniformly random tree as a critical
 Galton-Watson tree. Some other important offspring distributions
 include:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;the $\mathrm{Geometric}(1/2)$ offspring distribution,
+  &lt;li&gt;the \(\mathrm{Geometric}(1/2)\) offspring distribution,
 \[
   \mathbf{P}\{\xi = i\} = 2^{- (i + 1) } ,
 \]
 corresponding to uniformly random ordered trees (with any valence);&lt;/li&gt;
-  &lt;li&gt;the $\mathrm{Poisson}(1)$ offspring distribution,
+  &lt;li&gt;the \(\mathrm{Poisson}(1)\) offspring distribution,
 \[
   \mathbf{P}\{\xi = i\} = \frac{e^{-1}}{i!} ,
 \]
 corresponding to uniformly random unordered labelled trees, and;&lt;/li&gt;
-  &lt;li&gt;the $\mathrm{Binomial}(d, 1/d)$ offspring distribution,
+  &lt;li&gt;the \(\mathrm{Binomial}(d, 1/d)\) offspring distribution,
 \[
   \mathbf{P}\{\xi = i\} = \binom{d}{i} \frac{1}{d^i} \left(1 - \frac{1}{d}\right)^{d - i} ,
 \]
-corresponding to uniformly random (up to-) $d$-ary trees.&lt;/li&gt;
+corresponding to uniformly random (up to-) \(d\)-ary trees.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Critical Galton-Watson trees have many marvelous qualities which are
 too numerous to even summarize here. In particular, writing
-$\mathrm{Var}\{\xi\} = \sigma^2$, if $0 &amp;lt; \sigma^2 &amp;lt; \infty$, then
+\(\mathrm{Var}\{\xi\} = \sigma^2\), if \(0 &amp;lt; \sigma^2 &amp;lt; \infty\), then
 \[
 	\mathbf{E}\{\mathrm{height}(T_n)\} = \varTheta(\sqrt{n}) ,
 \]
@@ -1481,37 +1473,37 @@ and this height is even highly concentrated &lt;a class=&quot;citation&quot; hre
 
 &lt;p&gt;Even more fascinating is the local limit to the &lt;em&gt;size-biased tree,&lt;/em&gt;
 also known as &lt;em&gt;Kesten’s tree.&lt;/em&gt; To describe this structure, first we
-introduce the size-biased random variable $\hat{\xi}$, where
+introduce the size-biased random variable \(\hat{\xi}\), where
 \[
 	\mathbf{P}\{\hat{\xi} = i\} = i \mathbf{P}\{\xi = i\} .
 \]&lt;/p&gt;
 
-&lt;p&gt;Since $\xi$ is critical, then the size-biased distribution is indeed a
+&lt;p&gt;Since \(\xi\) is critical, then the size-biased distribution is indeed a
 probability distribution, i.e.,
 \[
 	\sum_{i \ge 0} \mathbf{P}\{\hat{\xi} = i\} = \sum_{i \ge 0} i \mathbf{P}\{\xi = i\} = \mathbf{E} \xi = 1 .
 \]&lt;/p&gt;
 
 &lt;p&gt;With this, we construct the infinite Kesten’s tree, denoted by
-$T_\infty$. This random tree has a set of mortal and immortal nodes,
+\(T_\infty\). This random tree has a set of mortal and immortal nodes,
 starting with one immortal node at the root. Each immortal node has an
-independently random number of children distributed as $\hat{\xi}$,
+independently random number of children distributed as \(\hat{\xi}\),
 where one among these is chosen as its immortal successor, and all
 others are made mortal. Each mortal node has an independently random
-number of children distributed as $\xi$.&lt;/p&gt;
+number of children distributed as \(\xi\).&lt;/p&gt;
 
-&lt;p&gt;Observe that $\mathbf{P}\{\hat{\xi} = 0\} = 0$, so each immortal has
-at least one child, and on average $\mathbf{E} \hat{\xi} = 1 +
-\sigma^2$ children. Thus, Kesten’s tree has an infinite “spine” along
+&lt;p&gt;Observe that \(\mathbf{P}\{\hat{\xi} = 0\} = 0\), so each immortal has
+at least one child, and on average \(\mathbf{E} \hat{\xi} = 1 +
+\sigma^2\) children. Thus, Kesten’s tree has an infinite “spine” along
 the sequence of immortal nodes, with several independent
-$\xi$-Galton-Watson trees hanging off this spine on either side.&lt;/p&gt;
+\(\xi\)-Galton-Watson trees hanging off this spine on either side.&lt;/p&gt;
 
-&lt;p&gt;For a tree $t$, let $[t]_r$ denote the tree $t$ truncated to include
-only the nodes of depth at most $r$. The following classical result describes
+&lt;p&gt;For a tree \(t\), let \([t]_r\) denote the tree \(t\) truncated to include
+only the nodes of depth at most \(r\). The following classical result describes
 the local limit to Kesten’s tree mentioned earlier:&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Theorem 2&lt;/strong&gt;&lt;br /&gt;
-Suppose that $\mathbf{E} \xi = 1$. Then, for each $r \ge 1$ and each tree $t$,
+Suppose that \(\mathbf{E} \xi = 1\). Then, for each \(r \ge 1\) and each tree \(t\),
 \[
   \lim_{n \to \infty} \mathbf{P}\{ [T_n]_r = t \} = \mathbf{P}\{ [T_\infty]_r = t\} .
 \]&lt;/p&gt;
@@ -1520,106 +1512,106 @@ Suppose that $\mathbf{E} \xi = 1$. Then, for each $r \ge 1$ and each tree $t$,
 &lt;p&gt;So, in the limit, conditioned Galton-Watson trees look like Kesten’s
 tree.&lt;/p&gt;
 
-&lt;p&gt;It may seem that $T_n$ “grows into” $T_\infty$ in some sense, if only
-because they are the same in the limit and because $T_\infty$ is
-“larger” than $T_n$, but this is not always true. To be more precise,
-the question is whether or not there exists a coupling of $T_n$ and
-$T_\infty$ for which $T_n \subset T_\infty$, where “$\subset$” denotes
+&lt;p&gt;It may seem that \(T_n\) “grows into” \(T_\infty\) in some sense, if only
+because they are the same in the limit and because \(T_\infty\) is
+“larger” than \(T_n\), but this is not always true. To be more precise,
+the question is whether or not there exists a coupling of \(T_n\) and
+\(T_\infty\) for which \(T_n \subset T_\infty\), where “\(\subset\)” denotes
 subtree inclusion at the root along some subsequence of children. More
 generously, some have asked whether or not conditioned Galton-Watson
 trees can be grown incrementally, i.e., whether or not there exists a
-coupling between $T_n$ and $T_{n + 1}$ for which $T_n \subset T_{n +
-1}$. Equivalently, this is asking whether or not $T_{n + 1}$ can be
-grown from $T_n$ by the insertion of a leaf. Recall that inserting
+coupling between \(T_n\) and \(T_{n + 1}\) for which \(T_n \subset T_{n +
+1}\). Equivalently, this is asking whether or not \(T_{n + 1}\) can be
+grown from \(T_n\) by the insertion of a leaf. Recall that inserting
 leaves uniformly at random in a binary tree creates a random binary
 search tree, so certainly if we have any hope of creating uniform
 random binary trees, the insertion profile must be radically
 nonuniform.&lt;/p&gt;
 
-&lt;p&gt;Note that if $T_n \subset T_{n + 1}$ for each $n$, then $T_n \subset
-T_\infty$, so incremental growth implies growth into Kesten’s
+&lt;p&gt;Note that if \(T_n \subset T_{n + 1}\) for each \(n\), then \(T_n \subset
+T_\infty\), so incremental growth implies growth into Kesten’s
 tree. Observe also that this kind of incremental growth can be
-extremely useful to study monotone properties of $T_n$, since it
-allows us to use the coupling between $T_n$ and $T_\infty$ to transfer
-the study of a property of $T_n$ onto the nearly-Galton-Watson
-Kesten’s tree $T_\infty$, which carries a lot of independence. If
-finiteness of the tree is required, we can even truncate $T_\infty$ at
-some level around $\sqrt{n}$, since the height of $T_n$ is highly
+extremely useful to study monotone properties of \(T_n\), since it
+allows us to use the coupling between \(T_n\) and \(T_\infty\) to transfer
+the study of a property of \(T_n\) onto the nearly-Galton-Watson
+Kesten’s tree \(T_\infty\), which carries a lot of independence. If
+finiteness of the tree is required, we can even truncate \(T_\infty\) at
+some level around \(\sqrt{n}\), since the height of \(T_n\) is highly
 concentrated.&lt;/p&gt;
 
 &lt;p&gt;In &lt;a class=&quot;citation&quot; href=&quot;#luczak&quot;&gt;(Luczak and Winkler, (2004)&lt;/a&gt;, it is
-shown that for any $d \ge 2$ and $\xi \sim \mathrm{Binomial}(d, 1/d)$,
-$T_n$ can indeed be grown incrementally. There are a few more results
+shown that for any \(d \ge 2\) and \(\xi \sim \mathrm{Binomial}(d, 1/d)\),
+\(T_n\) can indeed be grown incrementally. There are a few more results
 about growing conditioned Galton-Watson trees—see &lt;a class=&quot;citation&quot; href=&quot;#lyons&quot;&gt;(Lyons et al., (2008)&lt;/a&gt;, &lt;a class=&quot;citation&quot; href=&quot;#broman-binomial&quot;&gt;(Broman, (2014)&lt;/a&gt;, &lt;a class=&quot;citation&quot; href=&quot;#broman-geometric&quot;&gt;(Broman, (2016)&lt;/a&gt;—but as far as I am aware,
 these are virtually the only papers including positive results
 about which offspring distributions admit incremental growth or growth
 into Kesten’s tree.&lt;/p&gt;
 
 &lt;p&gt;In the reverse direction, &lt;a class=&quot;citation&quot; href=&quot;#janson-dont-grow&quot;&gt;(Janson, (2006)&lt;/a&gt; shows that for &lt;em&gt;some&lt;/em&gt; critical
-offspring distributions and for some $n$, there is no coupling for
-which $T_n \subset T_{n + 1}$, or $T_n \subset T_\infty$. We summarize
+offspring distributions and for some \(n\), there is no coupling for
+which \(T_n \subset T_{n + 1}\), or \(T_n \subset T_\infty\). We summarize
 the argument here, since it is quite simple.&lt;/p&gt;
 
-&lt;p&gt;Let $Z_k(t)$ denote the number of nodes at depth $k$ in the tree
-$t$. Observe that
+&lt;p&gt;Let \(Z_k(t)\) denote the number of nodes at depth \(k\) in the tree
+\(t\). Observe that
 \[
 	\mathbf{E} Z_k(T_\infty) = \sigma^2 + \mathbf{E} Z_{k - 1}(T_\infty) = 1 + k \sigma^2 .
 \]
-If $T_n \subset T_\infty$, then
+If \(T_n \subset T_\infty\), then
 \[
 	\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k (T_\infty) = 1 + k \sigma^2 
 \]
-for each $k$, and if $T_n \subset T_{n + 1}$, then
+for each \(k\), and if \(T_n \subset T_{n + 1}\), then
 \[
 	\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k(T_{n + 1})
 \]
-for each $k$. Janson proposes the following offspring distribution:
+for each \(k\). Janson proposes the following offspring distribution:
 \[
 	\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = \frac{1 - \varepsilon}{2}, \quad \mathbf{P}\{\xi = 1\} = \varepsilon ,
 \]
-for some fixed $\varepsilon &amp;gt; 0$, and then simply enumerates all small
+for some fixed \(\varepsilon &amp;gt; 0\), and then simply enumerates all small
 trees to compute that
 \[
 	\mathbf{E} Z_1 (T_3) &amp;gt; \mathbf{E} Z_1 (T_4) 
 \]
-for a small enough choice of $\varepsilon$, where we emphasize that
-$Z_1$ is simply the degree of the root node.&lt;/p&gt;
+for a small enough choice of \(\varepsilon\), where we emphasize that
+\(Z_1\) is simply the degree of the root node.&lt;/p&gt;
 
 &lt;p&gt;So indeed, some small conditioned Galton-Watson trees do not grow
 incrementally. When I first saw this result, I thought that perhaps
-this is a small $n$ problem, and that maybe for large enough $n$, it
-may still be true that $T_n \subset T_{n + 1}$. After some more
+this is a small \(n\) problem, and that maybe for large enough \(n\), it
+may still be true that \(T_n \subset T_{n + 1}\). After some more
 thinking, I realized that I was wrong.&lt;/p&gt;
 
-&lt;p&gt;Pick the following offspring distribution for some fixed $d \ge 2$:
+&lt;p&gt;Pick the following offspring distribution for some fixed \(d \ge 2\):
 \[
 	\mathbf{P}\{\xi = 0\} = \left(1 - \frac{1}{d}\right)^2, \quad \mathbf{P}\{\xi = 1\} = \frac{1}{d}, \quad \mathbf{P}\{\xi = d\} = \frac{1}{d}\left(1 - \frac{1}{d}\right) .
 \]
-It can be verified that $\mathbf{E} \xi = 1$ and $\sigma^2 = d - 2 +
-1/d$, so
+It can be verified that \(\mathbf{E} \xi = 1\) and \(\sigma^2 = d - 2 +
+1/d\), so
 \[
 	\mathbf{E} Z_1 (T_\infty) = d - 1 + \frac{1}{d} .
 \]
 We also know the distribution of the root degree for conditioned
 Galton-Watson trees from &lt;a class=&quot;citation&quot; href=&quot;#janson-survey&quot;&gt;(Janson, (2012)&lt;/a&gt;, so
 \[
-\begin{align*}
+\begin{aligned}
 	\mathbf{P}\{Z_1(T_n) = i\} &amp;amp;= \frac{n}{n - 1} i \mathbf{P}\{\xi_1 = i \mid \xi_1 + \xi_2 + \dots + \xi_n = n - 1\} \\
 	&amp;amp;= \frac{n i \mathbf{P}\{S_{n - 1} = n - 1 - i\}}{(n - 1) \mathbf{P}\{S_n = n - 1\}} ,
-\end{align*}
+\end{aligned}
 \]
-where $\xi_1, \dots, \xi_n$ are independent and identically distibuted
-as $\xi$, and $S_n = \xi_1 + \dots + \xi_n$. Using tedious
+where \(\xi_1, \dots, \xi_n\) are independent and identically distibuted
+as \(\xi\), and \(S_n = \xi_1 + \dots + \xi_n\). Using tedious
 computations through local limit theorems &lt;a class=&quot;citation&quot; href=&quot;#petrov&quot;&gt;(Petrov, (1975)&lt;/a&gt;, we can estimate the above
 probabilities in order, finally, to compute that
 \[
 	\mathbf{E} Z_1(T_n) = d - 1 + \frac{1}{d} + \frac{d^2 + o(d^2)}{2n} + o(1/n) , 
 \]
-where the function $o(d^2)$ does not depend on $n$.&lt;/p&gt;
+where the function \(o(d^2)\) does not depend on \(n\).&lt;/p&gt;
 
-&lt;p&gt;What this implies is that we can pick $d$ large enough so that $d^2$
-dominates $o(d^2)$ in the numerator, and then, for all sufficiently large
-$n$,
+&lt;p&gt;What this implies is that we can pick \(d\) large enough so that \(d^2\)
+dominates \(o(d^2)\) in the numerator, and then, for all sufficiently large
+\(n\),
 \[
 	\mathbf{E} Z_1 (T_n) &amp;gt; \mathbf{E} Z_1 (T_\infty) .
 \]
@@ -1627,84 +1619,20 @@ So, there are even arbitrarily large conditioned Galton-Watson trees
 which still cannot be grown within Kesten’s tree.&lt;/p&gt;
 
 &lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;broman-geometric&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Broman, E. I.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2016). &lt;b&gt;Stochastic ordering of infinite geometric Galton-Watson trees&lt;/b&gt;. &lt;i&gt;J. Theoret. Probab.&lt;/i&gt; 29, 1069–1082. https://doi.org/10.1007/s10959-015-0608-x&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;broman-binomial&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Broman, E. I.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2014). &lt;b&gt;Stochastic ordering of infinite binomial Galton-Watson trees&lt;/b&gt;. &lt;i&gt;ALEA Lat. Am. J. Probab. Math. Stat.&lt;/i&gt; 11, 209–227.&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;subgaussian&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Addario-Berry, L.&lt;/span&gt;, &lt;span style=&quot;font-variant: small-caps&quot;&gt;Devroye, L.&lt;/span&gt;, and &lt;span style=&quot;font-variant: small-caps&quot;&gt;Janson, S.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2013). &lt;b&gt;Sub-Gaussian tail bounds for the width and height of conditioned Galton-Watson trees&lt;/b&gt;. &lt;i&gt;Ann. Probab.&lt;/i&gt; 41, 1072–1087. https://doi.org/10.1214/12-AOP758&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;janson-survey&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Janson, S.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2012). &lt;b&gt;Simply generated trees, conditioned Galton-Watson trees, random allocations and condensation&lt;/b&gt;. &lt;i&gt;Probab. Surv.&lt;/i&gt; 9, 103–252. https://doi.org/10.1214/11-PS188&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;lyons&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Lyons, R.&lt;/span&gt;, &lt;span style=&quot;font-variant: small-caps&quot;&gt;Peled, R.&lt;/span&gt;, and &lt;span style=&quot;font-variant: small-caps&quot;&gt;Schramm, O.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2008). &lt;b&gt;Growth of the number of spanning trees of the Erdos-Rényi giant component&lt;/b&gt;. &lt;i&gt;Combin. Probab. Comput.&lt;/i&gt; 17, 711–726. https://doi.org/10.1017/S0963548308009188&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;janson-dont-grow&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Janson, S.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2006). &lt;b&gt;Conditioned Galton-Watson trees do not grow&lt;/b&gt;, in: Proceedings, Fourth Colloquium on Mathematics and Computer Science Algorithms, Trees, Combinatorics and Probabilities (Nancy, 2006). pp. 331–334.&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;luczak&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Luczak, M.&lt;/span&gt;, and &lt;span style=&quot;font-variant: small-caps&quot;&gt;Winkler, P.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (2004). &lt;b&gt;Building uniformly random subtrees&lt;/b&gt;. &lt;i&gt;Random Structures Algorithms&lt;/i&gt; 24, 420–443. https://doi.org/10.1002/rsa.20011&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;petrov&quot;&gt;&lt;span style=&quot;font-variant: normal&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;&lt;span style=&quot;font-variant: small-caps&quot;&gt;Petrov, V. V.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; (1975). Sums of Independent Random Variables. Springer-Verlag Berlin Heidelberg New York.&lt;/span&gt;
-
-&lt;br /&gt;
-
-
-&lt;ul class=&quot;referencelinks&quot;&gt;
-
-
-&lt;/ul&gt;
 &lt;/li&gt;&lt;/ol&gt;</content>
 
       
@@ -1730,7 +1658,7 @@ which still cannot be grown within Kesten’s tree.&lt;/p&gt;
       
 
       
-        <summary type="html">When programmers hear the phrase “random tree,” they most likely think of a random binary search tree, i.e., a binary search tree built from the insertion of a uniformly random permutation of $n$ keys—denote such a tree by $\mathrm{BST}_n$. A mathematician might instead think that a ``random tree’’ is more likely to be a uniformly random tree taken from some class, like the set of all ordered binary trees with $n$ nodes—denote such a tree by $\mathrm{UNIF}_n$. Of course, neither would be wrong. It should be clear, though, that these two distributions on the space of binary trees are quite different. In particular, most undergraduate students of computer science learn, through the study of comparison-based sorting algorithms, that \[ \mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) , \] and some will learn that \[ \mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) . \] Though random binary search trees might seem more immediately relevant to programmers, uniformly random binary trees are part of a bigger picture which is comparatively more versatile in the probabilistic analysis of algorithms. To this end, we introduce the concept of Galton-Watson trees.</summary>
+        <summary type="html">When programmers hear the phrase “random tree,” they most likely think of a random binary search tree, i.e., a binary search tree built from the insertion of a uniformly random permutation of \(n\) keys—denote such a tree by \(\mathrm{BST}_n\). A mathematician might instead think that a ``random tree’’ is more likely to be a uniformly random tree taken from some class, like the set of all ordered binary trees with \(n\) nodes—denote such a tree by \(\mathrm{UNIF}_n\). Of course, neither would be wrong. It should be clear, though, that these two distributions on the space of binary trees are quite different. In particular, most undergraduate students of computer science learn, through the study of comparison-based sorting algorithms, that \[ \mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) , \] and some will learn that \[ \mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) . \] Though random binary search trees might seem more immediately relevant to programmers, uniformly random binary trees are part of a bigger picture which is comparatively more versatile in the probabilistic analysis of algorithms. To this end, we introduce the concept of Galton-Watson trees.</summary>
       
 
       

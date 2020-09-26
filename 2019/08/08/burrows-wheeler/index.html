@@ -68,7 +68,7 @@
 
 
   
-    <script type="text/x-mathjax-config">
+    <!--<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
       TeX: {
           equationNumbers: {
@@ -82,7 +82,27 @@
   });
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
+-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+    crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            delimiter: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    });
+</script>
   
 
   
@@ -286,36 +306,36 @@ attains at most a constant factor of the empirical entropy of the
 input stream.</p>
 
 <p>We first suppose that our input stream has characters drawn from the
-alphabet $\Sigma$; for binary inputs, $\Sigma = {0, 1}$. If the
+alphabet \(\Sigma\); for binary inputs, \(\Sigma = {0, 1}\). If the
 encoder and decoder were both aware of the alphabet maintained in a
 fixed and agreed upon order, then we could encode the input stream by
 simply sending the stream of indices in the alphabet corresponding to
-each character. For example, with the alphabet $\Sigma = (a, b, c,
-\dots, z)$, we could represent the message <code class="highlighter-rouge">mississippi</code> with the
+each character. For example, with the alphabet \(\Sigma = (a, b, c,
+\dots, z)\), we could represent the message <code class="highlighter-rouge">mississippi</code> with the
 sequence of indices <code class="highlighter-rouge">13, 9, 19, 19, 9, 19, 19, 9, 16, 16,
 9</code>.</p>
 
 <p>Move-to-front makes the simple change over this trivial scheme that
 each time a character is polled, it is moved to the front of the
 alphabet. For example, in the first step of encoding <code class="highlighter-rouge">mississippi</code>,
-the alphabet $\Sigma$ is scanned from left to right until the symbol
+the alphabet \(\Sigma\) is scanned from left to right until the symbol
 <code class="highlighter-rouge">m</code> is encountered in the 13-th index, so we write <code class="highlighter-rouge">13</code> and move <code class="highlighter-rouge">m</code>
-to the front of the alphabet, which now becomes $\Sigma = (m, a, b, c,
-\dots, l, n, \dots, z)$. Each step of encoding <code class="highlighter-rouge">mississippi</code> is
+to the front of the alphabet, which now becomes \(\Sigma = (m, a, b, c,
+\dots, l, n, \dots, z)\). Each step of encoding <code class="highlighter-rouge">mississippi</code> is
 detailed below:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">m</code> index <code class="highlighter-rouge">13</code>, $\Sigma = (m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">10</code>, $\Sigma = (i, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">19</code>, $\Sigma = (s, i, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">1</code>, $\Sigma = (s, i, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">2</code>, $\Sigma = (i, s, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">2</code>, $\Sigma = (s, i, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">1</code>, $\Sigma = (s, i, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">1</code>, $\Sigma = (i, s, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">p</code> index <code class="highlighter-rouge">17</code>, $\Sigma = (p, i, s, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">p</code> index <code class="highlighter-rouge">1</code>, $\Sigma = (p, i, s, m, a, b, \dots, z)$.</li>
-  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">2</code>, $\Sigma = (i, p, s, m, a, b, \dots, z)$.</li>
+  <li><code class="highlighter-rouge">m</code> index <code class="highlighter-rouge">13</code>, \(\Sigma = (m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">10</code>, \(\Sigma = (i, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">19</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">1</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">2</code>, \(\Sigma = (i, s, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">2</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">s</code> index <code class="highlighter-rouge">1</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">1</code>, \(\Sigma = (i, s, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">p</code> index <code class="highlighter-rouge">17</code>, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">p</code> index <code class="highlighter-rouge">1</code>, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).</li>
+  <li><code class="highlighter-rouge">i</code> index <code class="highlighter-rouge">2</code>, \(\Sigma = (i, p, s, m, a, b, \dots, z)\).</li>
 </ul>
 
 <p>With move-to-front, <code class="highlighter-rouge">mississippi</code> is thus encoded with the sequence
@@ -325,7 +345,7 @@ characters.</p>
 
 <p>We still have to encode the integers in this index sequence. When we
 know that these indices are bounded within some range, as they are in
-this case between $1$ and $|\Sigma|$, it is common to use a
+this case between \(1\) and \(|\Sigma|\), it is common to use a
 fixed-width encoding; in computing terms, each character is
 represented using a fixed number of bits or bytes. However, in order
 to take advantage of the magnitude reduction of indices in
@@ -337,34 +357,34 @@ is prefix-free if no codeword is the prefix of another. Note that it
 is possible to decode a sequence of codewords from a prefix-free code
 immediately once each new codeword is encountered. The simplest
 prefix-free code for natural numbers is the <em>unary code</em>, where the
-integer <code class="highlighter-rouge">i</code> is encoded using a sequence of $i - 1$ <code class="highlighter-rouge">0</code> characters,
+integer <code class="highlighter-rouge">i</code> is encoded using a sequence of \(i - 1\) <code class="highlighter-rouge">0</code> characters,
 followed by a single <code class="highlighter-rouge">1</code>. This last <code class="highlighter-rouge">1</code> is necessary to delimit
 codewords in order to make the code prefix-free. It’s obvious that the
-unary codeword for $i$ has length $i$.</p>
+unary codeword for \(i\) has length \(i\).</p>
 
-<p>The Elias $\gamma$-code is another prefix-free code of natural
+<p>The Elias \(\gamma\)-code is another prefix-free code of natural
 numbers. Observe first that the binary codeword for the integer <code class="highlighter-rouge">i</code>
-has length $\lfloor \log_2 i \rfloor + 1$ bits, and the
+has length \(\lfloor \log_2 i \rfloor + 1\) bits, and the
 most-significant bit here is always a <code class="highlighter-rouge">1</code>. This by itself is not a
-prefix-free code. The Elias $\gamma$-code prepends a sequence of
-$\lfloor \log_2 i \rfloor$ <code class="highlighter-rouge">0</code> bits to the binary codeword for <code class="highlighter-rouge">i</code>,
-thereby creating a prefix-free code of length $2 \lfloor \log_2 i
-\rfloor + 1$ for the integer <code class="highlighter-rouge">i</code>.</p>
+prefix-free code. The Elias \(\gamma\)-code prepends a sequence of
+\(\lfloor \log_2 i \rfloor\) <code class="highlighter-rouge">0</code> bits to the binary codeword for <code class="highlighter-rouge">i</code>,
+thereby creating a prefix-free code of length \(2 \lfloor \log_2 i
+\rfloor + 1\) for the integer <code class="highlighter-rouge">i</code>.</p>
 
-<p>In principle, the Elias $\gamma$-code presents the number $\lfloor
-\log_2 i \rfloor + 1$ in a unary encoding through the most
+<p>In principle, the Elias \(\gamma\)-code presents the number \(\lfloor
+\log_2 i \rfloor + 1\) in a unary encoding through the most
 significant bits of the codeword for <code class="highlighter-rouge">i</code>, which tells us the remaining
 bits to be read in order to guarantee prefix-freeness. If we encode
-this integer instead with an Elias $\gamma$-code itself instead of
-unary, then we obtain the Elias $\delta$-code. For the integer $i$,
-the Elias $\delta$-code has length $\log_2 i + O(\log \log i)$. It’s
+this integer instead with an Elias \(\gamma\)-code itself instead of
+unary, then we obtain the Elias \(\delta\)-code. For the integer \(i\),
+the Elias \(\delta\)-code has length \(\log_2 i + O(\log \log i)\). It’s
 actually possible to iterate this process as much as possible to
-obtain the Elias $\omega$-code, but the Elias $\delta$-code is
-powerful enough for most purposes that the $\omega$-code is rarely
+obtain the Elias \(\omega\)-code, but the Elias \(\delta\)-code is
+powerful enough for most purposes that the \(\omega\)-code is rarely
 used, even in theoretical works.</p>
 
 <p>You can try to use the form at the top of this post to encode
-<code class="highlighter-rouge">mississippi</code> in move-to-front with Elias $\delta$-codes, by typing it
+<code class="highlighter-rouge">mississippi</code> in move-to-front with Elias \(\delta\)-codes, by typing it
 in the input tab and switching to the MTF tab.</p>
 
 <p>There is one simple and reversible transformation which we can make to
@@ -372,7 +392,7 @@ the input in order to greatly improve move-to-front compression
 performance on highly structured inputs: this is the <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">Burrows-Wheeler
 transform</a>. Simply
 put, the Burrows-Wheeler transform of an input string <code class="highlighter-rouge">str</code> takes all
-all cyclic rotations of the string <code class="highlighter-rouge">str + $</code>, where <code class="highlighter-rouge">$</code> is an
+all cyclic rotations of the string <code class="highlighter-rouge">str + \\(</code>, where <code class="highlighter-rouge">\\)</code> is an
 otherwise unused character, and sorts these rotations in lexicographic
 order, taking the last character of each of these sorted
 rotations.</p>
@@ -411,7 +431,7 @@ the Burrows-Wheeler transform, this is brought all the way down to
     <p>
       
 
-&copy; 2020. All rights reserved.
+&copy; 2020 - Tommy Reddad. All rights reserved.
 
     </p>
 

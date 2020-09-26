@@ -63,7 +63,7 @@
 
 
   
-    <script type="text/x-mathjax-config">
+    <!--<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
       TeX: {
           equationNumbers: {
@@ -77,7 +77,27 @@
   });
 </script>
 <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
+-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+    crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+            delimiter: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+    });
+</script>
   
 
   
@@ -183,13 +203,13 @@ properties. You will also find an instructive D3 visualization of a
 splay tree in motion.</p>
 
 <p>Splay trees are a kind of binary search tree, so they support the
-crucial search tree query $\texttt{SEARCH}(k)$ which returns the
-smallest value $x \ge k$ stored in the tree. As an aside, many
+crucial search tree query \(\texttt{SEARCH}(k)\) which returns the
+smallest value \(x \ge k\) stored in the tree. As an aside, many
 students ignore the difference between this search query, and what we
-may call a $\texttt{FIND}(k)$ query of dictionaries, which only should
-return $k$ if $k$ is present in the structure, and nothing
-otherwise. Obviously, we can always implement $\texttt{FIND}$ with
-$\texttt{SEARCH}$, but the reverse is not true. These are
+may call a \(\texttt{FIND}(k)\) query of dictionaries, which only should
+return \(k\) if \(k\) is present in the structure, and nothing
+otherwise. Obviously, we can always implement \(\texttt{FIND}\) with
+\(\texttt{SEARCH}\), but the reverse is not true. These are
 fundamentally different queries with different goals and limitations,
 which is sometimes not emphasized in undergraduate computer science
 courses, and indeed, the ignorance of this difference may lend
@@ -206,14 +226,14 @@ self-adjust also on queries, to be adaptive to input query
 sequences. Before describing this transformation in more detail, I’ll
 present a problem which happens to be solved by splay trees.</p>
 
-<p>Let $D$ be some data structure implementing $\texttt{SEARCH}$. We
-perform a sequence of queries $x_1, x_2, \dots$ on $D$. For a
-particular $x$, let $w(x)$ denote the number of distinct elements of
-$D$ which have been queried since $x$ was last queried. For example,
-if $x_1 = x_2 = x_3 = 1$ and we are performing the fourth query, then
-$w(1) = 0$. On the other hand, if $x_1 = x_2 = 1$ and $x_3 = 2$, then
-$w(1) = 1$. If $\texttt{SEARCH}(x)$ takes time $O(\log w(x))$,
-then $D$ is said to have the <em>working set property.</em> If a structure
+<p>Let \(D\) be some data structure implementing \(\texttt{SEARCH}\). We
+perform a sequence of queries \(x_1, x_2, \dots\) on \(D\). For a
+particular \(x\), let \(w(x)\) denote the number of distinct elements of
+\(D\) which have been queried since \(x\) was last queried. For example,
+if \(x_1 = x_2 = x_3 = 1\) and we are performing the fourth query, then
+\(w(1) = 0\). On the other hand, if \(x_1 = x_2 = 1\) and \(x_3 = 2\), then
+\(w(1) = 1\). If \(\texttt{SEARCH}(x)\) takes time \(O(\log w(x))\),
+then \(D\) is said to have the <em>working set property.</em> If a structure
 has this property, then this structure allows us to efficiently
 perform sequences of queries in which there are many recurring
 items. It’s not totally obvious how to implement a structure which has
@@ -223,12 +243,12 @@ the working set property, but one relatively easy example is given by
 <p>Intuitively, if we wanted to make a binary search tree which has the
 working set property, we might simply rotate any queried element all
 the way up to the root. This isn’t quite right. Take for example the
-sequence of insertions $x_1 = 1, x_2 = 2, \dots, x_n = n$. Each
+sequence of insertions \(x_1 = 1, x_2 = 2, \dots, x_n = n\). Each
 insertion in this structure will take constant time, and the final
-tree looks like a root with one right child, and a path of $n - 2$
-nodes hanging off its left child. Then, the query $x_{n + 1} = 1$
-takes $\varOmega(n)$ time. In fact, if $x_{n + i} = i$ for each $i$,
-then the queries will even take $\varOmega(n)$ amortized time. So, the
+tree looks like a root with one right child, and a path of \(n - 2\)
+nodes hanging off its left child. Then, the query \(x_{n + 1} = 1\)
+takes \(\varOmega(n)\) time. In fact, if \(x_{n + i} = i\) for each \(i\),
+then the queries will even take \(\varOmega(n)\) amortized time. So, the
 most obvious suggestion fails to implement the working set property.</p>
 
 <p>Splay trees are the next simplest choice. Instead of performing
@@ -242,16 +262,16 @@ of a target splayed node: the zig, the zig-zig, and the zig-zag.</p>
 
 <p>This is an ordinary binary tree rotation, as seen for example in
 red-black trees. The zig is only performed when the splayed node is a
-child of the root. On the left, the node to be splayed is $x$, and the
-root is $y$. The zig transforms the left tree into the right tree.</p>
+child of the root. On the left, the node to be splayed is \(x\), and the
+root is \(y\). The zig transforms the left tree into the right tree.</p>
 
 <div id="zig" align="center"></div>
 <script type="text/javascript" src="/assets/2019-07-27-splay-trees/zig.min.js"></script>
 
 <h3 id="the-zig-zig">The zig-zig</h3>
 
-<p>A zig-zig is performed whenever the splayed node $x$ is the left-left
-child or the right-right child of its grandparent. A zig-zig of $x$
+<p>A zig-zig is performed whenever the splayed node \(x\) is the left-left
+child or the right-right child of its grandparent. A zig-zig of \(x\)
 transforms the left tree into the right tree.</p>
 
 <div id="zigzig" align="center"></div>
@@ -280,30 +300,30 @@ power.</p>
 
 <blockquote>
   <p><strong>The Static Optimality Meta-Theorem.</strong><br />
-Let $T$ be some fixed binary search tree, and let $d(x)$ be the depth of the node $x$ in $T$. Let $x_1, x_2, \dots, x_m$ be a sequence of queries in $T$. The cost of accessing $x_1, x_2, \dots, x_m$ in a splay tree is at most<br />
+Let \(T\) be some fixed binary search tree, and let \(d(x)\) be the depth of the node \(x\) in \(T\). Let \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most<br />
 \[
 	O\left(n \log n + m + \sum_{i = 1}^m d(x_i)\right) .
 \]</p>
 </blockquote>
 
-<p>The $n \log n + m$ part can be thought of as the cost of doing
+<p>The \(n \log n + m\) part can be thought of as the cost of doing
 business in any balanced binary tree. The remaining part is the cost
-of the sequence of queries $x_1, \dots, x_m$ in $T$. So what this
+of the sequence of queries \(x_1, \dots, x_m\) in \(T\). So what this
 result says is that, for long enough query sequences, splay trees
 perform as well as any static binary search tree. In particular, if we
-pick $T$ to be a balanced complete binary tree, then we get the
+pick \(T\) to be a balanced complete binary tree, then we get the
 following corollary.</p>
 
 <blockquote>
   <p><strong>The Balance Theorem.</strong><br />
-The cost of any sequence of $m$ queries in a splay tree is at most
+The cost of any sequence of \(m\) queries in a splay tree is at most
 \[
 	O(n\log n + m \log n) .
 \]</p>
 </blockquote>
 
 <p>From this, we learn that the amortized cost of each operation is
-$O(\log n)$, so splay trees behave like balanced binary search trees.</p>
+\(O(\log n)\), so splay trees behave like balanced binary search trees.</p>
 
 <p>As it turns out, splay trees also have the amortized working set
 property which we discussed earlier, though this is not a consequence
@@ -311,7 +331,7 @@ of the static optimality meta-theorem.</p>
 
 <blockquote>
   <p><strong>The Working-Set Theorem.</strong><br />
-The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O\left(n \log n + m + \sum_{i = 1}^m \log w(x_i) \right) .
 \]</p>
@@ -319,9 +339,9 @@ The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
 
 <p>Every year that I’ve TA’d the undergraduate honours data structures
 class at McGill University, students have been asked to design a data
-structure which has the <em>dynamic finger property</em>, where if $\Delta$
+structure which has the <em>dynamic finger property</em>, where if \(\Delta\)
 is the difference in keys between the current and preceding queries,
-then the current operation should cost $O(\log \Delta)$. It’s a
+then the current operation should cost \(O(\log \Delta)\). It’s a
 tricky problem, but with some work, this can be accomplished using
 a self-balancing binary search tree with level-linked lists, some
 smart traversal, and a bit of careful thinking… But who has the time
@@ -329,11 +349,11 @@ for that?</p>
 
 <blockquote>
   <p><strong>The Dynamic Finger Theorem.</strong><br />
-The cost of the query sequence $x_1, x_2, \dots, x_m$ in a splay tree is at most
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O\left(n + m + \sum_{i = 1}^m \log(1 + |x_i - x_{i - 1}|)\right) ,
 \]
-where $x_0 = 0$.</p>
+where \(x_0 = 0\).</p>
 </blockquote>
 
 <p>Is there anything splay trees can’t do? We simply do not yet know,
@@ -341,7 +361,7 @@ considering the following conjecture remains open.</p>
 
 <blockquote>
   <p><strong>The Dynamic Optimality Conjecture.</strong><br />
-Let $T$ be a binary search tree and $x_1, x_2, \dots, x_m$ be a sequence of queries in $T$. Suppose that we are allowed to modify $T$ by rotations after each query. Let $S(T)$ be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing $x_1, x_2, \dots, x_m$ in a splay tree is at most
+Let \(T\) be a binary search tree and \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). Suppose that we are allowed to modify \(T\) by rotations after each query. Let \(S(T)\) be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
 	O(n + S(T)) .
 \]</p>
@@ -364,7 +384,7 @@ Let $T$ be a binary search tree and $x_1, x_2, \dots, x_m$ be a sequence of quer
     <p>
       
 
-&copy; 2020. All rights reserved.
+&copy; 2020 - Tommy Reddad. All rights reserved.
 
     </p>
 
