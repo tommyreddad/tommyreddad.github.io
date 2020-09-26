@@ -146,7 +146,7 @@
 \(\mathrm{Uniform}[0, 1]\) random variables. Let \(N\) be the minimum
 index for which
 \[
-	U_1 + U_2 + \dots + U_N &gt; 1 .
+U_1 + U_2 + \dots + U_N &gt; 1 .
 \]
 What is the expected value \(\mathbf{E}\{N\}\)?</p>
 
@@ -162,22 +162,22 @@ possible proof.</p>
 expectations, we have that
 \[
 \begin{aligned}
-	\mathbf{E}\{N\} &amp;= \sum_{i \ge 0} \mathbf{P}\{N \ge i\} \\
-			  &amp;= \sum_{i \ge 0} \mathbf{P}\{U_1 + \dots + U_i \le 1\} .
+\mathbf{E}\{N\} &amp;= \sum_{i \ge 0} \mathbf{P}\{N \ge i\} \\
+&amp;= \sum_{i \ge 0} \mathbf{P}\{U_1 + \dots + U_i \le 1\} .
 \end{aligned}
 \]
 Rearranging,
 \[
 \begin{aligned}
-	\mathbf{P}\{U_1 + \dots + U_i \le 1\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1 - U_i\} \\
-	       		 &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} ,
+\mathbf{P}\{U_1 + \dots + U_i \le 1\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1 - U_i\} \\
+&amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} ,
 \end{aligned}
 \]
 where \(U_i’ \sim \mathrm{Uniform}[0, 1]\), and \(U_i’\) is independent of \(U_1, \dots, U_{i - 1}\).</p>
 
 <p>Consider the event \(\mathcal{E}_i\) that
 \[
-	U_i’ = \max\{U_1, \dots, U_{i - 1}, U_i’\} .
+U_i’ = \max\{U_1, \dots, U_{i - 1}, U_i’\} .
 \]</p>
 
 <p>Since this is just a collection of independent uniform random
@@ -190,34 +190,34 @@ now each of these is independent and distributed as
 \(\overline{\mathcal{E}_i}\), one of the other variables is larger than
 \(U_i’\), and in particular,
 \[
-	U_1 + \dots + U_{i - 1} &gt; U_i’ .
+U_1 + \dots + U_{i - 1} &gt; U_i’ .
 \]
 Therefore,
 \[
 \begin{aligned}
-	 \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’ \mid \mathcal{E}_i\} \mathbf{P}\{\mathcal{E}_i\} \\
-	 		   &amp;= \frac{1}{i} \mathbf{P}\left\{\frac{U_1}{U_i’} + \dots + \frac{U_{i - 1}}{U_i’} \le 1 \,\Big|\, \mathcal{E}_i\right\} \\
-			   &amp;= \frac{1}{i} \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1\} ,
+\mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’\} &amp;= \mathbf{P}\{U_1 + \dots + U_{i - 1} \le U_i’ \mid \mathcal{E}_i\} \mathbf{P}\{\mathcal{E}_i\} \\
+&amp;= \frac{1}{i} \mathbf{P}\left\{\frac{U_1}{U_i’} + \dots + \frac{U_{i - 1}}{U_i’} \le 1 \,\Big|\, \mathcal{E}_i\right\} \\
+&amp;= \frac{1}{i} \mathbf{P}\{U_1 + \dots + U_{i - 1} \le 1\} ,
 \end{aligned}
 \]
 and upon iterating, we get the following very satisfying equation,
 \[
-	\mathbf{P}\{U_1 + \dots + U_i \le 1\} = \frac{1}{i!} .
+\mathbf{P}\{U_1 + \dots + U_i \le 1\} = \frac{1}{i!} .
 \]
 Replacing this into the formula for the expectation, we get the magical result
 \[
-	\mathbf{E}\{N\} = \sum_{i \ge 0} \frac{1}{i!} = e .
+\mathbf{E}\{N\} = \sum_{i \ge 0} \frac{1}{i!} = e .
 \]</p>
 
 <p>Incidentally, we’ve derived the entire distribution above, not just
 the expectation,
 \[
-	\mathbf{P}\{N \ge i\} = \frac{1}{i!} , \qquad \mathbf{P}\{N = i\} = \frac{1}{(i - 1)! (i + 1)} .
+\mathbf{P}\{N \ge i\} = \frac{1}{i!} , \qquad \mathbf{P}\{N = i\} = \frac{1}{(i - 1)! (i + 1)} .
 \]</p>
 
 <p>Consider also the value of the first uniform sum exceeding \(1\),
 \[
-	S_N = U_1 + \dots + U_N .
+S_N = U_1 + \dots + U_N .
 \]
 Deterministically, this quantity must be between \(1\) and
 \(2\). Intuitively, it seems likely that it will be at most \(3/2\), since
@@ -227,7 +227,7 @@ uniform before exceeding the threshold \(1\).</p>
 <p>Since \(N\) is a stopping time, by Wald’s lemma, we can easily nail the
 expectation of \(S_N\),
 \[
-	\mathbf{E}\{S_N\} = \mathbf{E}\{N\} \mathbf{E}\{U\} = e/2 \approx 1.359,
+\mathbf{E}\{S_N\} = \mathbf{E}\{N\} \mathbf{E}\{U\} = e/2 \approx 1.359,
 \]
 which is indeed less than \(3/2\).</p>
 

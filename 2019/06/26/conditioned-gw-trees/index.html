@@ -175,11 +175,11 @@ binary trees are quite different. In particular, most undergraduate
 students of computer science learn, through the study of
 comparison-based sorting algorithms, that
 \[
-	\mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) ,
+\mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) ,
 \]
 and some will learn that
 \[
-	\mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) .
+\mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) .
 \]
 Though random binary search trees might seem more immediately relevant
 to programmers, uniformly random binary trees are part of a bigger
@@ -219,10 +219,17 @@ Let \(q\) denote the probability that a \(\xi\)-Galton-Watson tree goes extinct.
 </blockquote>
 
 <p>Accordingly, there are three regimes:</p>
+
 <ul>
-  <li>the <em>subcritical</em> regime, when \(\mathbf{E} \xi &lt; 1\);</li>
-  <li>the <em>critical</em> regime, when \(\mathbf{E} \xi = 1\), and;</li>
-  <li>the <em>supercritical</em> regime, when \(\mathbf{E} \xi &gt; 1\).</li>
+  <li>
+    <p>the <em>subcritical</em> regime, when \(\mathbf{E} \xi &lt; 1\);</p>
+  </li>
+  <li>
+    <p>the <em>critical</em> regime, when \(\mathbf{E} \xi = 1\), and;</p>
+  </li>
+  <li>
+    <p>the <em>supercritical</em> regime, when \(\mathbf{E} \xi &gt; 1\).</p>
+  </li>
 </ul>
 
 <p>The critical regime is of paramount importance. Though it may not be
@@ -234,16 +241,16 @@ Galton-Watson trees model many kinds of “uniform” random trees.</p>
 control the number of nodes in a Galton-Watson tree. We define a
 <em>conditioned Galton-Watson tree</em> to be a Galton-Watson tree
 conditioned to have \(n\) nodes, and denote it by \(T_n\). So, for the
-\(\xi\)-Galton-Watson tree \(T\) and specific tree \(t\) on \(n\) nodes, 
+\(\xi\)-Galton-Watson tree \(T\) and specific tree \(t\) on \(n\) nodes,
 \[
-	\mathbf{P}\{T_n = t\} = \mathbf{P}\{T = t \mid |T| = n\} = \frac{\mathbf{P}\{T = t\}}{\mathbf{P}\{|T| = n\}} ,
+\mathbf{P}\{T_n = t\} = \mathbf{P}\{T = t \mid |T| = n\} = \frac{\mathbf{P}\{T = t\}}{\mathbf{P}\{|T| = n\}} ,
 \]
 where \(|T|\) denotes the number of nodes in \(T\).</p>
 
 <p>For certain offspring distributions, we may be conditioning on an
 event which occurs with zero probability. For example, if
 \[
-	\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/2 ,
+\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/2 ,
 \]
 then every \(\xi\)-Galton-Watson tree has an odd number of nodes, so \(n\)
 must be odd. We will ignore this technicality.</p>
@@ -253,50 +260,57 @@ tree with \(n = 2k + 1\) nodes, then \(n\) has \(k\) internal nodes and \(k +
 1\) leaves, so by independence of the number of offspring of each node
 in the Galton-Watson process,
 \[
-	\mathbf{P}\{T = t\} = ( \mathbf{P} \{\xi = 0\} )^{k + 1} ( \mathbf{P}\{\xi = 2 \} )^k = 2^{-n} .
+\mathbf{P}\{T = t\} = ( \mathbf{P} \{\xi = 0\} )^{k + 1} ( \mathbf{P}\{\xi = 2 \} )^k = 2^{-n} .
 \]
 Since \(t\) was an arbitrary binary tree on \(n\) nodes, this means that \(T_n\) is, after all, a uniformly random binary tree.</p>
 
 <p>This is just one way of viewing a uniformly random tree as a critical
 Galton-Watson tree. Some other important offspring distributions
 include:</p>
+
 <ul>
-  <li>the \(\mathrm{Geometric}(1/2)\) offspring distribution,
+  <li>
+    <p>the \(\mathrm{Geometric}(1/2)\) offspring distribution,
 \[
-  \mathbf{P}\{\xi = i\} = 2^{- (i + 1) } ,
+\mathbf{P}\{\xi = i\} = 2^{- (i + 1) } ,
 \]
-corresponding to uniformly random ordered trees (with any valence);</li>
-  <li>the \(\mathrm{Poisson}(1)\) offspring distribution,
+corresponding to uniformly random ordered trees (with any valence);</p>
+  </li>
+  <li>
+    <p>the \(\mathrm{Poisson}(1)\) offspring distribution,
 \[
-  \mathbf{P}\{\xi = i\} = \frac{e^{-1}}{i!} ,
+\mathbf{P}\{\xi = i\} = \frac{e^{-1}}{i!} ,
 \]
-corresponding to uniformly random unordered labelled trees, and;</li>
-  <li>the \(\mathrm{Binomial}(d, 1/d)\) offspring distribution,
+corresponding to uniformly random unordered labelled trees, and;</p>
+  </li>
+  <li>
+    <p>the \(\mathrm{Binomial}(d, 1/d)\) offspring distribution,
 \[
-  \mathbf{P}\{\xi = i\} = \binom{d}{i} \frac{1}{d^i} \left(1 - \frac{1}{d}\right)^{d - i} ,
+\mathbf{P}\{\xi = i\} = \binom{d}{i} \frac{1}{d^i} \left(1 - \frac{1}{d}\right)^{d - i} ,
 \]
-corresponding to uniformly random (up to-) \(d\)-ary trees.</li>
+corresponding to uniformly random (up to-) \(d\)-ary trees.</p>
+  </li>
 </ul>
 
 <p>Critical Galton-Watson trees have many marvelous qualities which are
 too numerous to even summarize here. In particular, writing
 \(\mathrm{Var}\{\xi\} = \sigma^2\), if \(0 &lt; \sigma^2 &lt; \infty\), then
 \[
-	\mathbf{E}\{\mathrm{height}(T_n)\} = \varTheta(\sqrt{n}) ,
+\mathbf{E}\{\mathrm{height}(T_n)\} = \varTheta(\sqrt{n}) ,
 \]
-and this height is even highly concentrated <a class="citation" href="#subgaussian">(Addario-Berry et al., (2013)</a>.</p>
+and this height is even highly concentrated <a class="citation" href="#subgaussian">(Addario-Berry et al., 2013)</a>.</p>
 
 <p>Even more fascinating is the local limit to the <em>size-biased tree,</em>
 also known as <em>Kesten’s tree.</em> To describe this structure, first we
 introduce the size-biased random variable \(\hat{\xi}\), where
 \[
-	\mathbf{P}\{\hat{\xi} = i\} = i \mathbf{P}\{\xi = i\} .
+\mathbf{P}\{\hat{\xi} = i\} = i \mathbf{P}\{\xi = i\} .
 \]</p>
 
 <p>Since \(\xi\) is critical, then the size-biased distribution is indeed a
 probability distribution, i.e.,
 \[
-	\sum_{i \ge 0} \mathbf{P}\{\hat{\xi} = i\} = \sum_{i \ge 0} i \mathbf{P}\{\xi = i\} = \mathbf{E} \xi = 1 .
+\sum_{i \ge 0} \mathbf{P}\{\hat{\xi} = i\} = \sum_{i \ge 0} i \mathbf{P}\{\xi = i\} = \mathbf{E} \xi = 1 .
 \]</p>
 
 <p>With this, we construct the infinite Kesten’s tree, denoted by
@@ -320,7 +334,7 @@ the local limit to Kesten’s tree mentioned earlier:</p>
   <p><strong>Theorem 2</strong><br />
 Suppose that \(\mathbf{E} \xi = 1\). Then, for each \(r \ge 1\) and each tree \(t\),
 \[
-  \lim_{n \to \infty} \mathbf{P}\{ [T_n]_r = t \} = \mathbf{P}\{ [T_\infty]_r = t\} .
+\lim_{n \to \infty} \mathbf{P}\{ [T_n]_r = t \} = \mathbf{P}\{ [T_\infty]_r = t\} .
 \]</p>
 </blockquote>
 
@@ -354,15 +368,15 @@ finiteness of the tree is required, we can even truncate \(T_\infty\) at
 some level around \(\sqrt{n}\), since the height of \(T_n\) is highly
 concentrated.</p>
 
-<p>In <a class="citation" href="#luczak">(Luczak and Winkler, (2004)</a>, it is
+<p>In <a class="citation" href="#luczak">(Luczak and Winkler, 2004)</a>, it is
 shown that for any \(d \ge 2\) and \(\xi \sim \mathrm{Binomial}(d, 1/d)\),
 \(T_n\) can indeed be grown incrementally. There are a few more results
-about growing conditioned Galton-Watson trees—see <a class="citation" href="#lyons">(Lyons et al., (2008)</a>, <a class="citation" href="#broman-binomial">(Broman, (2014)</a>, <a class="citation" href="#broman-geometric">(Broman, (2016)</a>—but as far as I am aware,
+about growing conditioned Galton-Watson trees—see <a class="citation" href="#lyons">(Lyons et al., 2008)</a>, <a class="citation" href="#broman-binomial">(Broman, 2014)</a>, <a class="citation" href="#broman-geometric">(Broman, 2016)</a>—but as far as I am aware,
 these are virtually the only papers including positive results
 about which offspring distributions admit incremental growth or growth
 into Kesten’s tree.</p>
 
-<p>In the reverse direction, <a class="citation" href="#janson-dont-grow">(Janson, (2006)</a> shows that for <em>some</em> critical
+<p>In the reverse direction, <a class="citation" href="#janson-dont-grow">(Janson, 2006)</a> shows that for <em>some</em> critical
 offspring distributions and for some \(n\), there is no coupling for
 which \(T_n \subset T_{n + 1}\), or \(T_n \subset T_\infty\). We summarize
 the argument here, since it is quite simple.</p>
@@ -370,24 +384,24 @@ the argument here, since it is quite simple.</p>
 <p>Let \(Z_k(t)\) denote the number of nodes at depth \(k\) in the tree
 \(t\). Observe that
 \[
-	\mathbf{E} Z_k(T_\infty) = \sigma^2 + \mathbf{E} Z_{k - 1}(T_\infty) = 1 + k \sigma^2 .
+\mathbf{E} Z_k(T_\infty) = \sigma^2 + \mathbf{E} Z_{k - 1}(T_\infty) = 1 + k \sigma^2 .
 \]
 If \(T_n \subset T_\infty\), then
 \[
-	\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k (T_\infty) = 1 + k \sigma^2 
+\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k (T_\infty) = 1 + k \sigma^2
 \]
 for each \(k\), and if \(T_n \subset T_{n + 1}\), then
 \[
-	\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k(T_{n + 1})
+\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k(T_{n + 1})
 \]
 for each \(k\). Janson proposes the following offspring distribution:
 \[
-	\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = \frac{1 - \varepsilon}{2}, \quad \mathbf{P}\{\xi = 1\} = \varepsilon ,
+\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = \frac{1 - \varepsilon}{2}, \quad \mathbf{P}\{\xi = 1\} = \varepsilon ,
 \]
 for some fixed \(\varepsilon &gt; 0\), and then simply enumerates all small
 trees to compute that
 \[
-	\mathbf{E} Z_1 (T_3) &gt; \mathbf{E} Z_1 (T_4) 
+\mathbf{E} Z_1 (T_3) &gt; \mathbf{E} Z_1 (T_4)
 \]
 for a small enough choice of \(\varepsilon\), where we emphasize that
 \(Z_1\) is simply the degree of the root node.</p>
@@ -400,27 +414,27 @@ thinking, I realized that I was wrong.</p>
 
 <p>Pick the following offspring distribution for some fixed \(d \ge 2\):
 \[
-	\mathbf{P}\{\xi = 0\} = \left(1 - \frac{1}{d}\right)^2, \quad \mathbf{P}\{\xi = 1\} = \frac{1}{d}, \quad \mathbf{P}\{\xi = d\} = \frac{1}{d}\left(1 - \frac{1}{d}\right) .
+\mathbf{P}\{\xi = 0\} = \left(1 - \frac{1}{d}\right)^2, \quad \mathbf{P}\{\xi = 1\} = \frac{1}{d}, \quad \mathbf{P}\{\xi = d\} = \frac{1}{d}\left(1 - \frac{1}{d}\right) .
 \]
 It can be verified that \(\mathbf{E} \xi = 1\) and \(\sigma^2 = d - 2 +
 1/d\), so
 \[
-	\mathbf{E} Z_1 (T_\infty) = d - 1 + \frac{1}{d} .
+\mathbf{E} Z_1 (T_\infty) = d - 1 + \frac{1}{d} .
 \]
 We also know the distribution of the root degree for conditioned
-Galton-Watson trees from <a class="citation" href="#janson-survey">(Janson, (2012)</a>, so
+Galton-Watson trees from <a class="citation" href="#janson-survey">(Janson, 2012)</a>, so
 \[
 \begin{aligned}
-	\mathbf{P}\{Z_1(T_n) = i\} &amp;= \frac{n}{n - 1} i \mathbf{P}\{\xi_1 = i \mid \xi_1 + \xi_2 + \dots + \xi_n = n - 1\} \\
-	&amp;= \frac{n i \mathbf{P}\{S_{n - 1} = n - 1 - i\}}{(n - 1) \mathbf{P}\{S_n = n - 1\}} ,
+\mathbf{P}\{Z_1(T_n) = i\} &amp;= \frac{n}{n - 1} i \mathbf{P}\{\xi_1 = i \mid \xi_1 + \xi_2 + \dots + \xi_n = n - 1\} \\
+&amp;= \frac{n i \mathbf{P}\{S_{n - 1} = n - 1 - i\}}{(n - 1) \mathbf{P}\{S_n = n - 1\}} ,
 \end{aligned}
 \]
 where \(\xi_1, \dots, \xi_n\) are independent and identically distibuted
 as \(\xi\), and \(S_n = \xi_1 + \dots + \xi_n\). Using tedious
-computations through local limit theorems <a class="citation" href="#petrov">(Petrov, (1975)</a>, we can estimate the above
+computations through local limit theorems <a class="citation" href="#petrov">(Petrov, 1975)</a>, we can estimate the above
 probabilities in order, finally, to compute that
 \[
-	\mathbf{E} Z_1(T_n) = d - 1 + \frac{1}{d} + \frac{d^2 + o(d^2)}{2n} + o(1/n) , 
+\mathbf{E} Z_1(T_n) = d - 1 + \frac{1}{d} + \frac{d^2 + o(d^2)}{2n} + o(1/n) ,
 \]
 where the function \(o(d^2)\) does not depend on \(n\).</p>
 
@@ -428,27 +442,19 @@ where the function \(o(d^2)\) does not depend on \(n\).</p>
 dominates \(o(d^2)\) in the numerator, and then, for all sufficiently large
 \(n\),
 \[
-	\mathbf{E} Z_1 (T_n) &gt; \mathbf{E} Z_1 (T_\infty) .
+\mathbf{E} Z_1 (T_n) &gt; \mathbf{E} Z_1 (T_\infty) .
 \]
 So, there are even arbitrarily large conditioned Galton-Watson trees
 which still cannot be grown within Kesten’s tree.</p>
 
-<ol class="bibliography"><li><span id="broman-geometric"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Broman, E. I.</span></span></span> (2016). <b>Stochastic ordering of infinite geometric Galton-Watson trees</b>. <i>J. Theoret. Probab.</i> 29, 1069–1082. https://doi.org/10.1007/s10959-015-0608-x</span>
-</li>
-<li><span id="broman-binomial"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Broman, E. I.</span></span></span> (2014). <b>Stochastic ordering of infinite binomial Galton-Watson trees</b>. <i>ALEA Lat. Am. J. Probab. Math. Stat.</i> 11, 209–227.</span>
-</li>
-<li><span id="subgaussian"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Addario-Berry, L.</span>, <span style="font-variant: small-caps">Devroye, L.</span>, and <span style="font-variant: small-caps">Janson, S.</span></span></span> (2013). <b>Sub-Gaussian tail bounds for the width and height of conditioned Galton-Watson trees</b>. <i>Ann. Probab.</i> 41, 1072–1087. https://doi.org/10.1214/12-AOP758</span>
-</li>
-<li><span id="janson-survey"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Janson, S.</span></span></span> (2012). <b>Simply generated trees, conditioned Galton-Watson trees, random allocations and condensation</b>. <i>Probab. Surv.</i> 9, 103–252. https://doi.org/10.1214/11-PS188</span>
-</li>
-<li><span id="lyons"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Lyons, R.</span>, <span style="font-variant: small-caps">Peled, R.</span>, and <span style="font-variant: small-caps">Schramm, O.</span></span></span> (2008). <b>Growth of the number of spanning trees of the Erdos-Rényi giant component</b>. <i>Combin. Probab. Comput.</i> 17, 711–726. https://doi.org/10.1017/S0963548308009188</span>
-</li>
-<li><span id="janson-dont-grow"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Janson, S.</span></span></span> (2006). <b>Conditioned Galton-Watson trees do not grow</b>, in: Proceedings, Fourth Colloquium on Mathematics and Computer Science Algorithms, Trees, Combinatorics and Probabilities (Nancy, 2006). pp. 331–334.</span>
-</li>
-<li><span id="luczak"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Luczak, M.</span>, and <span style="font-variant: small-caps">Winkler, P.</span></span></span> (2004). <b>Building uniformly random subtrees</b>. <i>Random Structures Algorithms</i> 24, 420–443. https://doi.org/10.1002/rsa.20011</span>
-</li>
-<li><span id="petrov"><span style="font-variant: normal"><span style="font-variant: small-caps"><span style="font-variant: small-caps">Petrov, V. V.</span></span></span> (1975). Sums of Independent Random Variables. Springer-Verlag Berlin Heidelberg New York.</span>
-</li></ol>
+<ol class="bibliography"><li><span id="broman-geometric">Broman, E.I., 2016. Stochastic ordering of infinite geometric Galton-Watson trees. J. Theoret. Probab. 29, 1069–1082. https://doi.org/10.1007/s10959-015-0608-x</span></li>
+<li><span id="broman-binomial">Broman, E.I., 2014. Stochastic ordering of infinite binomial Galton-Watson trees. ALEA Lat. Am. J. Probab. Math. Stat. 11, 209–227.</span></li>
+<li><span id="subgaussian">Addario-Berry, L., Devroye, L., Janson, S., 2013. Sub-Gaussian tail bounds for the width and height of conditioned Galton-Watson trees. Ann. Probab. 41, 1072–1087. https://doi.org/10.1214/12-AOP758</span></li>
+<li><span id="janson-survey">Janson, S., 2012. Simply generated trees, conditioned Galton-Watson trees, random allocations and condensation. Probab. Surv. 9, 103–252. https://doi.org/10.1214/11-PS188</span></li>
+<li><span id="lyons">Lyons, R., Peled, R., Schramm, O., 2008. Growth of the number of spanning trees of the Erdos-Rényi giant component. Combin. Probab. Comput. 17, 711–726. https://doi.org/10.1017/S0963548308009188</span></li>
+<li><span id="janson-dont-grow">Janson, S., 2006. Conditioned Galton-Watson trees do not grow, in: Proceedings, Fourth Colloquium on Mathematics and Computer Science Algorithms, Trees, Combinatorics and Probabilities (Nancy, 2006). pp. 331–334.</span></li>
+<li><span id="luczak">Luczak, M., Winkler, P., 2004. Building uniformly random subtrees. Random Structures Algorithms 24, 420–443. https://doi.org/10.1002/rsa.20011</span></li>
+<li><span id="petrov">Petrov, V.V., 1975. Sums of Independent Random Variables. Springer-Verlag Berlin Heidelberg New York.</span></li></ol>
 
   </div>
 

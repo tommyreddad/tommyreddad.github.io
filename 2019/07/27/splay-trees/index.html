@@ -239,7 +239,7 @@ child of the root. On the left, the node to be splayed is \(x\), and the
 root is \(y\). The zig transforms the left tree into the right tree.</p>
 
 <div id="zig" align="center"></div>
-<script type="text/javascript" src="/assets/2019-07-27-splay-trees/zig.min.js"></script>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zig.min.js"></script>
 
 <h3 id="the-zig-zig">The zig-zig</h3>
 
@@ -248,7 +248,7 @@ child or the right-right child of its grandparent. A zig-zig of \(x\)
 transforms the left tree into the right tree.</p>
 
 <div id="zigzig" align="center"></div>
-<script type="text/javascript" src="/assets/2019-07-27-splay-trees/zigzig.min.js"></script>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zigzig.min.js"></script>
 
 <h2 id="the-zig-zag">The zig-zag</h2>
 
@@ -256,7 +256,7 @@ transforms the left tree into the right tree.</p>
 tree into the right tree.</p>
 
 <div id="zigzag" align="center"></div>
-<script type="text/javascript" src="/assets/2019-07-27-splay-trees/zigzag.min.js"></script>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zigzag.min.js"></script>
 
 <p>Notice that each of the above transformations retains the in-order
 sequence of keys. In the following visualization, 32 keys are inserted
@@ -266,7 +266,7 @@ their nodes are splayed to the root. Nodes currently being splayed are
 highlighted in red. Black squares represent external nodes.</p>
 
 <div id="splay" align="center"></div>
-<script type="text/javascript" src="/assets/2019-07-27-splay-trees/splay.min.js"></script>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/splay.min.js"></script>
 
 <p>This simple modification is enough to give splay trees some serious
 power.</p>
@@ -275,7 +275,7 @@ power.</p>
   <p><strong>The Static Optimality Meta-Theorem.</strong><br />
 Let \(T\) be some fixed binary search tree, and let \(d(x)\) be the depth of the node \(x\) in \(T\). Let \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most<br />
 \[
-	O\left(n \log n + m + \sum_{i = 1}^m d(x_i)\right) .
+O\left(n \log n + m + \sum_{i = 1}^m d(x_i)\right) .
 \]</p>
 </blockquote>
 
@@ -291,7 +291,7 @@ following corollary.</p>
   <p><strong>The Balance Theorem.</strong><br />
 The cost of any sequence of \(m\) queries in a splay tree is at most
 \[
-	O(n\log n + m \log n) .
+O(n\log n + m \log n) .
 \]</p>
 </blockquote>
 
@@ -306,7 +306,7 @@ of the static optimality meta-theorem.</p>
   <p><strong>The Working-Set Theorem.</strong><br />
 The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
-	O\left(n \log n + m + \sum_{i = 1}^m \log w(x_i) \right) .
+O\left(n \log n + m + \sum_{i = 1}^m \log w(x_i) \right) .
 \]</p>
 </blockquote>
 
@@ -324,7 +324,7 @@ for that?</p>
   <p><strong>The Dynamic Finger Theorem.</strong><br />
 The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
-	O\left(n + m + \sum_{i = 1}^m \log(1 + |x_i - x_{i - 1}|)\right) ,
+O\left(n + m + \sum_{i = 1}^m \log(1 + |x_i - x_{i - 1}|)\right) ,
 \]
 where \(x_0 = 0\).</p>
 </blockquote>
@@ -336,7 +336,7 @@ considering the following conjecture remains open.</p>
   <p><strong>The Dynamic Optimality Conjecture.</strong><br />
 Let \(T\) be a binary search tree and \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). Suppose that we are allowed to modify \(T\) by rotations after each query. Let \(S(T)\) be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most
 \[
-	O(n + S(T)) .
+O(n + S(T)) .
 \]</p>
 </blockquote>
 
