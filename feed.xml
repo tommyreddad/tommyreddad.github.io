@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-09-26T18:32:26-04:00</updated>
+  <updated>2020-09-27T14:47:28-04:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -28,6 +28,158 @@
   
     <entry>
       
+      <title type="html">The Burrows-Wheeler transform, revisited</title>
+      
+      
+      <link href="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/" rel="alternate" type="text/html" title="The Burrows-Wheeler transform, revisited" />
+      
+      <published>2020-09-27T00:00:00-04:00</published>
+      <updated>2020-09-27T00:00:00-04:00</updated>
+      <id>https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited</id>
+      <content type="html" xml:base="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/">&lt;p&gt;&lt;a href=&quot;2019-08-08-burrows-wheeler.md&quot;&gt;In my previous post&lt;/a&gt;, I discussed the Burrows-Wheeler transform,
+and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.&lt;/p&gt;
+
+&lt;p&gt;My initial implementation of this form was done in pure JavaScript with no particular care for
+efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on
+&lt;a href=&quot;2019-08-08-burrows-wheeler.md&quot;&gt;the same page&lt;/a&gt; reduces this complexity to \(O(n \log n)\) time
+and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of
+&lt;a href=&quot;https://arxiv.org/pdf/1201.3077.pdf&quot;&gt;Gil and Scott&lt;/a&gt;, that this time complexity can be reduced to \(O(n)\) by using linear time
+suffix array construction algorithms.&lt;/p&gt;
+
+&lt;p&gt;The new implementation has been rewritten in TypeScript, which makes it much easier on the eyes. The
+full source code is available on &lt;a href=&quot;https://github.com/tommyreddad/tommyreddad.github.io/blob/master/ts/2020-09-27-burrows-wheeler-revisited/bwt.ts&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To show off the new efficiency improvements, and the efficacy of the Burrows-Wheeler transform,
+we can try to compress the entire text of an English translation of Dostoevsky’s &lt;a href=&quot;https://www.gutenberg.org/files/2554/2554-0.txt&quot;&gt;Crime and Punishment&lt;/a&gt;,
+which is made available for free online thanks to &lt;a href=&quot;https://www.gutenberg.org/&quot;&gt;Project Gutenberg&lt;/a&gt;. In this case,
+after a few seconds of execution on my laptop, we can observe the completed transformation.
+A visual inspection of the BWT itself reveals long chunks of repeated characters throughout. The following tables contains statistics on the resulting compression:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Bit Count&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Compression Ratio&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Original (UTF-8)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;9,434,200&lt;/td&gt;
+      &lt;td&gt;1.00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;8,122,221&lt;/td&gt;
+      &lt;td&gt;0.86&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;BWT+MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;3,336,189&lt;/td&gt;
+      &lt;td&gt;0.35&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;How does the Burrows-Wheeler transform perform on texts written in a different language? In my personal experience, French text
+is absolutely full of extraneous characters, especially e’s, a’s, u’, and s’s, so this might suggest the Burrows-Wheeler transform to be effective in compressing French text.
+We ran the algorithm on Zola’s &lt;a href=&quot;https://www.gutenberg.org/cache/epub/5711/pg5711.txt&quot;&gt;Germinal&lt;/a&gt;:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Bit Count&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Compression Ratio&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Original (UTF-8)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;8,415,728&lt;/td&gt;
+      &lt;td&gt;1.00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;7,188,574&lt;/td&gt;
+      &lt;td&gt;0.85&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;BWT+MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;2,947,192&lt;/td&gt;
+      &lt;td&gt;0.35&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Interestingly, the compression behaved almost identically as on the English text!&lt;/p&gt;
+
+&lt;p&gt;We also consider Chinese text–in this case, &lt;a href=&quot;https://www.gutenberg.org/files/23950/23950-0.txt&quot;&gt;Romance of the Three Kingdoms&lt;/a&gt;. The results follow:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Bit Count&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Compression Ratio&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Original (UTF-8)&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;14,735,232&lt;/td&gt;
+      &lt;td&gt;1.00&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;7,460,164&lt;/td&gt;
+      &lt;td&gt;0.51&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;BWT+MTF&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;5,229,807&lt;/td&gt;
+      &lt;td&gt;0.35&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Surprisingly to me, the &lt;strong&gt;35%&lt;/strong&gt; compression ratio returns, even with the enormous number of unique characters used in the Chinese text: &lt;strong&gt;4225&lt;/strong&gt;, when compared to Crime and Punishment’s &lt;strong&gt;97&lt;/strong&gt; and Germinal’s &lt;strong&gt;103&lt;/strong&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Tommy Reddad</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="compression" />
+      
+        <category term="algorithms" />
+      
+
+      
+        <summary type="html">In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
       <title type="html">The Burrows-Wheeler transform and move-to-front compression</title>
       
       
@@ -37,19 +189,19 @@
       <updated>2019-08-08T00:00:00-04:00</updated>
       <id>https://www.reddad.ca/2019/08/08/burrows-wheeler</id>
       <content type="html" xml:base="https://www.reddad.ca/2019/08/08/burrows-wheeler/">&lt;style type=&quot;text/css&quot;&gt;
-.bitContent {
+.bit-content {
   display: inline;
   }
-.bitCount {
+.bit-count {
   display: inline;
       font-family: Monaco, Menlo, Consolas, &quot;Courier New&quot;, DotumChe, monospace;
   }
-.bitCountLabel {
+.bit-count-label {
   font-weight: 700;
     display: inline;
       padding-right: 10px;
       }
-.alphabetContent {
+.alphabet-content {
   display: table-cell;
     width: 100%;
       border: 1px solid #e1e1e1;
@@ -96,38 +248,38 @@ textarea {
 &lt;/style&gt;
 
 &lt;ul class=&quot;nav nav-tabs&quot;&gt;
-&lt;li class=&quot;active&quot;&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#inputContents&quot;&gt;Input&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#bwtContents&quot;&gt;BWT&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#mtfContents&quot;&gt;MTF&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#bwtmtfContents&quot;&gt;BWT + MTF&lt;/a&gt;&lt;/li&gt;
+  &lt;li class=&quot;active&quot;&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#input-contents&quot;&gt;Input&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#bwt-contents&quot;&gt;BWT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#mtf-contents&quot;&gt;MTF&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a data-toggle=&quot;tab&quot; href=&quot;#bwt-mtf-contents&quot;&gt;BWT+MTF&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;tab-content&quot;&gt;
-&lt;div id=&quot;inputContents&quot; class=&quot;tab-pane active&quot;&gt;
-&lt;textarea id=&quot;input&quot; placeholder=&quot;Text to compress...&quot;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-&lt;div id=&quot;bwtContents&quot; class=&quot;tab-pane&quot;&gt;
-&lt;textarea id=&quot;bwt&quot; placeholder=&quot;Burrows-Wheeler transform to invert...&quot;&gt;&lt;/textarea&gt;
-&lt;/div&gt;
-&lt;div id=&quot;mtfContents&quot; class=&quot;tab-pane&quot;&gt;
-&lt;div class=&quot;alphabet&quot;&gt;
-&lt;label for=&quot;mtfSigma&quot;&gt;Alphabet: &lt;/label&gt;
-&lt;input class=&quot;alphabetContent&quot; type=&quot;text&quot; id=&quot;mtfSigma&quot; /&gt;
-&lt;/div&gt;
-&lt;textarea id=&quot;mtf&quot; placeholder=&quot;MTF-compressed binary to decode...&quot;&gt;&lt;/textarea&gt;
-&lt;div class=&quot;bitCount&quot;&gt;
-&lt;div class=&quot;bitCountLabel&quot;&gt;Bit count: &lt;/div&gt;&lt;div class=&quot;bitContent&quot; id=&quot;mtfCount&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&quot;bwtmtfContents&quot; class=&quot;tab-pane&quot;&gt;
-&lt;div class=&quot;alphabet&quot;&gt;
-&lt;label for=&quot;bwtmtfSigma&quot;&gt;Alphabet: &lt;/label&gt;
-&lt;input class=&quot;alphabetContent&quot; type=&quot;text&quot; id=&quot;bwtmtfSigma&quot; /&gt;
-&lt;/div&gt;
-&lt;textarea id=&quot;bwtmtf&quot; placeholder=&quot;BWT+MTF-compressed binary to decode...&quot;&gt;&lt;/textarea&gt;
-&lt;div class=&quot;bitCount&quot;&gt;
-&lt;div class=&quot;bitCountLabel&quot;&gt;Bit count: &lt;/div&gt;&lt;div class=&quot;bitContent&quot; id=&quot;bwtmtfCount&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+  &lt;div id=&quot;input-contents&quot; class=&quot;tab-pane active&quot;&gt;
+    &lt;textarea id=&quot;input&quot; placeholder=&quot;Text to compress...&quot;&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;bwt-contents&quot; class=&quot;tab-pane&quot;&gt;
+    &lt;textarea id=&quot;bwt&quot; placeholder=&quot;Burrows-Wheeler transform to invert...&quot;&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;mtf-contents&quot; class=&quot;tab-pane&quot;&gt;
+    &lt;div class=&quot;alphabet&quot;&gt;
+      &lt;label for=&quot;mtf-Sigma&quot;&gt;Alphabet: &lt;/label&gt;
+      &lt;input class=&quot;alphabet-content&quot; type=&quot;text&quot; id=&quot;mtf-Sigma&quot; /&gt;
+    &lt;/div&gt;
+    &lt;textarea id=&quot;mtf&quot; placeholder=&quot;MTF-compressed binary to decode...&quot;&gt;&lt;/textarea&gt;
+    &lt;div class=&quot;bit-count&quot;&gt;
+      &lt;div class=&quot;bit-count-label&quot;&gt;Bit count: &lt;/div&gt;&lt;div class=&quot;bit-content&quot; id=&quot;mtf-count&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;bwt-mtf-contents&quot; class=&quot;tab-pane&quot;&gt;
+    &lt;div class=&quot;alphabet&quot;&gt;
+      &lt;label for=&quot;bwt-mtf-Sigma&quot;&gt;Alphabet: &lt;/label&gt;
+      &lt;input class=&quot;alphabet-content&quot; type=&quot;text&quot; id=&quot;bwt-mtf-Sigma&quot; /&gt;
+    &lt;/div&gt;
+    &lt;textarea id=&quot;bwt-mtf&quot; placeholder=&quot;BWT+MTF-compressed binary to decode...&quot;&gt;&lt;/textarea&gt;
+    &lt;div class=&quot;bit-count&quot;&gt;
+      &lt;div class=&quot;bit-count-label&quot;&gt;Bit count: &lt;/div&gt;&lt;div class=&quot;bit-content&quot; id=&quot;bwt-mtf-count&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;/js/2019-08-08-burrows-wheeler/bwt.js&quot;&gt;&lt;/script&gt;
 
@@ -279,7 +431,7 @@ the Burrows-Wheeler transform, this is brought all the way down to
       
 
       
-        <summary type="html">Input BWT MTF BWT + MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.</summary>
+        <summary type="html">Input BWT MTF BWT+MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.</summary>
       
 
       

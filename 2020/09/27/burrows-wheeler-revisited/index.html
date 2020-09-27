@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!--
+    Webpage powered by Jekyll with a modified version of the whiteglass
+    theme (https://github.com/yous/whiteglass).
+-->
+<head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142724010-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142724010-1');
+  </script>
+
+
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  
+  
+  <title>The Burrows-Wheeler transform, revisited · Tommy Reddad</title>
+  <meta name="description" content="In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.">
+  
+
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  
+    
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Tommy Reddad" href="https://www.reddad.ca/feed.xml">
+
+  
+
+  
+  <meta property="og:title" content="The Burrows-Wheeler transform, revisited · Tommy Reddad">
+  <meta property="og:site_name" content="Tommy Reddad">
+  <meta property="og:url" content="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/">
+  <meta property="og:description" content="In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.">
+  
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="The Burrows-Wheeler transform, revisited · Tommy Reddad">
+  <meta name="twitter:description" content="In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additiona...">
+  
+  
+
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+    integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+    integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+    crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+
+  
+    
+</head>
+
+  
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Tommy Reddad</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/about/">About</a>
+      
+        
+        <a class="page-link" href="/publications/">Publications</a>
+      
+        
+        <a class="page-link" href="/archive/">Archive</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">The Burrows-Wheeler transform, revisited</h1>
+    
+    <p class="post-meta"><time datetime="2020-09-27T00:00:00-04:00" itemprop="datePublished">Sep 27, 2020</time>
+
+ •
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/compression/">compression</a>,
+      
+    
+  
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <a href="/tags/algorithms/">algorithms</a>
+      
+    
+      
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="2019-08-08-burrows-wheeler.md">In my previous post</a>, I discussed the Burrows-Wheeler transform,
+and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.</p>
+
+<p>My initial implementation of this form was done in pure JavaScript with no particular care for
+efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on
+<a href="2019-08-08-burrows-wheeler.md">the same page</a> reduces this complexity to \(O(n \log n)\) time
+and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of
+<a href="https://arxiv.org/pdf/1201.3077.pdf">Gil and Scott</a>, that this time complexity can be reduced to \(O(n)\) by using linear time
+suffix array construction algorithms.</p>
+
+<p>The new implementation has been rewritten in TypeScript, which makes it much easier on the eyes. The
+full source code is available on <a href="https://github.com/tommyreddad/tommyreddad.github.io/blob/master/ts/2020-09-27-burrows-wheeler-revisited/bwt.ts">GitHub</a>.</p>
+
+<p>To show off the new efficiency improvements, and the efficacy of the Burrows-Wheeler transform,
+we can try to compress the entire text of an English translation of Dostoevsky’s <a href="https://www.gutenberg.org/files/2554/2554-0.txt">Crime and Punishment</a>,
+which is made available for free online thanks to <a href="https://www.gutenberg.org/">Project Gutenberg</a>. In this case,
+after a few seconds of execution on my laptop, we can observe the completed transformation.
+A visual inspection of the BWT itself reveals long chunks of repeated characters throughout. The following tables contains statistics on the resulting compression:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>Bit Count</strong></th>
+      <th><strong>Compression Ratio</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Original (UTF-8)</strong></td>
+      <td>9,434,200</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td><strong>MTF</strong></td>
+      <td>8,122,221</td>
+      <td>0.86</td>
+    </tr>
+    <tr>
+      <td><strong>BWT+MTF</strong></td>
+      <td>3,336,189</td>
+      <td>0.35</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>How does the Burrows-Wheeler transform perform on texts written in a different language? In my personal experience, French text
+is absolutely full of extraneous characters, especially e’s, a’s, u’, and s’s, so this might suggest the Burrows-Wheeler transform to be effective in compressing French text.
+We ran the algorithm on Zola’s <a href="https://www.gutenberg.org/cache/epub/5711/pg5711.txt">Germinal</a>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>Bit Count</strong></th>
+      <th><strong>Compression Ratio</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Original (UTF-8)</strong></td>
+      <td>8,415,728</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td><strong>MTF</strong></td>
+      <td>7,188,574</td>
+      <td>0.85</td>
+    </tr>
+    <tr>
+      <td><strong>BWT+MTF</strong></td>
+      <td>2,947,192</td>
+      <td>0.35</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Interestingly, the compression behaved almost identically as on the English text!</p>
+
+<p>We also consider Chinese text–in this case, <a href="https://www.gutenberg.org/files/23950/23950-0.txt">Romance of the Three Kingdoms</a>. The results follow:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th><strong>Bit Count</strong></th>
+      <th><strong>Compression Ratio</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Original (UTF-8)</strong></td>
+      <td>14,735,232</td>
+      <td>1.00</td>
+    </tr>
+    <tr>
+      <td><strong>MTF</strong></td>
+      <td>7,460,164</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <td><strong>BWT+MTF</strong></td>
+      <td>5,229,807</td>
+      <td>0.35</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Surprisingly to me, the <strong>35%</strong> compression ratio returns, even with the enormous number of unique characters used in the Chinese text: <strong>4225</strong>, when compared to Crime and Punishment’s <strong>97</strong> and Germinal’s <strong>103</strong>.</p>
+
+  </div>
+
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy; 2020 - Tommy Reddad. All rights reserved.
+
+    </p>
+
+  </div>
+  
+</footer>
+
+
+  </body>
+
+</html>

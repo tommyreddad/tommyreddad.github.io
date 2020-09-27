@@ -28,7 +28,7 @@
   
   
   <title>The Burrows-Wheeler transform and move-to-front compression · Tommy Reddad</title>
-  <meta name="description" content="Input BWT MTF BWT + MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.">
+  <meta name="description" content="Input BWT MTF BWT+MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.">
   
 
   
@@ -50,13 +50,13 @@
   <meta property="og:title" content="The Burrows-Wheeler transform and move-to-front compression · Tommy Reddad">
   <meta property="og:site_name" content="Tommy Reddad">
   <meta property="og:url" content="https://www.reddad.ca/2019/08/08/burrows-wheeler/">
-  <meta property="og:description" content="Input BWT MTF BWT + MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.">
+  <meta property="og:description" content="Input BWT MTF BWT+MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional application of the Burrows-Wheeler transform. These extremely slick algorithms blew my mind when I first heard of them. They are currently in use, among other places, in bzip2 file compression.">
   
   
   <meta name="twitter:card" content="summary">
   
   <meta name="twitter:title" content="The Burrows-Wheeler transform and move-to-front compression · Tommy...">
-  <meta name="twitter:description" content="Input BWT MTF BWT + MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional ap...">
+  <meta name="twitter:description" content="Input BWT MTF BWT+MTF Alphabet: Bit count: Alphabet: Bit count: The above form implements algorithms to code and decode from the move-to-front compression scheme, with or without an additional appl...">
   
   
 
@@ -169,19 +169,19 @@
 
   <div class="post-content" itemprop="articleBody">
     <style type="text/css">
-.bitContent {
+.bit-content {
   display: inline;
   }
-.bitCount {
+.bit-count {
   display: inline;
       font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
   }
-.bitCountLabel {
+.bit-count-label {
   font-weight: 700;
     display: inline;
       padding-right: 10px;
       }
-.alphabetContent {
+.alphabet-content {
   display: table-cell;
     width: 100%;
       border: 1px solid #e1e1e1;
@@ -228,38 +228,38 @@ textarea {
 </style>
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" href="#inputContents">Input</a></li>
-<li><a data-toggle="tab" href="#bwtContents">BWT</a></li>
-<li><a data-toggle="tab" href="#mtfContents">MTF</a></li>
-<li><a data-toggle="tab" href="#bwtmtfContents">BWT + MTF</a></li>
+  <li class="active"><a data-toggle="tab" href="#input-contents">Input</a></li>
+  <li><a data-toggle="tab" href="#bwt-contents">BWT</a></li>
+  <li><a data-toggle="tab" href="#mtf-contents">MTF</a></li>
+  <li><a data-toggle="tab" href="#bwt-mtf-contents">BWT+MTF</a></li>
 </ul>
 <div class="tab-content">
-<div id="inputContents" class="tab-pane active">
-<textarea id="input" placeholder="Text to compress..."></textarea>
-</div>
-<div id="bwtContents" class="tab-pane">
-<textarea id="bwt" placeholder="Burrows-Wheeler transform to invert..."></textarea>
-</div>
-<div id="mtfContents" class="tab-pane">
-<div class="alphabet">
-<label for="mtfSigma">Alphabet: </label>
-<input class="alphabetContent" type="text" id="mtfSigma" />
-</div>
-<textarea id="mtf" placeholder="MTF-compressed binary to decode..."></textarea>
-<div class="bitCount">
-<div class="bitCountLabel">Bit count: </div><div class="bitContent" id="mtfCount"></div>
-</div>
-</div>
-<div id="bwtmtfContents" class="tab-pane">
-<div class="alphabet">
-<label for="bwtmtfSigma">Alphabet: </label>
-<input class="alphabetContent" type="text" id="bwtmtfSigma" />
-</div>
-<textarea id="bwtmtf" placeholder="BWT+MTF-compressed binary to decode..."></textarea>
-<div class="bitCount">
-<div class="bitCountLabel">Bit count: </div><div class="bitContent" id="bwtmtfCount"></div>
-</div>
-</div>
+  <div id="input-contents" class="tab-pane active">
+    <textarea id="input" placeholder="Text to compress..."></textarea>
+  </div>
+  <div id="bwt-contents" class="tab-pane">
+    <textarea id="bwt" placeholder="Burrows-Wheeler transform to invert..."></textarea>
+  </div>
+  <div id="mtf-contents" class="tab-pane">
+    <div class="alphabet">
+      <label for="mtf-Sigma">Alphabet: </label>
+      <input class="alphabet-content" type="text" id="mtf-Sigma" />
+    </div>
+    <textarea id="mtf" placeholder="MTF-compressed binary to decode..."></textarea>
+    <div class="bit-count">
+      <div class="bit-count-label">Bit count: </div><div class="bit-content" id="mtf-count"></div>
+    </div>
+  </div>
+  <div id="bwt-mtf-contents" class="tab-pane">
+    <div class="alphabet">
+      <label for="bwt-mtf-Sigma">Alphabet: </label>
+      <input class="alphabet-content" type="text" id="bwt-mtf-Sigma" />
+    </div>
+    <textarea id="bwt-mtf" placeholder="BWT+MTF-compressed binary to decode..."></textarea>
+    <div class="bit-count">
+      <div class="bit-count-label">Bit count: </div><div class="bit-content" id="bwt-mtf-count"></div>
+    </div>
+  </div>
 </div>
 <script type="text/javascript" src="/js/2019-08-08-burrows-wheeler/bwt.js"></script>
 
