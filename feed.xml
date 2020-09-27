@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-09-27T14:47:28-04:00</updated>
+  <updated>2020-09-27T14:51:31-04:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -36,12 +36,10 @@
       <published>2020-09-27T00:00:00-04:00</published>
       <updated>2020-09-27T00:00:00-04:00</updated>
       <id>https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited</id>
-      <content type="html" xml:base="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/">&lt;p&gt;&lt;a href=&quot;2019-08-08-burrows-wheeler.md&quot;&gt;In my previous post&lt;/a&gt;, I discussed the Burrows-Wheeler transform,
-and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.&lt;/p&gt;
-
-&lt;p&gt;My initial implementation of this form was done in pure JavaScript with no particular care for
+      <content type="html" xml:base="https://www.reddad.ca/2020/09/27/burrows-wheeler-revisited/">&lt;p&gt;&lt;a href=&quot;/2019/08/08/burrows-wheeler/&quot;&gt;In my previous post&lt;/a&gt;, I discussed the Burrows-Wheeler transform,
+and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for
 efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on
-&lt;a href=&quot;2019-08-08-burrows-wheeler.md&quot;&gt;the same page&lt;/a&gt; reduces this complexity to \(O(n \log n)\) time
+&lt;a href=&quot;/2019/08/08/burrows-wheeler/&quot;&gt;the same page&lt;/a&gt; reduces this complexity to \(O(n \log n)\) time
 and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of
 &lt;a href=&quot;https://arxiv.org/pdf/1201.3077.pdf&quot;&gt;Gil and Scott&lt;/a&gt;, that this time complexity can be reduced to \(O(n)\) by using linear time
 suffix array construction algorithms.&lt;/p&gt;
@@ -169,7 +167,7 @@ We ran the algorithm on Zola’s &lt;a href=&quot;https://www.gutenberg.org/cach
       
 
       
-        <summary type="html">In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.</summary>
+        <summary type="html">In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on the same page reduces this complexity to \(O(n \log n)\) time and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of Gil and Scott, that this time complexity can be reduced to \(O(n)\) by using linear time suffix array construction algorithms.</summary>
       
 
       

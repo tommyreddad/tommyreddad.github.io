@@ -191,8 +191,13 @@
         </header>
 
         <div class="post-content">
-          <p><a href="2019-08-08-burrows-wheeler.md">In my previous post</a>, I discussed the Burrows-Wheeler transform,
-and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step.</p>
+          <p><a href="/2019/08/08/burrows-wheeler/">In my previous post</a>, I discussed the Burrows-Wheeler transform,
+and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for
+efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on
+<a href="/2019/08/08/burrows-wheeler/">the same page</a> reduces this complexity to \(O(n \log n)\) time
+and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of
+<a href="https://arxiv.org/pdf/1201.3077.pdf">Gil and Scott</a>, that this time complexity can be reduced to \(O(n)\) by using linear time
+suffix array construction algorithms.</p>
 
 
         </div>
