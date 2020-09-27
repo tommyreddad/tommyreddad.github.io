@@ -365,7 +365,7 @@ the input in order to greatly improve move-to-front compression
 performance on highly structured inputs: this is the <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">Burrows-Wheeler
 transform</a>. Simply
 put, the Burrows-Wheeler transform of an input string <code class="highlighter-rouge">str</code> takes all
-all cyclic rotations of the string <code class="highlighter-rouge">str + \\(</code>, where <code class="highlighter-rouge">\\)</code> is an
+all cyclic rotations of the string <code class="highlighter-rouge">str + $</code>, where <code class="highlighter-rouge">$</code> is an
 otherwise unused character, and sorts these rotations in lexicographic
 order, taking the last character of each of these sorted
 rotations.</p>

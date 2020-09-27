@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-09-27T15:07:32-04:00</updated>
+  <updated>2020-09-27T15:34:22-04:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -383,7 +383,7 @@ the input in order to greatly improve move-to-front compression
 performance on highly structured inputs: this is the &lt;a href=&quot;https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform&quot;&gt;Burrows-Wheeler
 transform&lt;/a&gt;. Simply
 put, the Burrows-Wheeler transform of an input string &lt;code class=&quot;highlighter-rouge&quot;&gt;str&lt;/code&gt; takes all
-all cyclic rotations of the string &lt;code class=&quot;highlighter-rouge&quot;&gt;str + \\(&lt;/code&gt;, where &lt;code class=&quot;highlighter-rouge&quot;&gt;\\)&lt;/code&gt; is an
+all cyclic rotations of the string &lt;code class=&quot;highlighter-rouge&quot;&gt;str + $&lt;/code&gt;, where &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; is an
 otherwise unused character, and sorts these rotations in lexicographic
 order, taking the last character of each of these sorted
 rotations.&lt;/p&gt;
