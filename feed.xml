@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-09-27T14:51:31-04:00</updated>
+  <updated>2020-09-27T14:53:45-04:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -45,7 +45,7 @@ and \(O(n)\) space, making the form usable on larger texts. It is possible, as n
 suffix array construction algorithms.&lt;/p&gt;
 
 &lt;p&gt;The new implementation has been rewritten in TypeScript, which makes it much easier on the eyes. The
-full source code is available on &lt;a href=&quot;https://github.com/tommyreddad/tommyreddad.github.io/blob/master/ts/2020-09-27-burrows-wheeler-revisited/bwt.ts&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+full source code is available on &lt;a href=&quot;https://github.com/tommyreddad/tommyreddad.github.io/blob/master/ts/2019-08-08-burrows-wheeler/bwt.ts&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;To show off the new efficiency improvements, and the efficacy of the Burrows-Wheeler transform,
 we can try to compress the entire text of an English translation of Dostoevsky’s &lt;a href=&quot;https://www.gutenberg.org/files/2554/2554-0.txt&quot;&gt;Crime and Punishment&lt;/a&gt;,
