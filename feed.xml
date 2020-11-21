@@ -5,7 +5,7 @@
   
   <link href="https://www.reddad.ca/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://www.reddad.ca/" rel="alternate" type="text/html" />
-  <updated>2020-10-24T18:36:33-04:00</updated>
+  <updated>2020-11-21T12:23:48-05:00</updated>
   <id>https://www.reddad.ca//</id>
 
   
@@ -24,6 +24,186 @@
     </author>
   
 
+  
+  
+    <entry>
+      
+      <title type="html">galtonwatson, a Go module for efficient manipulation of Galton-Watson trees</title>
+      
+      
+      <link href="https://www.reddad.ca/2020/11/21/galtonwatson-go/" rel="alternate" type="text/html" title="galtonwatson, a Go module for efficient manipulation of Galton-Watson trees" />
+      
+      <published>2020-11-21T00:00:00-05:00</published>
+      <updated>2020-11-21T00:00:00-05:00</updated>
+      <id>https://www.reddad.ca/2020/11/21/galtonwatson-go</id>
+      <content type="html" xml:base="https://www.reddad.ca/2020/11/21/galtonwatson-go/">&lt;p&gt;&lt;a href=&quot;https://github.com/tommyreddad/galtonwatson&quot;&gt;&lt;strong&gt;galtonwatson&lt;/strong&gt;&lt;/a&gt; is a Go module in early development which implements efficient algorithms for the generation and manipulation of Galton-Watson trees. By extension, this tool can be used to generate uniformly random samples from many classes of rooted trees, including:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;uniformly random binary trees of a given size,&lt;/li&gt;
+  &lt;li&gt;uniformly random d-ary trees of a given size,&lt;/li&gt;
+  &lt;li&gt;uniformly random Cayley trees, i.e., unordered labeled trees of a given size,&lt;/li&gt;
+  &lt;li&gt;uniformly random ordered trees of a given size,&lt;/li&gt;
+  &lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’ve recently taken up Go as part of my real job and learned to appreciate the language. It’s sometimes odd and stands out from other languages in a few striking ways. To name a few:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Go module management is built-in to the language. Modules can be imported directly from GitHub, or wherever… gone are the days of using third-party package managers like pip.&lt;/li&gt;
+  &lt;li&gt;Another built-in feature is formatting, which is accomplished using the built-in tool &lt;code class=&quot;highlighter-rouge&quot;&gt;gofmt&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Go has no generic types. Here are some of the alternatives which are widely used:
+    &lt;ul&gt;
+      &lt;li&gt;Code generation. One copy per type you care to implement.&lt;/li&gt;
+      &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;interface{}&lt;/code&gt; type, analogous to the C &lt;code class=&quot;highlighter-rouge&quot;&gt;void*&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;The complicated &lt;a href=&quot;https://golang.org/pkg/reflect/&quot;&gt;reflect&lt;/a&gt;, which allows for run-time reflection.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Still, I have grown to appreciate (some of) these quirks, and &lt;strong&gt;galtonwatson&lt;/strong&gt; is just a project in which I can explore the language more deeply in my free time.&lt;/p&gt;
+
+&lt;p&gt;As part of the early development, I have explored efficient generation algorithms. &lt;a href=&quot;http://luc.devroye.org/gw-simulation.pdf&quot;&gt;This paper&lt;/a&gt; of Devroye (2011) has been a great resource.&lt;/p&gt;
+
+&lt;p&gt;To recall, briefly, Galton-Watson trees are a sort of random rooted ordered tree defined by an offspring distribution \(\xi\). Starting with the root node, each vertex has an independent number of offspring distributed as \(\xi\), and the structure obtained is a tree denoted \(T\). When conditioned upon having exactly \(n\) vertices, we denote this tree by \(T_n\) and call it the conditioned Galton-Watson tree of size \(n\).&lt;/p&gt;
+
+&lt;p&gt;Let \(\Xi = (\xi_1, \dots, \xi_n)\) denote the vector of the number of offspring observed when traversing the tree in a depth-first order. Clearly, \(T_n\) determines \(\Xi\), but not necessarily vice-versa. One condition that must be met for any admissible \(\Xi\) is
+\[
+    S(\Xi) := \sum_{i = 1}^n \xi_i = n - 1 ,
+\]
+indicating the number of edges in the tree to be \(n - 1\). This is not sufficient. However, by the Dvoretzky-Motzkin cycle lemma, exactly one rotation \((\xi_\ell, \xi_{\ell+1}, \dots, \xi_n, \xi_1, \dots, \xi_{\ell-1})\) does correspond to a tree, and furthermore this rotation can be found in linear time. Therefore, generating \(T_n\) is in fact equivalent to generating \(\Xi\) with the right number of edges.&lt;/p&gt;
+
+&lt;p&gt;The paper of Devroye describes some slick approaches towards generating \(\Xi\) efficiently, which is not an a priori obvious task.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-naive-approach&quot;&gt;A Naive Approach&lt;/h2&gt;
+
+&lt;p&gt;One straightforward approach towards generating \(\Xi\) is by the &lt;em&gt;rejetion method&lt;/em&gt;. This simply works by generating the entire vector \(\Xi\) repeatedly until
+\[
+    S(\Xi) = n - 1 ,
+\]
+discarding any samples which do not meet this criterion, and rotating appropriately. It’s the simplest possible idea and is not very efficient, it should be avoided when possible.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-general-solution&quot;&gt;A General Solution&lt;/h2&gt;
+
+&lt;p&gt;The multinomial distribution can be leveraged to provide a general solution which works well for many purposes.&lt;/p&gt;
+
+&lt;p&gt;Write \(p_i = \Pr\{\xi = i\}\), and let \((N_0, N_1, \dots) \sim \textrm{Multinomial}(n; p_0, p_1, \dots)\). Then,
+\[
+    S(\Xi) \overset{d}{=} \sum_{i = 1}^n i N_i .
+\]&lt;/p&gt;
+
+&lt;p&gt;The rejection method can then be used to generate the multinomial vector \((N_0, N_1, \dots)\) repeatedly until
+\[
+    \sum_{i = 1}^n i N_i = n - 1 .
+\]
+This gives us the number of nodes with \(i\) children for each integer \(i\), which we can shuffle in order to create the vector \(\Xi\).&lt;/p&gt;
+
+&lt;p&gt;Generating \((N_0, N_1, \dots)\) can sometimes be much more efficient than following the naive approach, especially when \(\xi\) has compact support.&lt;/p&gt;
+
+&lt;p&gt;Let us compare the cases for the offspring distribution \(p_0 = 1/4, p_1 = 1/2, p_2 = 1/4\), which serves for generating uniform binary trees of a given size. We assume to have access to an infinite source of uniform random samples, which take constant time each to generate.&lt;/p&gt;
+
+&lt;p&gt;In the naive case, it takes \(\varTheta(n)\) time to generate one vector \(\Xi\), and a success is observed with probability
+\[
+    \alpha := \Pr\left\{ S(\Xi) = n - 1 \right\} .
+\]
+This can be approximated to any desired degree by a local limit theorem, but we instead offer a direct approach, since this case can be solved explicitly without difficulty. Observe that we can write \(\xi_i = B_i + B_i’\), where \(I_i, I_i’ \sim \textrm{Bernoulli}(1/2)\) for each \(i = 1, \dots, n\) are independent. Then,
+\[
+\begin{aligned}
+    \alpha &amp;amp;= \Pr\left\{\sum_{i = 1}^n (I_i + I_i’) = n - 1 \right\} \\
+    &amp;amp;= \Pr\{ B_n + B_n’ = n - 1 \} ,
+\end{aligned}
+\]
+for independent \(B_n, B_n’ \sim \textrm{Binomial}(n, 1/2)\). Then,
+\[
+\begin{aligned}
+    \alpha &amp;amp;= \sum_{t = 0}^{n - 1} \Pr\{ B_n = n - 1 - t \} \Pr\{ B_n’ = t \} \\
+    &amp;amp;= \sum_{t = 0}^{n - 1} \binom{n}{n - t - 1} \binom{n}{t} 2^{-2n} \\
+    &amp;amp;= 2^{-2n} \binom{2n}{n - 1} ,
+\end{aligned}
+\]
+where the second equality holds by the definition of the binomial probability, and the third equality holds by Chu-Vandermonde. Therefore, by standard estimates of the central binomial coefficient,
+\[
+    \alpha \sim \frac{1}{\sqrt{\pi n}} .
+\]
+The number of failed attempts in generating \(\Xi\) is distributed as \(\textrm{Geometric}(\alpha)\), so that the expected number of failures before the first success is \(1/\alpha \sim \sqrt{\pi n}\), and the total running time of the naive generator is \(\varTheta(n^{3/2})\).&lt;/p&gt;
+
+&lt;p&gt;Consider by comparison the multinomial approach. It is true, in fact, that for any \(\xi\) with \(\mathbf{E}\{\xi^2\} &amp;lt; \infty\), we have \(\alpha = \varTheta(1/\sqrt{n})\). It is also known that binomial random samples can be generated in constant time, so \((N_0, N_1, N_2)\) can be generated in constant time. Therefore, the expected running time to generate the conditioned multinomial is only \(\varTheta(\sqrt{n})\); the extra shuffling step to finish generating \(\Xi\) brings this up to \(\varTheta(n)\).&lt;/p&gt;
+
+&lt;p&gt;The multinomial approach is versatile and quite fast. But when \(\xi\) has infinite support, or infinite second moment, or other special properties, it may be best to use an alternative.&lt;/p&gt;
+
+&lt;h2 id=&quot;poisson-offspring-distribution&quot;&gt;Poisson Offspring Distribution&lt;/h2&gt;
+
+&lt;p&gt;Some special offspring distributions are amenable to a specific hand-picked approach which will likely beat any general purpose method. One such is the \(\textrm{Poisson}(\lambda)\) offspring distribution. Observe that for any integers \((k_1, \dots, k_n\)), that
+\[
+\begin{aligned}
+    \beta &amp;amp;:= \Pr\left\{\xi_1 = k_1, \dots, \xi_n = k_n \; \big\vert \; S(\Xi) = n - 1\right\} \\
+    &amp;amp;= \frac{\mathbf{1}\{k_1 + \dots + k_n = n - 1\} \Pr\{\xi_1 = k_1, \dots, \xi_n = k_n\}}{\Pr\{S(\Xi) = n - 1\}} \\
+    &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{\prod_{i=1}^n \frac{\lambda^{k_i} e^{-\lambda}}{k_i!}}{\Pr\{S(\Xi)=n-1\}}
+\end{aligned}
+\]
+In this case, \(S(\Xi) \sim \textrm{Poisson}(\lambda n)\), so
+\[
+\begin{aligned}
+    \beta &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{(n-1)!}{n^{n -1} \prod_{i=1}^n k_i!} \\
+    &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{(n - 1)!}{\prod_{i = 1}^{n} k_i! n^{k_i}} .
+\end{aligned}
+\]
+This is precisely the \(\textrm{Multinomial}(n - 1; 1/n, \dots, 1/n)\) density. So, \(\Xi\) can be generated by generating \(n - 1\) uniform points among \(n\) bins, and setting \(\xi_i\) as the number of points in the \(i\)-th bin.&lt;/p&gt;
+
+&lt;h2 id=&quot;geometric-offspring-distribution&quot;&gt;Geometric Offspring Distribution&lt;/h2&gt;
+
+&lt;p&gt;Another offspring distribution admitting a simple generator is the \(\textrm{Geometric}(p)\) distribution. In this case, observe that for any integers \((k_1, \dots, k_n)\), that
+\[
+\begin{aligned}
+    \beta &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{\prod_{i = 1}^n \Pr\{\xi_i = k_i\}}{\Pr\{S(\Xi) = n - 1\}} \\
+    &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{\prod_{i = 1}^n (1 - p)^{k_i} p}{\Pr\{S(\Xi) = n - 1\}} \\
+    &amp;amp;= \mathbf{1}\{k_1 + \dots + k_n = n - 1\} \frac{(1 - p)^{n - 1} p^n}{\Pr\{S(\Xi) = n - 1\}} .
+\end{aligned}
+\]
+It is also known that \(S(\Xi) \sim \textrm{NegativeBinomial}(n, p)\), whence
+\[
+    \beta = \frac{\mathbf{1}\{k_1 + \dots + k_n = n - 1\}}{\binom{2n - 2}{n - 1}} .
+\]
+It follows that \(\Xi\) is uniformly distributed on the discrete simplex
+\[
+    \{(k_1, \dots, k_n) \colon k_i \ge 0, k_1 + \dots + k_n = n - 1\} .
+\]
+Such a vector can be drawn uniformly at random by placing \(n - 1\) spacers \(X_1, \dots, X_{n-1}\) uniformly in between or on either ends of the points \(\{1, 2, \dots, n - 1\}\), and setting
+\[
+    k_i = X_{(i)} - X_{(i-1)} ,
+\]
+where \(X_{(i)}\) is the \(i\)-th smallest among the \(X_i\), and \(X_{(0)} = 0, X_{(n)} = n - 1\). This again takes \(\varTheta(n)\) time.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Tommy Reddad</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="galton-watson" />
+      
+        <category term="trees" />
+      
+        <category term="algorithms" />
+      
+
+      
+        <summary type="html">galtonwatson is a Go module in early development which implements efficient algorithms for the generation and manipulation of Galton-Watson trees. By extension, this tool can be used to generate uniformly random samples from many classes of rooted trees, including: uniformly random binary trees of a given size, uniformly random d-ary trees of a given size, uniformly random Cayley trees, i.e., unordered labeled trees of a given size, uniformly random ordered trees of a given size, etc.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
