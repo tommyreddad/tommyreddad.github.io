@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Tommy Reddad</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on Tommy Reddad</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algorithms</title>
+      <link>http://localhost:1313/tags/algorithms/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Galton-Watson</title>
+      <link>http://localhost:1313/tags/galton-watson/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/galton-watson/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Trees</title>
+      <link>http://localhost:1313/tags/trees/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/trees/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Compression</title>
+      <link>http://localhost:1313/tags/compression/</link>
+      <pubDate>Sun, 27 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/compression/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Random-Generation</title>
+      <link>http://localhost:1313/tags/random-generation/</link>
+      <pubDate>Mon, 22 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/random-generation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sphere</title>
+      <link>http://localhost:1313/tags/sphere/</link>
+      <pubDate>Mon, 08 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/sphere/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Density-Estimation</title>
+      <link>http://localhost:1313/tags/density-estimation/</link>
+      <pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/density-estimation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Minimax</title>
+      <link>http://localhost:1313/tags/minimax/</link>
+      <pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/minimax/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

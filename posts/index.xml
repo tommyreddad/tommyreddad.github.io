@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Tommy Reddad</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on Tommy Reddad</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Some conditioned Galton-Watson trees never grow</title>
+      <link>http://localhost:1313/posts/2019-06-26-conditioned-gw-trees/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2019-06-26-conditioned-gw-trees/</guid>
+      <description>&lt;p&gt;When programmers hear the phrase &amp;ldquo;random tree,&amp;rdquo; they most likely think&#xA;of a random binary search tree, i.e., a binary search tree built from&#xA;the insertion of a uniformly random permutation of \(n\) keys&amp;mdash;denote such&#xA;a tree by \(\mathrm{BST}_n\). A mathematician might instead think that a&#xA;``random tree&amp;rsquo;&amp;rsquo; is more likely to be a uniformly random tree taken&#xA;from some class, like the set of all ordered binary trees with \(n\) nodes&amp;mdash;denote&#xA;such a tree by \(\mathrm{UNIF}_n\). Of course, neither would be wrong. It&#xA;should be clear, though, that these two distributions on the space of&#xA;binary trees are quite different. In particular, most undergraduate&#xA;students of computer science learn, through the study of&#xA;comparison-based sorting algorithms, that&#xA;\[&#xA;\mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) ,&#xA;\]&#xA;and some will learn that&#xA;\[&#xA;\mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) .&#xA;\]&#xA;Though random binary search trees might seem more immediately relevant&#xA;to programmers, uniformly random binary trees are part of a bigger&#xA;picture which is comparatively more versatile in the probabilistic&#xA;analysis of algorithms. To this end, we introduce the concept of&#xA;&lt;em&gt;Galton-Watson trees.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

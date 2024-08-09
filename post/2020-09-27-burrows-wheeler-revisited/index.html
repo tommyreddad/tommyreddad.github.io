@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>The Burrows-Wheeler transform, revisited · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="this is a test ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://localhost:1313/post/2020-09-27-burrows-wheeler-revisited/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="http://localhost:1313/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="http://localhost:1313//about/">About</a>
+<a class="page-link" href="http://localhost:1313//publications/">Publications</a>
+<a class="page-link" href="http://localhost:1313//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">The Burrows-Wheeler transform, revisited</h1>
+	<p class="post-meta">
+	  Sep 27, 2020 •
+	  
+	  
+	  
+	  <a href="http://localhost:1313//tags/compression">compression</a>,&nbsp<a href="http://localhost:1313//tags/algorithms">algorithms</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p><a href="/post/2019-08-08-burrows-wheeler/">In my previous post</a>, I discussed the Burrows-Wheeler transform,
+and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for
+efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on
+<a href="/post/2019-08-08-burrows-wheeler/">the same page</a> reduces this complexity to \(O(n \log n)\) time
+and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of
+<a href="https://arxiv.org/pdf/1201.3077.pdf">Gil and Scott</a>, that this time complexity can be reduced to \(O(n)\) by using linear time
+suffix array construction algorithms.</p>
+<p>The new implementation has been rewritten in TypeScript, which makes it much easier on the eyes. The
+full source code is available on <a href="https://github.com/tommyreddad/tommyreddad.github.io/blob/master/ts/2019-08-08-burrows-wheeler/bwt.ts">GitHub</a>.</p>
+<p>To show off the new efficiency improvements, and the efficacy of the Burrows-Wheeler transform,
+we can try to compress the entire text of an English translation of Dostoevsky&rsquo;s <a href="https://www.gutenberg.org/files/2554/2554-0.txt">Crime and Punishment</a>,
+which is made available for free online thanks to <a href="https://www.gutenberg.org/">Project Gutenberg</a>. In this case,
+after a few seconds of execution on my laptop, we can observe the completed transformation.
+A visual inspection of the BWT itself reveals long chunks of repeated characters throughout. The following tables contains statistics on the resulting compression:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Bit Count</strong></th>
+<th><strong>Compression Ratio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Original (UTF-8)</strong></td>
+<td>9,434,200</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td><strong>MTF</strong></td>
+<td>8,122,221</td>
+<td>0.86</td>
+</tr>
+<tr>
+<td><strong>BWT+MTF</strong></td>
+<td>3,336,189</td>
+<td>0.35</td>
+</tr>
+</tbody>
+</table>
+<p>How does the Burrows-Wheeler transform perform on texts written in a different language? In my personal experience, French text
+is absolutely full of extraneous characters, especially e&rsquo;s, a&rsquo;s, u&rsquo;, and s&rsquo;s, so this might suggest the Burrows-Wheeler transform to be effective in compressing French text.
+We ran the algorithm on Zola&rsquo;s <a href="https://www.gutenberg.org/cache/epub/5711/pg5711.txt">Germinal</a>:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Bit Count</strong></th>
+<th><strong>Compression Ratio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Original (UTF-8)</strong></td>
+<td>8,415,728</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td><strong>MTF</strong></td>
+<td>7,188,574</td>
+<td>0.85</td>
+</tr>
+<tr>
+<td><strong>BWT+MTF</strong></td>
+<td>2,947,192</td>
+<td>0.35</td>
+</tr>
+</tbody>
+</table>
+<p>Interestingly, the compression behaved almost identically as on the English text!</p>
+<p>We also consider Chinese text&ndash;in this case, <a href="https://www.gutenberg.org/files/23950/23950-0.txt">Romance of the Three Kingdoms</a>. The results follow:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Bit Count</strong></th>
+<th><strong>Compression Ratio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Original (UTF-8)</strong></td>
+<td>14,735,232</td>
+<td>1.00</td>
+</tr>
+<tr>
+<td><strong>MTF</strong></td>
+<td>7,460,164</td>
+<td>0.51</td>
+</tr>
+<tr>
+<td><strong>BWT+MTF</strong></td>
+<td>5,229,807</td>
+<td>0.35</td>
+</tr>
+</tbody>
+</table>
+<p>Surprisingly to me, the <strong>35%</strong> compression ratio returns, even with the enormous number of unique characters used in the Chinese text: <strong>4225</strong>, when compared to Crime and Punishment&rsquo;s <strong>97</strong> and Germinal&rsquo;s <strong>103</strong>.</p>
+
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+

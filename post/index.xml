@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Tommy Reddad</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on Tommy Reddad</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 21 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>galtonwatson, a Go module for efficient manipulation of Galton-Watson trees</title>
+      <link>http://localhost:1313/post/2020-11-21-galtonwatson-go/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020-11-21-galtonwatson-go/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/tommyreddad/galtonwatson&#34;&gt;&lt;strong&gt;galtonwatson&lt;/strong&gt;&lt;/a&gt; is a Go module in early development which implements efficient algorithms for the generation and manipulation of Galton-Watson trees. By extension, this tool can be used to generate uniformly random samples from many classes of rooted trees, including:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;uniformly random binary trees of a given size,&lt;/li&gt;&#xA;&lt;li&gt;uniformly random d-ary trees of a given size,&lt;/li&gt;&#xA;&lt;li&gt;uniformly random Cayley trees, i.e., unordered labeled trees of a given size,&lt;/li&gt;&#xA;&lt;li&gt;uniformly random ordered trees of a given size,&lt;/li&gt;&#xA;&lt;li&gt;etc.&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>The Burrows-Wheeler transform, revisited</title>
+      <link>http://localhost:1313/post/2020-09-27-burrows-wheeler-revisited/</link>
+      <pubDate>Sun, 27 Sep 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2020-09-27-burrows-wheeler-revisited/</guid>
+      <description>In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on the same page reduces this complexity to \(O(n \log n)\) time and \(O(n)\) space, making the form usable on larger texts.</description>
+    </item>
+    <item>
+      <title>The Burrows-Wheeler transform and move-to-front compression</title>
+      <link>http://localhost:1313/post/2019-08-08-burrows-wheeler/</link>
+      <pubDate>Sat, 08 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-08-08-burrows-wheeler/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;&#xA;.bit-content {&#xA;  display: inline;&#xA;  }&#xA;.bit-count {&#xA;  display: inline;&#xA;      font-family: Monaco, Menlo, Consolas, &#34;Courier New&#34;, DotumChe, monospace;&#xA;  }&#xA;.bit-count-label {&#xA;  font-weight: 700;&#xA;    display: inline;&#xA;      padding-right: 10px;&#xA;      }&#xA;.alphabet-content {&#xA;  display: table-cell;&#xA;    width: 100%;&#xA;      border: 1px solid #e1e1e1;&#xA;        margin-bottom: 16px;&#xA;        font-family: Monaco, Menlo, Consolas, &#34;Courier New&#34;, DotumChe, monospace;&#xA;  }&#xA;.alphabet {&#xA;  display: table;&#xA;    width: 100%;&#xA;    }&#xA;label {&#xA;  font-weight: 700;&#xA;    display: table-cell;&#xA;      width: 1px;&#xA;        padding-right: 10px;&#xA;  }&#xA;textarea {&#xA;  width: 100%;&#xA;    display: block;&#xA;      height: 300px;&#xA;        border: 1px solid #e1e1e1;&#xA;    margin: 0 0 10px;&#xA;      padding: 10px;&#xA;      font-family: Monaco, Menlo, Consolas, &#34;Courier New&#34;, DotumChe, monospace;&#xA;      }&#xA;.tab-pane {&#xA;  min-height: 300px;&#xA;  }&#xA;.nav-tabs {&#xA;  margin: 19px 0px 18px;&#xA;    visibility: visible;&#xA;      border-bottom: 1px solid #ddd;&#xA;      }&#xA;.nav-tabs &gt; li.active {&#xA;  font-weight: 700;&#xA;  }&#xA;.nav-tabs &gt; li {&#xA;  float: left;&#xA;    margin-bottom: -1px;&#xA;    }&#xA;.tab-content {&#xA;  margin-bottom: 10px;&#xA;  }&#xA;&lt;/style&gt;&#xA;&lt;ul class=&#34;nav nav-tabs&#34;&gt;&#xA;  &lt;li class=&#34;active&#34;&gt;&lt;a data-toggle=&#34;tab&#34; href=&#34;#input-contents&#34;&gt;Input&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;li&gt;&lt;a data-toggle=&#34;tab&#34; href=&#34;#bwt-contents&#34;&gt;BWT&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;li&gt;&lt;a data-toggle=&#34;tab&#34; href=&#34;#mtf-contents&#34;&gt;MTF&lt;/a&gt;&lt;/li&gt;&#xA;  &lt;li&gt;&lt;a data-toggle=&#34;tab&#34; href=&#34;#bwt-mtf-contents&#34;&gt;BWT+MTF&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;tab-content&#34;&gt;&#xA;  &lt;div id=&#34;input-contents&#34; class=&#34;tab-pane active&#34;&gt;&#xA;    &lt;textarea id=&#34;input&#34; placeholder=&#34;Text to compress...&#34;&gt;&lt;/textarea&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div id=&#34;bwt-contents&#34; class=&#34;tab-pane&#34;&gt;&#xA;    &lt;textarea id=&#34;bwt&#34; placeholder=&#34;Burrows-Wheeler transform to invert...&#34;&gt;&lt;/textarea&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div id=&#34;mtf-contents&#34; class=&#34;tab-pane&#34;&gt;&#xA;    &lt;div class=&#34;alphabet&#34;&gt;&#xA;      &lt;label for=&#34;mtf-Sigma&#34;&gt;Alphabet: &lt;/label&gt;&#xA;      &lt;input class=&#34;alphabet-content&#34; type=&#34;text&#34; id=&#34;mtf-Sigma&#34;&gt;&#xA;    &lt;/div&gt;&#xA;    &lt;textarea id=&#34;mtf&#34; placeholder=&#34;MTF-compressed binary to decode...&#34;&gt;&lt;/textarea&gt;&#xA;    &lt;div class=&#34;bit-count&#34;&gt;&#xA;      &lt;div class=&#34;bit-count-label&#34;&gt;Bit count: &lt;/div&gt;&lt;div class=&#34;bit-content&#34; id=&#34;mtf-count&#34;&gt;&lt;/div&gt;&#xA;    &lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;  &lt;div id=&#34;bwt-mtf-contents&#34; class=&#34;tab-pane&#34;&gt;&#xA;    &lt;div class=&#34;alphabet&#34;&gt;&#xA;      &lt;label for=&#34;bwt-mtf-Sigma&#34;&gt;Alphabet: &lt;/label&gt;&#xA;      &lt;input class=&#34;alphabet-content&#34; type=&#34;text&#34; id=&#34;bwt-mtf-Sigma&#34;&gt;&#xA;    &lt;/div&gt;&#xA;    &lt;textarea id=&#34;bwt-mtf&#34; placeholder=&#34;BWT+MTF-compressed binary to decode...&#34;&gt;&lt;/textarea&gt;&#xA;    &lt;div class=&#34;bit-count&#34;&gt;&#xA;      &lt;div class=&#34;bit-count-label&#34;&gt;Bit count: &lt;/div&gt;&lt;div class=&#34;bit-content&#34; id=&#34;bwt-mtf-count&#34;&gt;&lt;/div&gt;&#xA;    &lt;/div&gt;&#xA;  &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&lt;script type=&#34;text/javascript&#34; src=&#34;http://localhost:1313/js/2019-08-08-burrows-wheeler/bwt.js&#34;&gt;&lt;/script&gt;&#xA;The above form implements algorithms to code and decode from the&#xA;move-to-front compression scheme, with or without an additional&#xA;application of the Burrows-Wheeler transform. These extremely slick&#xA;algorithms blew my mind when I first heard of them. They are currently&#xA;in use, among other places, in&#xA;[bzip2](https://en.wikipedia.org/wiki/Bzip2) file compression.</description>
+    </item>
+    <item>
+      <title>Splay trees and optimality</title>
+      <link>http://localhost:1313/post/2019-07-27-splay-trees/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-07-27-splay-trees/</guid>
+      <description>&lt;p&gt;The splay tree is probably my favourite data structure. Is it useful&#xA;in practice? Probably not, but its remarkable optimality properties&#xA;coupled with its bare simplicity are so tantalizing that I&amp;rsquo;ve fallen&#xA;in love with splaying. In the rest of this post, I&amp;rsquo;ll describe the&#xA;splay tree structure, and present some of my favourite splay tree&#xA;properties. You will also find an instructive D3 visualization of a&#xA;splay tree in motion.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A uniform sum threshold problem</title>
+      <link>http://localhost:1313/post/2019-07-22-uniform-sum-threshold/</link>
+      <pubDate>Mon, 22 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-07-22-uniform-sum-threshold/</guid>
+      <description>&lt;p&gt;Let \(U_1, U_2, \dots\) be an infinite sequence of independent&#xA;\(\mathrm{Uniform}[0, 1]\) random variables. Let \(N\) be the minimum&#xA;index for which&#xA;\[&#xA;U_1 + U_2 + \dots + U_N &amp;gt; 1 .&#xA;\]&#xA;What is the expected value \(\mathbf{E}\{N\}\)?&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generating spherical points without complex operations</title>
+      <link>http://localhost:1313/post/2019-07-08-generating-without-complex-operations/</link>
+      <pubDate>Mon, 08 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-07-08-generating-without-complex-operations/</guid>
+      <description>&lt;p&gt;These days, most of everyone&amp;rsquo;s favourite languages and libraries for&#xA;scientific computing come ready-equipped with random number generators&#xA;for most common univariate distributions: the uniform, binomial,&#xA;normal, geometric, exponential, beta, etc. In my experience,&#xA;multivariate generation is comparatively hit-or-miss. But in any case,&#xA;since documentation usually doesn&amp;rsquo;t specify implementation methods or&#xA;running time, you usually can&amp;rsquo;t be sure of the efficiency of one of&#xA;these functions without personally examining some source code, or&#xA;being lucky and finding that someone else on StackExchange already&#xA;did. Thankfully, when in doubt, one can always refer to the excellent&#xA;and totally free book &lt;a href=&#34;http://nrbook.com/devroye/&#34;&gt;Non-Uniform Random Variate&#xA;Generation&lt;/a&gt; by my old PhD supervisor Luc Devroye. In&#xA;fact, it seems this book is even more than free, as stated in this&#xA;plea posted by the author on the book&amp;rsquo;s webpage.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;I give anyone the permission, even without asking me, to take these PDF files to a printer, print as many copies as you like, and sell them for profit.&lt;/strong&gt; If you would like me to advertise the sales points of the hard copies, please let me know. &lt;strong&gt;To the libraries: Please do not charge patrons for copying this book. I grant everyone the right to copy at will, for free.&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Discrete minimax estimation with trees</title>
+      <link>http://localhost:1313/post/2019-06-27-density-trees/</link>
+      <pubDate>Thu, 27 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-06-27-density-trees/</guid>
+      <description>&lt;p&gt;This morning, I submitted the final version of my paper &lt;a href=&#34;https://arxiv.org/abs/1812.06063&#34;&gt;Discrete&#xA;minimax estimation with trees&lt;/a&gt; (Devroye and Reddad, 2019), which is to appear in the Electronic&#xA;Journal of Statistics. I think this paper is conceptually quite&#xA;interesting, and I&amp;rsquo;m very happy with the final result, so in this post&#xA;I&amp;rsquo;ll describe some of the main ideas present in the work.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Some conditioned Galton-Watson trees never grow</title>
+      <link>http://localhost:1313/post/2019-06-26-conditioned-gw-trees/</link>
+      <pubDate>Wed, 26 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/2019-06-26-conditioned-gw-trees/</guid>
+      <description>&lt;p&gt;When programmers hear the phrase &amp;ldquo;random tree,&amp;rdquo; they most likely think&#xA;of a random binary search tree, i.e., a binary search tree built from&#xA;the insertion of a uniformly random permutation of \(n\) keys&amp;mdash;denote such&#xA;a tree by \(\mathrm{BST}_n\). A mathematician might instead think that a&#xA;``random tree&amp;rsquo;&amp;rsquo; is more likely to be a uniformly random tree taken&#xA;from some class, like the set of all ordered binary trees with \(n\) nodes&amp;mdash;denote&#xA;such a tree by \(\mathrm{UNIF}_n\). Of course, neither would be wrong. It&#xA;should be clear, though, that these two distributions on the space of&#xA;binary trees are quite different. In particular, most undergraduate&#xA;students of computer science learn, through the study of&#xA;comparison-based sorting algorithms, that&#xA;\[&#xA;\mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) ,&#xA;\]&#xA;and some will learn that&#xA;\[&#xA;\mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) .&#xA;\]&#xA;Though random binary search trees might seem more immediately relevant&#xA;to programmers, uniformly random binary trees are part of a bigger&#xA;picture which is comparatively more versatile in the probabilistic&#xA;analysis of algorithms. To this end, we introduce the concept of&#xA;&lt;em&gt;Galton-Watson trees.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

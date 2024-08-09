@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Some conditioned Galton-Watson trees never grow · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="this is a test ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://localhost:1313/post/2019-06-26-conditioned-gw-trees/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="http://localhost:1313/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="http://localhost:1313//about/">About</a>
+<a class="page-link" href="http://localhost:1313//publications/">Publications</a>
+<a class="page-link" href="http://localhost:1313//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">Some conditioned Galton-Watson trees never grow</h1>
+	<p class="post-meta">
+	  Jun 26, 2019 •
+	  
+	  
+	  
+	  <a href="http://localhost:1313//tags/galton-watson">galton-watson</a>,&nbsp<a href="http://localhost:1313//tags/trees">trees</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p>When programmers hear the phrase &ldquo;random tree,&rdquo; they most likely think
+of a random binary search tree, i.e., a binary search tree built from
+the insertion of a uniformly random permutation of \(n\) keys&mdash;denote such
+a tree by \(\mathrm{BST}_n\). A mathematician might instead think that a
+``random tree&rsquo;&rsquo; is more likely to be a uniformly random tree taken
+from some class, like the set of all ordered binary trees with \(n\) nodes&mdash;denote
+such a tree by \(\mathrm{UNIF}_n\). Of course, neither would be wrong. It
+should be clear, though, that these two distributions on the space of
+binary trees are quite different. In particular, most undergraduate
+students of computer science learn, through the study of
+comparison-based sorting algorithms, that
+\[
+\mathbf{E}\{\mathrm{height}(\mathrm{BST}_n)\} = \varTheta(\log n) ,
+\]
+and some will learn that
+\[
+\mathbf{E}\{\mathrm{height}(\mathrm{UNIF}_n)\} = \varTheta(\sqrt{n}) .
+\]
+Though random binary search trees might seem more immediately relevant
+to programmers, uniformly random binary trees are part of a bigger
+picture which is comparatively more versatile in the probabilistic
+analysis of algorithms. To this end, we introduce the concept of
+<em>Galton-Watson trees.</em></p>
+<p>Galton-Watson trees were originally used to model the spread and
+ultimate extinction of aristocratic family names, as part of the
+eugenics craze of the late 19-th and early 20-th century. It is a
+mathematical model of asexual reproduction. Starting with one
+individual, each individual has an independently random number of
+children, which each have their own equidistributed independently
+random number of children, and so on. The distribution of the
+underlying ordered family tree is known as a <em>Galton-Watson tree,</em>
+which is determined by its <em>offspring distribution,</em> i.e., the
+distribution of the number of children which each individual
+births. We write \(\xi\) for a random variable distributed as such. For
+example, we might have the following offspring distribution:
+\[
+\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/4, \quad \mathbf{P}\{\xi = 1\} = 1/2 ;
+\]
+in words, each individual has \(0\) or \(2\) children with probability
+\(1/4\), and \(1\) child with probability \(1/2\). Importantly, in this
+case, there is a positive probability that individuals can have no
+progeny, so there is a positive probability that the Galton-Watson
+tree determined by \(\xi\) dies off. If each individual represents a
+person with a given family name, this would indicate the extinction of
+the family name.</p>
+<p>What follows is a fascinating and classical result about Galton-Watson
+tree extinction:</p>
+<blockquote>
+<p><strong>Theorem 1.</strong><br>
+Let \(q\) denote the probability that a \(\xi\)-Galton-Watson tree goes extinct. Then, \(q = 1\) if and only if \(\mathbf{E} \xi \le 1\).</p>
+</blockquote>
+<p>Accordingly, there are three regimes:</p>
+<ul>
+<li>
+<p>the <em>subcritical</em> regime, when \(\mathbf{E} \xi &lt; 1\);</p>
+</li>
+<li>
+<p>the <em>critical</em> regime, when \(\mathbf{E} \xi = 1\), and;</p>
+</li>
+<li>
+<p>the <em>supercritical</em> regime, when \(\mathbf{E} \xi &gt; 1\).</p>
+</li>
+</ul>
+<p>The critical regime is of paramount importance. Though it may not be
+obvious to a first-time observer, uniformly random binary trees are
+actually critical Galton-Watson trees, and indeed, critical
+Galton-Watson trees model many kinds of &ldquo;uniform&rdquo; random trees.</p>
+<p>To see this fact about uniformly random binary trees, we must first
+control the number of nodes in a Galton-Watson tree. We define a
+<em>conditioned Galton-Watson tree</em> to be a Galton-Watson tree
+conditioned to have \(n\) nodes, and denote it by \(T_n\). So, for the
+\(\xi\)-Galton-Watson tree \(T\) and specific tree \(t\) on \(n\) nodes,
+\[
+\mathbf{P}\{T_n = t\} = \mathbf{P}\{T = t \mid |T| = n\} = \frac{\mathbf{P}\{T = t\}}{\mathbf{P}\{|T| = n\}} ,
+\]
+where \(|T|\) denotes the number of nodes in \(T\).</p>
+<p>For certain offspring distributions, we may be conditioning on an
+event which occurs with zero probability. For example, if
+\[
+\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = 1/2 ,
+\]
+then every \(\xi\)-Galton-Watson tree has an odd number of nodes, so \(n\)
+must be odd. We will ignore this technicality.</p>
+<p>Sticking with this choice of \(\xi\), observe that if \(t\) is a binary
+tree with \(n = 2k + 1\) nodes, then \(n\) has \(k\) internal nodes and \(k +
+1\) leaves, so by independence of the number of offspring of each node
+in the Galton-Watson process,
+\[
+\mathbf{P}\{T = t\} = ( \mathbf{P} \{\xi = 0\} )^{k + 1} ( \mathbf{P}\{\xi = 2 \} )^k = 2^{-n} .
+\]
+Since \(t\) was an arbitrary binary tree on \(n\) nodes, this means that \(T_n\) is, after all, a uniformly random binary tree.</p>
+<p>This is just one way of viewing a uniformly random tree as a critical
+Galton-Watson tree. Some other important offspring distributions
+include:</p>
+<ul>
+<li>
+<p>the \(\mathrm{Geometric}(1/2)\) offspring distribution,
+\[
+\mathbf{P}\{\xi = i\} = 2^{- (i + 1) } ,
+\]
+corresponding to uniformly random ordered trees (with any valence);</p>
+</li>
+<li>
+<p>the \(\mathrm{Poisson}(1)\) offspring distribution,
+\[
+\mathbf{P}\{\xi = i\} = \frac{e^{-1}}{i!} ,
+\]
+corresponding to uniformly random unordered labelled trees, and;</p>
+</li>
+<li>
+<p>the \(\mathrm{Binomial}(d, 1/d)\) offspring distribution,
+\[
+\mathbf{P}\{\xi = i\} = \binom{d}{i} \frac{1}{d^i} \left(1 - \frac{1}{d}\right)^{d - i} ,
+\]
+corresponding to uniformly random (up to-) \(d\)-ary trees.</p>
+</li>
+</ul>
+<p>Critical Galton-Watson trees have many marvelous qualities which are
+too numerous to even summarize here. In particular, writing
+\(\mathrm{Var}\{\xi\} = \sigma^2\), if \(0 &lt; \sigma^2 &lt; \infty\), then
+\[
+\mathbf{E}\{\mathrm{height}(T_n)\} = \varTheta(\sqrt{n}) ,
+\]
+and this height is even highly concentrated (Addario-Berry et al., 2013).</p>
+<p>Even more fascinating is the local limit to the <em>size-biased tree,</em>
+also known as <em>Kesten&rsquo;s tree.</em> To describe this structure, first we
+introduce the size-biased random variable \(\hat{\xi}\), where
+\[
+\mathbf{P}\{\hat{\xi} = i\} = i \mathbf{P}\{\xi = i\} .
+\]</p>
+<p>Since \(\xi\) is critical, then the size-biased distribution is indeed a
+probability distribution, i.e.,
+\[
+\sum_{i \ge 0} \mathbf{P}\{\hat{\xi} = i\} = \sum_{i \ge 0} i \mathbf{P}\{\xi = i\} = \mathbf{E} \xi = 1 .
+\]</p>
+<p>With this, we construct the infinite Kesten&rsquo;s tree, denoted by
+\(T_\infty\). This random tree has a set of mortal and immortal nodes,
+starting with one immortal node at the root. Each immortal node has an
+independently random number of children distributed as \(\hat{\xi}\),
+where one among these is chosen as its immortal successor, and all
+others are made mortal. Each mortal node has an independently random
+number of children distributed as \(\xi\).</p>
+<p>Observe that \(\mathbf{P}\{\hat{\xi} = 0\} = 0\), so each immortal has
+at least one child, and on average \(\mathbf{E} \hat{\xi} = 1 +
+\sigma^2\) children. Thus, Kesten&rsquo;s tree has an infinite &ldquo;spine&rdquo; along
+the sequence of immortal nodes, with several independent
+\(\xi\)-Galton-Watson trees hanging off this spine on either side.</p>
+<p>For a tree \(t\), let \([t]_r\) denote the tree \(t\) truncated to include
+only the nodes of depth at most \(r\). The following classical result describes
+the local limit to Kesten&rsquo;s tree mentioned earlier:</p>
+<blockquote>
+<p><strong>Theorem 2</strong><br>
+Suppose that \(\mathbf{E} \xi = 1\). Then, for each \(r \ge 1\) and each tree \(t\),
+\[
+\lim_{n \to \infty} \mathbf{P}\{ [T_n]_r = t \} = \mathbf{P}\{ [T_\infty]_r = t\} .
+\]</p>
+</blockquote>
+<p>So, in the limit, conditioned Galton-Watson trees look like Kesten&rsquo;s
+tree.</p>
+<p>It may seem that \(T_n\) &ldquo;grows into&rdquo; \(T_\infty\) in some sense, if only
+because they are the same in the limit and because \(T_\infty\) is
+&ldquo;larger&rdquo; than \(T_n\), but this is not always true. To be more precise,
+the question is whether or not there exists a coupling of \(T_n\) and
+\(T_\infty\) for which \(T_n \subset T_\infty\), where &ldquo;\(\subset\)&rdquo; denotes
+subtree inclusion at the root along some subsequence of children. More
+generously, some have asked whether or not conditioned Galton-Watson
+trees can be grown incrementally, i.e., whether or not there exists a
+coupling between \(T_n\) and \(T_{n + 1}\) for which \(T_n \subset T_{n +
+1}\). Equivalently, this is asking whether or not \(T_{n + 1}\) can be
+grown from \(T_n\) by the insertion of a leaf. Recall that inserting
+leaves uniformly at random in a binary tree creates a random binary
+search tree, so certainly if we have any hope of creating uniform
+random binary trees, the insertion profile must be radically
+nonuniform.</p>
+<p>Note that if \(T_n \subset T_{n + 1}\) for each \(n\), then \(T_n \subset
+T_\infty\), so incremental growth implies growth into Kesten&rsquo;s
+tree. Observe also that this kind of incremental growth can be
+extremely useful to study monotone properties of \(T_n\), since it
+allows us to use the coupling between \(T_n\) and \(T_\infty\) to transfer
+the study of a property of \(T_n\) onto the nearly-Galton-Watson
+Kesten&rsquo;s tree \(T_\infty\), which carries a lot of independence. If
+finiteness of the tree is required, we can even truncate \(T_\infty\) at
+some level around \(\sqrt{n}\), since the height of \(T_n\) is highly
+concentrated.</p>
+<p>In (Luczak and Winkler, 2004), it is
+shown that for any \(d \ge 2\) and \(\xi \sim \mathrm{Binomial}(d, 1/d)\),
+\(T_n\) can indeed be grown incrementally. There are a few more results
+about growing conditioned Galton-Watson trees&mdash;see (Lyons et al., 2008), (Broman, 2014), (Broman, 2016)&mdash;but as far as I am aware,
+these are virtually the only papers including positive results
+about which offspring distributions admit incremental growth or growth
+into Kesten&rsquo;s tree.</p>
+<p>In the reverse direction, (Janson, 2006) shows that for <em>some</em> critical
+offspring distributions and for some \(n\), there is no coupling for
+which \(T_n \subset T_{n + 1}\), or \(T_n \subset T_\infty\). We summarize
+the argument here, since it is quite simple.</p>
+<p>Let \(Z_k(t)\) denote the number of nodes at depth \(k\) in the tree
+\(t\). Observe that
+\[
+\mathbf{E} Z_k(T_\infty) = \sigma^2 + \mathbf{E} Z_{k - 1}(T_\infty) = 1 + k \sigma^2 .
+\]
+If \(T_n \subset T_\infty\), then
+\[
+\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k (T_\infty) = 1 + k \sigma^2
+\]
+for each \(k\), and if \(T_n \subset T_{n + 1}\), then
+\[
+\mathbf{E} Z_k (T_n) \le \mathbf{E} Z_k(T_{n + 1})
+\]
+for each \(k\). Janson proposes the following offspring distribution:
+\[
+\mathbf{P}\{\xi = 0\} = \mathbf{P}\{\xi = 2\} = \frac{1 - \varepsilon}{2}, \quad \mathbf{P}\{\xi = 1\} = \varepsilon ,
+\]
+for some fixed \(\varepsilon &gt; 0\), and then simply enumerates all small
+trees to compute that
+\[
+\mathbf{E} Z_1 (T_3) &gt; \mathbf{E} Z_1 (T_4)
+\]
+for a small enough choice of \(\varepsilon\), where we emphasize that
+\(Z_1\) is simply the degree of the root node.</p>
+<p>So indeed, some small conditioned Galton-Watson trees do not grow
+incrementally. When I first saw this result, I thought that perhaps
+this is a small \(n\) problem, and that maybe for large enough \(n\), it
+may still be true that \(T_n \subset T_{n + 1}\). After some more
+thinking, I realized that I was wrong.</p>
+<p>Pick the following offspring distribution for some fixed \(d \ge 2\):
+\[
+\mathbf{P}\{\xi = 0\} = \left(1 - \frac{1}{d}\right)^2, \quad \mathbf{P}\{\xi = 1\} = \frac{1}{d}, \quad \mathbf{P}\{\xi = d\} = \frac{1}{d}\left(1 - \frac{1}{d}\right) .
+\]
+It can be verified that \(\mathbf{E} \xi = 1\) and \(\sigma^2 = d - 2 +
+1/d\), so
+\[
+\mathbf{E} Z_1 (T_\infty) = d - 1 + \frac{1}{d} .
+\]
+We also know the distribution of the root degree for conditioned
+Galton-Watson trees from (Janson, 2012), so
+\[
+\begin{aligned}
+\mathbf{P}\{Z_1(T_n) = i\} &amp;= \frac{n}{n - 1} i \mathbf{P}\{\xi_1 = i \mid \xi_1 + \xi_2 + \dots + \xi_n = n - 1\} \\
+&amp;= \frac{n i \mathbf{P}\{S_{n - 1} = n - 1 - i\}}{(n - 1) \mathbf{P}\{S_n = n - 1\}} ,
+\end{aligned}
+\]
+where \(\xi_1, \dots, \xi_n\) are independent and identically distibuted
+as \(\xi\), and \(S_n = \xi_1 + \dots + \xi_n\). Using tedious
+computations through local limit theorems (Petrov, 1975), we can estimate the above
+probabilities in order, finally, to compute that
+\[
+\mathbf{E} Z_1(T_n) = d - 1 + \frac{1}{d} + \frac{d^2 + o(d^2)}{2n} + o(1/n) ,
+\]
+where the function \(o(d^2)\) does not depend on \(n\).</p>
+<p>What this implies is that we can pick \(d\) large enough so that \(d^2\)
+dominates \(o(d^2)\) in the numerator, and then, for all sufficiently large
+\(n\),
+\[
+\mathbf{E} Z_1 (T_n) &gt; \mathbf{E} Z_1 (T_\infty) .
+\]
+So, there are even arbitrarily large conditioned Galton-Watson trees
+which still cannot be grown within Kesten&rsquo;s tree.</p>
+<ol>
+<li>Broman, E.I., 2016. Stochastic ordering of infinite geometric Galton-Watson trees. J. Theoret. Probab. 29, 1069–1082. <a href="https://doi.org/10.1007/s10959-015-0608-x">https://doi.org/10.1007/s10959-015-0608-x</a></li>
+<li>Broman, E.I., 2014. Stochastic ordering of infinite binomial Galton-Watson trees. ALEA Lat. Am. J. Probab. Math. Stat. 11, 209–227.</li>
+<li>Addario-Berry, L., Devroye, L., Janson, S., 2013. Sub-Gaussian tail bounds for the width and height of conditioned Galton-Watson trees. Ann. Probab. 41, 1072–1087. <a href="https://doi.org/10.1214/12-AOP758">https://doi.org/10.1214/12-AOP758</a></li>
+<li>Janson, S., 2012. Simply generated trees, conditioned Galton-Watson trees, random allocations and condensation. Probab. Surv. 9, 103–252. <a href="https://doi.org/10.1214/11-PS188">https://doi.org/10.1214/11-PS188</a></li>
+<li>Lyons, R., Peled, R., Schramm, O., 2008. Growth of the number of spanning trees of the Erdos-Rényi giant component. Combin. Probab. Comput. 17, 711–726. <a href="https://doi.org/10.1017/S0963548308009188">https://doi.org/10.1017/S0963548308009188</a></li>
+<li>Janson, S., 2006. Conditioned Galton-Watson trees do not grow, in: Proceedings, Fourth Colloquium on Mathematics and Computer Science Algorithms, Trees, Combinatorics and Probabilities (Nancy, 2006). pp. 331–334.</li>
+<li>Luczak, M., Winkler, P., 2004. Building uniformly random subtrees. Random Structures Algorithms 24, 420–443. <a href="https://doi.org/10.1002/rsa.20011">https://doi.org/10.1002/rsa.20011</a></li>
+<li>Petrov, V.V., 1975. Sums of Independent Random Variables. Springer-Verlag Berlin Heidelberg New York.</li>
+</ol>
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+

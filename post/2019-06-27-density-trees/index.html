@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Discrete minimax estimation with trees · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="this is a test ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://localhost:1313/post/2019-06-27-density-trees/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="http://localhost:1313/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="http://localhost:1313//about/">About</a>
+<a class="page-link" href="http://localhost:1313//publications/">Publications</a>
+<a class="page-link" href="http://localhost:1313//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">Discrete minimax estimation with trees</h1>
+	<p class="post-meta">
+	  Jun 27, 2019 •
+	  
+	  
+	  
+	  <a href="http://localhost:1313//tags/minimax">minimax</a>,&nbsp<a href="http://localhost:1313//tags/density-estimation">density-estimation</a>,&nbsp<a href="http://localhost:1313//tags/trees">trees</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p>This morning, I submitted the final version of my paper <a href="https://arxiv.org/abs/1812.06063">Discrete
+minimax estimation with trees</a> (Devroye and Reddad, 2019), which is to appear in the Electronic
+Journal of Statistics. I think this paper is conceptually quite
+interesting, and I&rsquo;m very happy with the final result, so in this post
+I&rsquo;ll describe some of the main ideas present in the work.</p>
+<p>The setting is elementary. We observe \(n\) independent and identically
+distributed samples coming from an unknown discrete distribution, and
+our goal is to concoct an estimate of the underlying distribution
+using our observations. In general, we will write \(f\) for the
+probability mass function of the true distribution \(\mu\), and
+\(\hat{f}\) for an estimate of \(f\) with corresponding distribution
+\(\hat{\mu}\). Note that \(\hat{\mu}\) and \(\hat{f}\) are random functions.
+Our goal is to make a choice of \(\hat{f}\) which minimizes
+the expected <em>total variation (TV) distance</em> between \(\mu\) and \(\hat{\mu}\),
+where this quantity is defined as
+\[
+\mathrm{TV}(\mu, \hat{\mu}) = \sup_A |\mu(A) - \hat{\mu}(A)| .
+\]
+If this quantity is small, then \(\mu\) and \(\hat{\mu}\) assign nearly
+the same probabilities to all events.</p>
+<p>The TV-distance has several equivalent formulations which makes it
+particularly attractive to us. Among them is the following <em>coupling
+characterization</em>, where if \(X\) and \(\hat{X}\) are random variables
+distributed as \(\mu\) and \(\hat{\mu}\), then
+\[
+\mathrm{TV}(\mu, \hat{\mu}) = \inf_{(X, \hat{X})} \mathbf{P}\{X \neq \hat{X}\} ,
+\]
+where the infimum is over all couplings of \(X\) and \(\hat{X}\). In this sense, we see how the TV-distance really captures our capacity to be able to tell \(X\) and \(\hat{X}\) apart by any means.</p>
+<p>It is also not hard to see that
+\[
+\mathrm{TV}(\mu, \hat{\mu}) = \frac{1}{2} \sum_i |f(i) - \hat{f}(i)| ,
+\]
+and for this reason we will abuse notation and work with probability
+mass functions instead of probability measures in what follows:
+\[
+\mathrm{TV}(f, \hat{f}) = \frac{1}{2} \sum_i |f(i) - \hat{f}(i)| .
+\]
+We also will refer to probability mass functions as densities.
+All in all, if we know that \(f\) belongs to some class of functions
+\(\mathcal{F}\), then we are interested in the following quantity,
+\[
+\mathcal{R}_n(\mathcal{F}) = \inf_{\hat{f}} \sup_{f \in \mathcal{F}} \mathbf{E}\{\mathrm{TV}(f, \hat{f})\} ,
+\]
+known as the <em>minimax risk</em> or <em>minimax rate</em> of the class
+\(\mathcal{F}\). This represents the best worst-case error over all
+events and estimators of an unknown density in \(\mathcal{F}\).</p>
+<p>As a warm-up, let us suppose that the true density comes the class of
+all densities \(\mathcal{F}\) supported on \(\{1, \dots, k\}\). Write \(X_1, \dots,
+X_n\) for the observed samples. Since we have no extra information, is
+sensible then to choose \(\hat{\mu}\) as the empirical measure, i.e., for
+each \(i \in \{1, \dots, k\}\),
+\[
+\hat{f}(i) = \frac{1}{n} \sum_{j = 1}^n \mathbf{1}\{ X_j = i\} = \frac{N_i}{n} ,
+\]
+where \(N_i\) denotes the number of samples equal to \(i\). Note that
+\(N_i\) is distributed as \(\mathrm{Binomial}(n, f(i))\). The error of
+this estimate can be easily measured:
+\[
+\begin{aligned}
+\mathbf{E} \{\mathrm{TV}(f, \hat{f})\} &amp;= \frac{1}{2} \sum_{i = 1}^k \mathbf{E}\{|f(i) - \hat{f}(i)|\} \\
+&amp;= \frac{1}{2n} \sum_{i = 1}^k \mathbf{E}\{|n f(i) - N_i|\} \\
+&amp;\le \frac{1}{2n} \sum_{i = 1}^k \sqrt{\mathbf{E}\{(n f(i) - N_i)^2\}} ,
+\end{aligned}
+\]
+by the Cauchy-Schwarz inequality. Each term here is simply the
+variance of a binomial random variable, whence
+\[
+\mathcal{R}_n(\mathcal{F}) \le \frac{1}{2n} \sup_{f \in \mathcal{F}} \sum_{i = 1}^k \sqrt{n f(i)} \le \frac{1}{2} \sqrt{\frac{k}{n}} ,
+\]
+again by Cauchy-Schwarz. It&rsquo;s also not hard to see that this is the
+optimal rate up to a constant factor, i.e.,
+\[
+\mathcal{R}_n(\mathcal{F}) \asymp \sqrt{\frac{k}{n}} .
+\]</p>
+<p>The estimate \(\hat{f}\) above is technically a type of
+<em>histogram</em>. Histogram estimates create piecewise constant functions
+determined by a partition of the support into bins, where each bin
+receives a total mass proportional to the number of samples falling
+within it. The estimate \(\hat{f}\) is a histogram with bins of size
+\(1\). Histograms can be used to study classes other than \(\mathcal{F}\)
+above, in which case it becomes important to make a good choice of
+bins, which is not always an easy move.</p>
+<p>In (Devroye and Reddad, 2019), we
+develop a recursive scheme for determining a histogram partition for
+estimating discrete non-increasing and non-increasing convex
+densities. I&rsquo;ll focus on the first case.</p>
+<p>First, write \(\mathcal{F}_k\) for the class of all non-increasing
+densities supported on \(\{1, \dots, k\}\), where \(k\) is a power of
+two. Let \(f \in \mathcal{F}_k\) be the unknown density generating the
+\(n\) observations \(X_1, \dots, X_n\). We construct a binary tree with a
+corresponding partition of the support. Let \(\rho\) be the root of the
+tree, corresponding to the interval \(I_\rho = \{1, \dots, k\}\). Let
+\[
+\begin{aligned}
+I_v &amp;= \{1, \dots, k/2\} , \\
+I_w &amp;= \{k/2 + 1, \dots, k\}
+\end{aligned}
+\]
+denote the left and right halves of \(I_\rho\). We need to decide
+whether or not to split \(I_\rho\) into \(I_v\) and \(I_w\) and recurse, or
+use \(I_\rho\) as a bin itself. If it appears that \(f\) is constant on
+\(I_\rho\), then we would do well not to recurse, and vice versa. To
+this end, let \(N_v\) and \(N_w\) denote the number of samples falling
+into the intervals \(I_v\) and \(I_w\). Let also \(f_v\) and \(f_w\) denote
+the total mass of \(f\) in \(I_v\) and \(I_w\). Since \(f\) is non-increasing,
+then we expect that
+\[
+N_v \ge N_w
+\]
+much of the time, so we should not recurse if \(N_v &lt; N_w\). In fact,
+since \(N_v \sim \mathrm{Binomial}(n, f_v)\) and \(N_w \sim
+\mathrm{Binomial}(n, f_w)\), then with constant probability,
+\[
+\begin{aligned}
+N_v - N_w \ge \sqrt{N_v + N_w} , \qquad (2)
+\end{aligned}
+\]
+for example by Chebyshev&rsquo;s inequality. We call this the <em>greedy
+splitting rule</em>, and we split \(\rho\) and recurse if and only if either
+\((2)\) holds and \(|I_\rho| &gt; 1\).</p>
+<p>In the end, we obtain a partition of the interval \(\{1, \dots, k\}\),
+which can be used to make a histogram estimate \(\hat{f}\), which we
+call the <em>greedy tree-based estimate</em> for \(f\). Our simulations suggest
+that \(\hat{f}\) well-estimates \(f\), but the proof of this eludes
+us. Instead, we can use the construction of \(\hat{f}\) to develop
+another estimate which, along with some black magic, can allow us to
+obtain the optimal minimax rate \(\mathcal{R}_n(\mathcal{F})\).</p>
+<p>If we replace the quantities in \((2)\) with their
+expectations, we get what we call the <em>idealized splitting rule</em>
+\[
+\begin{aligned}
+f_v - f_w \ge \sqrt{\frac{f_v + f_w}{n}} . \qquad (1)
+\end{aligned}
+\]
+We can still use the idealized splitting rule to construct a
+piecewise-constant function \(f^*\) which has, on each bin, the average
+value of \(f\) along that bin.</p>
+<p>This may seem contrary to the point of the problem, considering this
+construction depends heavily upon prior knowledge of the true density
+\(f\). This is where the black magic kicks in, but we need a few
+definitions first.</p>
+<p>For a class of functions \(\mathcal{G}\), define its <em>Yatracos class</em>
+\(\mathcal{A}\) as
+\[
+\mathcal{A} = \{\{x \colon f(x) &gt; g(x)\} \colon f \neq g \in \mathcal{G}\} .
+\]
+Define also the Vapnik-Chervonenkis (VC) dimension of a class
+\(\mathcal{A}\) of subsets of \(\mathcal{X}\) as the size of the largest
+\(X \subseteq \mathcal{X}\) such that for every \(Y \subseteq X\), there
+exists \(B \in \mathcal{A}\) such that \(X \cap B = Y\). This is an
+important quantity in combinatorial statistics and machine learning.</p>
+<blockquote>
+<p><strong>Theorem 1.</strong>
+Let \(\mathcal{G}\) be some class of density estimates with Yatracos class \(\mathcal{A}\). Then, there is a universal constant \(c &gt; 0\) for which
+\[
+\mathcal{R}_n(\mathcal{F}) \le 3 \sup_{f \in \mathcal{F}} \inf_{g \in \mathcal{G}} \mathrm{TV}(f, g) + c \sqrt{\frac{\mathrm{VC}(\mathcal{A})}{n}} + \frac{3}{2n} .
+\]</p>
+</blockquote>
+<p>Let \(T^*\) denote the underlying binary tree in the construction of
+\(f^*\), and say it has leaves \(L^*\). Suppose that \(\mathcal{G}\) is
+the class of all density estimates with at most \(\ell\)
+piecewise constant parts, for \(\ell \ge |L^*|\). Then, \(f^* \in \mathcal{G}\). Furthermore,
+if \(\mathcal{A}\) is the Yatracos class of \(\mathcal{G}\), then
+\(\mathcal{A} \subset \mathcal{B}\), where \(\mathcal{B}\) is the class of
+unions of at most \(\ell\) intervals. In particular, it is well-known
+that \(\mathrm{VC}(\mathcal{B}) = 2 \ell\), so applying Theorem 1,
+\[
+\mathcal{R}_n(\mathcal{F}_k) \le 3 \sup_{f \in \mathcal{F}} \mathrm{TV}(f, f^*) + c \sqrt{\frac{\ell}{n}} + \frac{3}{2n} .
+\]</p>
+<p>We can also control the total-variation distance to the idealized
+tree-based estimate:
+\[
+\begin{aligned}
+\mathrm{TV}(f, f^*) &amp;= \frac{1}{2} \sum_{i = 1}^k |f(i) - f^*(i)| \\
+&amp;= \frac{1}{2} \sum_{u \in L^*} \sum_{i \in I_u} |f(i) - f^*(i)| \\
+&amp;= \frac{1}{2} \sum_{u \in L^*} \sum_{i \in I_u} |f(i) - \bar{f}_u| ,
+\end{aligned}
+\]
+where \(\bar{f}_u = f_u/|I_u|\) is the average value of \(f\) on
+\(I_u\). For \(u \in L^*\), write
+\[
+A_u = \sum_{x \in I_u} |f(i) - \bar{f}_u| .
+\]</p>
+<p>If \(|I_u| = 1\), then \(A_u = 0\), so we assume that \(|I_u| &gt; 1\). In this
+case, let \(I_v\) and \(I_w\) be the left and right halves of \(I_u\). Write
+also
+\[
+\begin{aligned}
+B_v &amp;= \sum_{x \in I_v} |f(i) - \bar{f}_v| , \\
+B_w &amp;= \sum_{x \in I_w} |f(i) - \bar{f}_w| .
+\end{aligned}
+\]
+By the triangle inequality,
+\[
+\begin{aligned}
+A_u &amp;\le (\bar{f}_v - \bar{f}_u) |I_v| + (\bar{f}_u - \bar{f}_w) |I_w| + B_v + B_w \\
+&amp;= (f_v - f_w) + B_v + B_w .
+\end{aligned}
+\]
+Let \(i_v\) be the largest point in \(I_v\) for which \(f(i) \ge \bar{f}_v\). Then,
+\[
+\begin{aligned}
+B_v &amp;= \sum_{i \in I_v, i \le i_v} (f(i) - \bar{f}_v) + \sum_{i \in I_v, i &gt; i_v} (\bar{f}_v - f(i)) \\
+&amp;= 2 \sum_{i \in I_v, i &gt; i_v} (\bar{f}_v - f(i)) \\
+&amp;\le 2 |I_v| (\bar{f}_v - \bar{f}_w) \\
+&amp;= 2 (f_v - f_w) .
+\end{aligned}
+\]
+A similar relation holds for \(B_w\), whence
+\[
+A_u \le 5 (f_v - f_w) \le 5 \sqrt{f_u/n}
+\]
+by the idealized splitting rule \((1)\). Putting this all together,
+\[
+\mathrm{TV}(f, f^*) \le \frac{5}{2 \sqrt{n}} \sum_{u \in L^*} \sqrt{f_u} \le \frac{5}{2} \sqrt{\frac{\ell}{n}}
+\]
+by the Cauchy-Schwarz inequality. So for some universal constant \(c &gt; 0\),
+\[
+\mathcal{R}_(\mathcal{F}_k) \le c \sqrt{\ell/n} .
+\]
+So it suffices to find a uniform upper bound on \(|L^*|\).</p>
+<p>The idea here is that each time a split occurs on a fixed level in
+\(T^*\) creating children \(v, w\) in order from left to right, we know
+that
+\[
+f_v - f_w \ge  + \sqrt{\frac{f_v + f_w}{n}} .
+\]
+So, the more splits there are on a level, the taller the density grows
+towards the origin. The above equation ressembles a differential equation,
+\[
+\mathrm{d} f \ge \sqrt{f/n} ,
+\]
+which has the solution \(f(x) \ge x^2/(4n)\). More formally, if \(U_j\) is
+the set of nodes at depth \(j - 1\) in \(T^*\) which have at least one
+leaf as a child, with all the children of nodes in \(U_j\) labelled
+\(u_1, \dots, u_{2|U_j|}\), then it can be shown that
+\[
+f_{u_{2i}} \ge \frac{i^2}{n} .
+\]
+Let \(L_j\) be the set of leaves at level \(j\) in \(T^*\), with total mass \(q_j\). Then, ignoring integer effects,
+\[
+q_j \ge \sum_{i = 1}^{|L_j|/2} f_{u_{2i}} \ge \sum_{i = 1}^{|L_j|/2} \frac{i^2}{n} \ge \frac{|L_j|^3}{24n} ,
+\]
+and \(|L_j| \le (24 n q_j)^{1/3}\), so by Hölder&rsquo;s inequality,
+\[
+\begin{aligned}
+|L^*| &amp;\le (24 n)^{1/3} \sum_{i = 1}^{\log_2 k} q_j^{1/3} \\
+&amp;\le (24 n)^{1/3} \left(\sum_{i = 1}^{\log_2 k} q_j \right)^{1/3} \left( \sum_{i = 1}^{\log_2 k} 1 \right)^{2/3} \\
+&amp;= (24 n)^{1/3} (\log_2 k)^{2/3} ,
+\end{aligned}
+\]
+and finally
+\[
+\mathcal{R}_n(\mathcal{F}_k) \le c \left( \frac{\log k}{n} \right)^{1/3} .
+\]
+This is just a sketch of the full computation&mdash;for the fully
+articulated argument, <a href="https://arxiv.org/abs/1812.06063">read our paper</a>.</p>
+<ol>
+<li>Devroye, L., Reddad, T., 2019. Discrete minimax estimation with trees. Electron. J. Stat. 50, 2595–2623.</li>
+</ol>
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+

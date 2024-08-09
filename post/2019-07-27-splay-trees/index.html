@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Splay trees and optimality · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="this is a test ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://localhost:1313/post/2019-07-27-splay-trees/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="http://localhost:1313/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="http://localhost:1313//about/">About</a>
+<a class="page-link" href="http://localhost:1313//publications/">Publications</a>
+<a class="page-link" href="http://localhost:1313//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">Splay trees and optimality</h1>
+	<p class="post-meta">
+	  Jul 27, 2019 •
+	  
+	  
+	  
+	  <a href="http://localhost:1313//tags/trees">trees</a>,&nbsp<a href="http://localhost:1313//tags/algorithms">algorithms</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p>The splay tree is probably my favourite data structure. Is it useful
+in practice? Probably not, but its remarkable optimality properties
+coupled with its bare simplicity are so tantalizing that I&rsquo;ve fallen
+in love with splaying. In the rest of this post, I&rsquo;ll describe the
+splay tree structure, and present some of my favourite splay tree
+properties. You will also find an instructive D3 visualization of a
+splay tree in motion.</p>
+<p>Splay trees are a kind of binary search tree, so they support the
+crucial search tree query \(\texttt{SEARCH}(k)\) which returns the
+smallest value \(x \ge k\) stored in the tree. As an aside, many
+students ignore the difference between this search query, and what we
+may call a \(\texttt{FIND}(k)\) query of dictionaries, which only should
+return \(k\) if \(k\) is present in the structure, and nothing
+otherwise. Obviously, we can always implement \(\texttt{FIND}\) with
+\(\texttt{SEARCH}\), but the reverse is not true. These are
+fundamentally different queries with different goals and limitations,
+which is sometimes not emphasized in undergraduate computer science
+courses, and indeed, the ignorance of this difference may lend
+students to believe for a time that dictionaries ultimately solve all
+of the same problems as search trees.</p>
+<p>So, splay trees are search trees. They are also <em>adaptive</em>; the
+structure modifies itself not only upon insertions and deletions, but
+also on search queries. Every undergraduate computer science student
+encounters <em>red-black trees</em>, which are a kind of self-adjusting
+binary search tree, which perform <em>rotations</em> upon insertions and
+deletions so as to constantly maintain logarithmic height. Splay trees
+self-adjust also on queries, to be adaptive to input query
+sequences. Before describing this transformation in more detail, I&rsquo;ll
+present a problem which happens to be solved by splay trees.</p>
+<p>Let \(D\) be some data structure implementing \(\texttt{SEARCH}\). We
+perform a sequence of queries \(x_1, x_2, \dots\) on \(D\). For a
+particular \(x\), let \(w(x)\) denote the number of distinct elements of
+\(D\) which have been queried since \(x\) was last queried. For example,
+if \(x_1 = x_2 = x_3 = 1\) and we are performing the fourth query, then
+\(w(1) = 0\). On the other hand, if \(x_1 = x_2 = 1\) and \(x_3 = 2\), then
+\(w(1) = 1\). If \(\texttt{SEARCH}(x)\) takes time \(O(\log w(x))\),
+then \(D\) is said to have the <em>working set property.</em> If a structure
+has this property, then this structure allows us to efficiently
+perform sequences of queries in which there are many recurring
+items. It&rsquo;s not totally obvious how to implement a structure which has
+the working set property, but one relatively easy example is given by
+<a href="https://en.wikipedia.org/wiki/Iacono%27s_working_set_structure">Iacono&rsquo;s working set structure</a>.</p>
+<p>Intuitively, if we wanted to make a binary search tree which has the
+working set property, we might simply rotate any queried element all
+the way up to the root. This isn&rsquo;t quite right. Take for example the
+sequence of insertions \(x_1 = 1, x_2 = 2, \dots, x_n = n\). Each
+insertion in this structure will take constant time, and the final
+tree looks like a root with one right child, and a path of \(n - 2\)
+nodes hanging off its left child. Then, the query \(x_{n + 1} = 1\)
+takes \(\varOmega(n)\) time. In fact, if \(x_{n + i} = i\) for each \(i\),
+then the queries will even take \(\varOmega(n)\) amortized time. So, the
+most obvious suggestion fails to implement the working set property.</p>
+<p>Splay trees are the next simplest choice. Instead of performing
+rotations to bubble up queried nodes to the root, nodes are <em>splayed</em>
+to the root. A single splaying operation is a kind of rotation which
+happens on one or two levels at a time. There are three kinds of
+splaying up to symmetries, based on the parent-grandparent orientation
+of a target splayed node: the zig, the zig-zig, and the zig-zag.</p>
+<h3 id="the-zig">The zig</h3>
+<p>This is an ordinary binary tree rotation, as seen for example in
+red-black trees. The zig is only performed when the splayed node is a
+child of the root. On the left, the node to be splayed is \(x\), and the
+root is \(y\). The zig transforms the left tree into the right tree.</p>
+<div id="zig" align="center"></div>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zig.min.js"></script>
+<h3 id="the-zig-zig">The zig-zig</h3>
+<p>A zig-zig is performed whenever the splayed node \(x\) is the left-left
+child or the right-right child of its grandparent. A zig-zig of \(x\)
+transforms the left tree into the right tree.</p>
+<div id="zigzig" align="center"></div>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zigzig.min.js"></script>
+<h3 id="the-zig-zag">The zig-zag</h3>
+<p>In all remaining cases, a zig-zag is performed, transforming the left
+tree into the right tree.</p>
+<div id="zigzag" align="center"></div>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/zigzag.min.js"></script>
+<p>Notice that each of the above transformations retains the in-order
+sequence of keys. In the following visualization, 32 keys are inserted
+in a uniformly random order and splayed to the root. Once all keys are
+inserted, uniformly random keys are queried from inside the tree, and
+their nodes are splayed to the root. Nodes currently being splayed are
+highlighted in red. Black squares represent external nodes.</p>
+<div id="splay" align="center"></div>
+<script type="text/javascript" src="/js/2019-07-27-splay-trees/splay.min.js"></script>
+<p>This simple modification is enough to give splay trees some serious
+power.</p>
+<blockquote>
+<p><strong>The Static Optimality Meta-Theorem.</strong><br>
+Let \(T\) be some fixed binary search tree, and let \(d(x)\) be the depth of the node \(x\) in \(T\). Let \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most<br>
+\[
+O\left(n \log n + m + \sum_{i = 1}^m d(x_i)\right) .
+\]</p>
+</blockquote>
+<p>The \(n \log n + m\) part can be thought of as the cost of doing
+business in any balanced binary tree. The remaining part is the cost
+of the sequence of queries \(x_1, \dots, x_m\) in \(T\). So what this
+result says is that, for long enough query sequences, splay trees
+perform as well as any static binary search tree. In particular, if we
+pick \(T\) to be a balanced complete binary tree, then we get the
+following corollary.</p>
+<blockquote>
+<p><strong>The Balance Theorem.</strong><br>
+The cost of any sequence of \(m\) queries in a splay tree is at most
+\[
+O(n\log n + m \log n) .
+\]</p>
+</blockquote>
+<p>From this, we learn that the amortized cost of each operation is
+\(O(\log n)\), so splay trees behave like balanced binary search trees.</p>
+<p>As it turns out, splay trees also have the amortized working set
+property which we discussed earlier, though this is not a consequence
+of the static optimality meta-theorem.</p>
+<blockquote>
+<p><strong>The Working-Set Theorem.</strong><br>
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
+\[
+O\left(n \log n + m + \sum_{i = 1}^m \log w(x_i) \right) .
+\]</p>
+</blockquote>
+<p>Every year that I&rsquo;ve TA&rsquo;d the undergraduate honours data structures
+class at McGill University, students have been asked to design a data
+structure which has the <em>dynamic finger property</em>, where if \(\Delta\)
+is the difference in keys between the current and preceding queries,
+then the current operation should cost \(O(\log \Delta)\). It&rsquo;s a
+tricky problem, but with some work, this can be accomplished using
+a self-balancing binary search tree with level-linked lists, some
+smart traversal, and a bit of careful thinking&hellip; But who has the time
+for that?</p>
+<blockquote>
+<p><strong>The Dynamic Finger Theorem.</strong><br>
+The cost of the query sequence \(x_1, x_2, \dots, x_m\) in a splay tree is at most
+\[
+O\left(n + m + \sum_{i = 1}^m \log(1 + |x_i - x_{i - 1}|)\right) ,
+\]
+where \(x_0 = 0\).</p>
+</blockquote>
+<p>Is there anything splay trees can&rsquo;t do? We simply do not yet know,
+considering the following conjecture remains open.</p>
+<blockquote>
+<p><strong>The Dynamic Optimality Conjecture.</strong><br>
+Let \(T\) be a binary search tree and \(x_1, x_2, \dots, x_m\) be a sequence of queries in \(T\). Suppose that we are allowed to modify \(T\) by rotations after each query. Let \(S(T)\) be the sum of the lengths of access paths and the number of rotations made in the query sequence. The cost of accessing \(x_1, x_2, \dots, x_m\) in a splay tree is at most
+\[
+O(n + S(T)) .
+\]</p>
+</blockquote>
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+

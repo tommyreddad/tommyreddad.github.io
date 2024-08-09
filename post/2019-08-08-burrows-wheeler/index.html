@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>The Burrows-Wheeler transform and move-to-front compression · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="this is a test ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="http://localhost:1313/post/2019-08-08-burrows-wheeler/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="http://localhost:1313/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="http://localhost:1313//about/">About</a>
+<a class="page-link" href="http://localhost:1313//publications/">Publications</a>
+<a class="page-link" href="http://localhost:1313//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">The Burrows-Wheeler transform and move-to-front compression</h1>
+	<p class="post-meta">
+	  Aug 8, 2020 •
+	  
+	  
+	  
+	  <a href="http://localhost:1313//tags/compression">compression</a>,&nbsp<a href="http://localhost:1313//tags/algorithms">algorithms</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<style type="text/css">
+.bit-content {
+  display: inline;
+  }
+.bit-count {
+  display: inline;
+      font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+  }
+.bit-count-label {
+  font-weight: 700;
+    display: inline;
+      padding-right: 10px;
+      }
+.alphabet-content {
+  display: table-cell;
+    width: 100%;
+      border: 1px solid #e1e1e1;
+        margin-bottom: 16px;
+        font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+  }
+.alphabet {
+  display: table;
+    width: 100%;
+    }
+label {
+  font-weight: 700;
+    display: table-cell;
+      width: 1px;
+        padding-right: 10px;
+  }
+textarea {
+  width: 100%;
+    display: block;
+      height: 300px;
+        border: 1px solid #e1e1e1;
+    margin: 0 0 10px;
+      padding: 10px;
+      font-family: Monaco, Menlo, Consolas, "Courier New", DotumChe, monospace;
+      }
+.tab-pane {
+  min-height: 300px;
+  }
+.nav-tabs {
+  margin: 19px 0px 18px;
+    visibility: visible;
+      border-bottom: 1px solid #ddd;
+      }
+.nav-tabs > li.active {
+  font-weight: 700;
+  }
+.nav-tabs > li {
+  float: left;
+    margin-bottom: -1px;
+    }
+.tab-content {
+  margin-bottom: 10px;
+  }
+</style>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#input-contents">Input</a></li>
+  <li><a data-toggle="tab" href="#bwt-contents">BWT</a></li>
+  <li><a data-toggle="tab" href="#mtf-contents">MTF</a></li>
+  <li><a data-toggle="tab" href="#bwt-mtf-contents">BWT+MTF</a></li>
+</ul>
+<div class="tab-content">
+  <div id="input-contents" class="tab-pane active">
+    <textarea id="input" placeholder="Text to compress..."></textarea>
+  </div>
+  <div id="bwt-contents" class="tab-pane">
+    <textarea id="bwt" placeholder="Burrows-Wheeler transform to invert..."></textarea>
+  </div>
+  <div id="mtf-contents" class="tab-pane">
+    <div class="alphabet">
+      <label for="mtf-Sigma">Alphabet: </label>
+      <input class="alphabet-content" type="text" id="mtf-Sigma">
+    </div>
+    <textarea id="mtf" placeholder="MTF-compressed binary to decode..."></textarea>
+    <div class="bit-count">
+      <div class="bit-count-label">Bit count: </div><div class="bit-content" id="mtf-count"></div>
+    </div>
+  </div>
+  <div id="bwt-mtf-contents" class="tab-pane">
+    <div class="alphabet">
+      <label for="bwt-mtf-Sigma">Alphabet: </label>
+      <input class="alphabet-content" type="text" id="bwt-mtf-Sigma">
+    </div>
+    <textarea id="bwt-mtf" placeholder="BWT+MTF-compressed binary to decode..."></textarea>
+    <div class="bit-count">
+      <div class="bit-count-label">Bit count: </div><div class="bit-content" id="bwt-mtf-count"></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/js/2019-08-08-burrows-wheeler/bwt.js"></script>
+The above form implements algorithms to code and decode from the
+move-to-front compression scheme, with or without an additional
+application of the Burrows-Wheeler transform. These extremely slick
+algorithms blew my mind when I first heard of them. They are currently
+in use, among other places, in
+[bzip2](https://en.wikipedia.org/wiki/Bzip2) file compression.
+<p><a href="https://en.wikipedia.org/wiki/Move-to-front_transform">Move-to-front</a>
+is a natural and elegant compression scheme for encoding streams of
+data into a binary sequence, which performs particularly well when its
+input has many repetitions. In general, move-to-front is optimal in
+the sense that the length of its output sequence asymptotically
+attains at most a constant factor of the empirical entropy of the
+input stream.</p>
+<p>We first suppose that our input stream has characters drawn from the
+alphabet \(\Sigma\); for binary inputs, \(\Sigma = {0, 1}\). If the
+encoder and decoder were both aware of the alphabet maintained in a
+fixed and agreed upon order, then we could encode the input stream by
+simply sending the stream of indices in the alphabet corresponding to
+each character. For example, with the alphabet \(\Sigma = (a, b, c,
+\dots, z)\), we could represent the message <code>mississippi</code> with the
+sequence of indices <code>13, 9, 19, 19, 9, 19, 19, 9, 16, 16, 9</code>.</p>
+<p>Move-to-front makes the simple change over this trivial scheme that
+each time a character is polled, it is moved to the front of the
+alphabet. For example, in the first step of encoding <code>mississippi</code>,
+the alphabet \(\Sigma\) is scanned from left to right until the symbol
+<code>m</code> is encountered in the 13-th index, so we write <code>13</code> and move <code>m</code>
+to the front of the alphabet, which now becomes \(\Sigma = (m, a, b, c,
+\dots, l, n, \dots, z)\). Each step of encoding <code>mississippi</code> is
+detailed below:</p>
+<ul>
+<li><code>m</code> index <code>13</code>, \(\Sigma = (m, a, b, \dots, z)\).</li>
+<li><code>i</code> index <code>10</code>, \(\Sigma = (i, m, a, b, \dots, z)\).</li>
+<li><code>s</code> index <code>19</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+<li><code>s</code> index <code>1</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+<li><code>i</code> index <code>2</code>, \(\Sigma = (i, s, m, a, b, \dots, z)\).</li>
+<li><code>s</code> index <code>2</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+<li><code>s</code> index <code>1</code>, \(\Sigma = (s, i, m, a, b, \dots, z)\).</li>
+<li><code>i</code> index <code>1</code>, \(\Sigma = (i, s, m, a, b, \dots, z)\).</li>
+<li><code>p</code> index <code>17</code>, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).</li>
+<li><code>p</code> index <code>1</code>, \(\Sigma = (p, i, s, m, a, b, \dots, z)\).</li>
+<li><code>i</code> index <code>2</code>, \(\Sigma = (i, p, s, m, a, b, \dots, z)\).</li>
+</ul>
+<p>With move-to-front, <code>mississippi</code> is thus encoded with the sequence
+<code>13, 10, 19, 1, 2, 2, 1, 1, 17, 1, 2</code>. In comparison with the trivial
+scheme, this has drastically reduced the magnitude of frequently used
+characters.</p>
+<p>We still have to encode the integers in this index sequence. When we
+know that these indices are bounded within some range, as they are in
+this case between \(1\) and \(|\Sigma|\), it is common to use a
+fixed-width encoding; in computing terms, each character is
+represented using a fixed number of bits or bytes. However, in order
+to take advantage of the magnitude reduction of indices in
+move-to-front, it is judicious to make use of a variable-length
+encoding. We focus here on Elias codes.</p>
+<p>The Elias codes are each prefix-free codes of natural numbers. A code
+is prefix-free if no codeword is the prefix of another. Note that it
+is possible to decode a sequence of codewords from a prefix-free code
+immediately once each new codeword is encountered. The simplest
+prefix-free code for natural numbers is the <em>unary code</em>, where the
+integer <code>i</code> is encoded using a sequence of \(i - 1\) <code>0</code> characters,
+followed by a single <code>1</code>. This last <code>1</code> is necessary to delimit
+codewords in order to make the code prefix-free. It&rsquo;s obvious that the
+unary codeword for \(i\) has length \(i\).</p>
+<p>The Elias \(\gamma\)-code is another prefix-free code of natural
+numbers. Observe first that the binary codeword for the integer <code>i</code>
+has length \(\lfloor \log_2 i \rfloor + 1\) bits, and the
+most-significant bit here is always a <code>1</code>. This by itself is not a
+prefix-free code. The Elias \(\gamma\)-code prepends a sequence of
+\(\lfloor \log_2 i \rfloor\) <code>0</code> bits to the binary codeword for <code>i</code>,
+thereby creating a prefix-free code of length \(2 \lfloor \log_2 i
+\rfloor + 1\) for the integer <code>i</code>.</p>
+<p>In principle, the Elias \(\gamma\)-code presents the number \(\lfloor
+\log_2 i \rfloor + 1\) in a unary encoding through the most
+significant bits of the codeword for <code>i</code>, which tells us the remaining
+bits to be read in order to guarantee prefix-freeness. If we encode
+this integer instead with an Elias \(\gamma\)-code itself instead of
+unary, then we obtain the Elias \(\delta\)-code. For the integer \(i\),
+the Elias \(\delta\)-code has length \(\log_2 i + O(\log \log i)\). It&rsquo;s
+actually possible to iterate this process as much as possible to
+obtain the Elias \(\omega\)-code, but the Elias \(\delta\)-code is
+powerful enough for most purposes that the \(\omega\)-code is rarely
+used, even in theoretical works.</p>
+<p>You can try to use the form at the top of this post to encode
+<code>mississippi</code> in move-to-front with Elias \(\delta\)-codes, by typing it
+in the input tab and switching to the MTF tab.</p>
+<p>There is one simple and reversible transformation which we can make to
+the input in order to greatly improve move-to-front compression
+performance on highly structured inputs: this is the <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">Burrows-Wheeler
+transform</a>. Simply
+put, the Burrows-Wheeler transform of an input string <code>str</code> takes all
+all cyclic rotations of the string <code>str + $</code>, where <code>$</code> is an
+otherwise unused character, and sorts these rotations in lexicographic
+order, taking the last character of each of these sorted
+rotations.</p>
+<p>It&rsquo;s not hard to see why this transform can be inverted. But why
+should it help in move-to-front compression for structured input? As
+stated on Wikipedia,</p>
+<blockquote>
+<p>To understand why this creates more-easily-compressible data, consider transforming a long English text frequently containing the word &ldquo;the&rdquo;. Sorting the rotations of this text will group rotations starting with &ldquo;he &quot; together, and the last character of that rotation (which is also the character before the &ldquo;he &ldquo;) will usually be &ldquo;t&rdquo;, so the result of the transform would contain a number of &ldquo;t&rdquo; characters along with the perhaps less-common exceptions (such as if it contains &ldquo;Brahe &ldquo;) mixed in. So it can be seen that the success of this transform depends upon one value having a high probability of occurring before a sequence, so that in general it needs fairly long samples (a few kilobytes at least) of appropriate data (such as text).</p>
+</blockquote>
+<p>There are bijective variants of the Burrows-Wheeler transform, which
+don&rsquo;t require the introduction of a new character at the end of the
+input; I implemented the variant of <a href="http://bijective.dogma.net/00yyy.pdf">Gil and
+Scott</a> in the form at the top of
+this post.</p>
+<p>So how well does this perform? The text above this paragraph, encoded
+with move-to-front by itself, takes 42260 bits. With the addition of
+the Burrows-Wheeler transform, this is brought all the way down to
+21452 bits, almost half as many!</p>
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+
