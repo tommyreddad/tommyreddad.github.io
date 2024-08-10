@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Rebuilt this website with Hugo · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="some description ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="https://reddad.ca/post/2024-08-09-hugo/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="https://reddad.ca/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="https://reddad.ca//about/">About</a>
+<a class="page-link" href="https://reddad.ca//publications/">Publications</a>
+<a class="page-link" href="https://reddad.ca//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">Rebuilt this website with Hugo</h1>
+	<p class="post-meta">
+	  Aug 9, 2024 •
+	  
+	  
+	  
+	  <a href="https://reddad.ca//tags/web">web</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p>I decided yesterday to rebuild this website using
+<a href="https://gohugo.io/">Hugo</a>, while it was originally built using
+<a href="https://jekyllrb.com/">Jekyll</a>. In this post I&rsquo;ll discuss my
+experience.</p>
+<p>I was originally attracted to using Jekyll because I wanted a really
+simple static webpage, and at the time, Jekyll seemed like the best
+and most popular option. I enjoyed its excellent support for code and
+\(\LaTeX\) rendering.</p>
+<p>Over time my webpage grew to use many dependencies. I was a little bit
+uncomfortable about this, since Jekyll and its extensions are written
+in Ruby, which is not a language I&rsquo;m comfortable with or enjoy
+using. Whenever I ran into a lacking feature (which was pretty often),
+I just grumbled and moved on, since I didn&rsquo;t feel like stomaching
+enough Ruby to do whatever I wanted.</p>
+<p>Although it has been years since I last attempted to deploy this
+webpage with Jekyll, I remember running into some issues and some
+surprisingly long build times. It&rsquo;s around that time that I first
+heard of Hugo, which offers a similar feature set built in Go, which
+is a language I&rsquo;m much more familiar with.</p>
+<p>I decided yesterday to take the leap and attempt to recreate my page,
+with minimal aesthetic and technical changes, in Hugo. It took a few
+hours of tinkering but I mostly succeeded, except in one area. Jekyll
+supported an extension for handling citations in blog posts through
+BibTeX files. Unfortunately I don&rsquo;t think such an extension exists in
+Hugo yet &ndash; maybe I will develop it. So for now, citations have been
+manually annotated in blog posts, and a bibliography manually added to
+the bottom of relevant posts.</p>
+<p>Overall I&rsquo;m really pleased with Hugo, and I especially enjoy the fast
+build times.</p>
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad 
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+
