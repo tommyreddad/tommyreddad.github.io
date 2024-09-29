@@ -118,87 +118,87 @@ which is made available for free online thanks to <a href="https://www.gutenberg
 after a few seconds of execution on my laptop, we can observe the completed transformation.
 A visual inspection of the BWT itself reveals long chunks of repeated characters throughout. The following tables contains statistics on the resulting compression:</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Bit Count</strong></th>
-<th><strong>Compression Ratio</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Original (UTF-8)</strong></td>
-<td>9,434,200</td>
-<td>1.00</td>
-</tr>
-<tr>
-<td><strong>MTF</strong></td>
-<td>8,122,221</td>
-<td>0.86</td>
-</tr>
-<tr>
-<td><strong>BWT+MTF</strong></td>
-<td>3,336,189</td>
-<td>0.35</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"><strong>Bit Count</strong></th>
+          <th style="text-align: left"><strong>Compression Ratio</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Original (UTF-8)</strong></td>
+          <td style="text-align: left">9,434,200</td>
+          <td style="text-align: left">1.00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>MTF</strong></td>
+          <td style="text-align: left">8,122,221</td>
+          <td style="text-align: left">0.86</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>BWT+MTF</strong></td>
+          <td style="text-align: left">3,336,189</td>
+          <td style="text-align: left">0.35</td>
+      </tr>
+  </tbody>
 </table>
 <p>How does the Burrows-Wheeler transform perform on texts written in a different language? In my personal experience, French text
 is absolutely full of extraneous characters, especially e&rsquo;s, a&rsquo;s, u&rsquo;, and s&rsquo;s, so this might suggest the Burrows-Wheeler transform to be effective in compressing French text.
 We ran the algorithm on Zola&rsquo;s <a href="https://www.gutenberg.org/cache/epub/5711/pg5711.txt">Germinal</a>:</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Bit Count</strong></th>
-<th><strong>Compression Ratio</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Original (UTF-8)</strong></td>
-<td>8,415,728</td>
-<td>1.00</td>
-</tr>
-<tr>
-<td><strong>MTF</strong></td>
-<td>7,188,574</td>
-<td>0.85</td>
-</tr>
-<tr>
-<td><strong>BWT+MTF</strong></td>
-<td>2,947,192</td>
-<td>0.35</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"><strong>Bit Count</strong></th>
+          <th style="text-align: left"><strong>Compression Ratio</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Original (UTF-8)</strong></td>
+          <td style="text-align: left">8,415,728</td>
+          <td style="text-align: left">1.00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>MTF</strong></td>
+          <td style="text-align: left">7,188,574</td>
+          <td style="text-align: left">0.85</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>BWT+MTF</strong></td>
+          <td style="text-align: left">2,947,192</td>
+          <td style="text-align: left">0.35</td>
+      </tr>
+  </tbody>
 </table>
 <p>Interestingly, the compression behaved almost identically as on the English text!</p>
 <p>We also consider Chinese text&ndash;in this case, <a href="https://www.gutenberg.org/files/23950/23950-0.txt">Romance of the Three Kingdoms</a>. The results follow:</p>
 <table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Bit Count</strong></th>
-<th><strong>Compression Ratio</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Original (UTF-8)</strong></td>
-<td>14,735,232</td>
-<td>1.00</td>
-</tr>
-<tr>
-<td><strong>MTF</strong></td>
-<td>7,460,164</td>
-<td>0.51</td>
-</tr>
-<tr>
-<td><strong>BWT+MTF</strong></td>
-<td>5,229,807</td>
-<td>0.35</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left"></th>
+          <th style="text-align: left"><strong>Bit Count</strong></th>
+          <th style="text-align: left"><strong>Compression Ratio</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Original (UTF-8)</strong></td>
+          <td style="text-align: left">14,735,232</td>
+          <td style="text-align: left">1.00</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>MTF</strong></td>
+          <td style="text-align: left">7,460,164</td>
+          <td style="text-align: left">0.51</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>BWT+MTF</strong></td>
+          <td style="text-align: left">5,229,807</td>
+          <td style="text-align: left">0.35</td>
+      </tr>
+  </tbody>
 </table>
 <p>Surprisingly to me, the <strong>35%</strong> compression ratio returns, even with the enormous number of unique characters used in the Chinese text: <strong>4225</strong>, when compared to Crime and Punishment&rsquo;s <strong>97</strong> and Germinal&rsquo;s <strong>103</strong>.</p>
 

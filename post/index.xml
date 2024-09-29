@@ -6,8 +6,15 @@
     <description>Recent content in Posts on Tommy Reddad</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://reddad.ca/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Coming soon: a few exploratory projects</title>
+      <link>https://reddad.ca/post/2024-09-24-coming-soon/</link>
+      <pubDate>Sat, 28 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>https://reddad.ca/post/2024-09-24-coming-soon/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been messing around in my free time doing a bit of coding for fun&#xA;and to explore areas of interest. It&amp;rsquo;s a bit hard to motivate myself&#xA;to code during my free time considering coding is also part of my day&#xA;job. But my day job is not very technically interesting, so this is&#xA;how I get to explore the fun of coding. I&amp;rsquo;ll briefly describe a few of&#xA;these projects which I have in mind.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Rebuilt this website with Hugo</title>
       <link>https://reddad.ca/post/2024-08-09-hugo/</link>
@@ -27,7 +34,7 @@
       <link>https://reddad.ca/post/2020-09-27-burrows-wheeler-revisited/</link>
       <pubDate>Sun, 27 Sep 2020 00:00:00 +0000</pubDate>
       <guid>https://reddad.ca/post/2020-09-27-burrows-wheeler-revisited/</guid>
-      <description>In my previous post, I discussed the Burrows-Wheeler transform, and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on the same page reduces this complexity to \(O(n \log n)\) time and \(O(n)\) space, making the form usable on larger texts.</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://reddad.ca/post/2019-08-08-burrows-wheeler/&#34;&gt;In my previous post&lt;/a&gt;, I discussed the Burrows-Wheeler transform,&#xA;and embedded an HTML form on the page which dynamically computed the forward and inverse Burrows-Wheeler transforms with an additional move-to-front compression step. My initial implementation of this form was done in pure JavaScript with no particular care for&#xA;efficiency, and in particular used \(O(n^2 \log n)\) space and time. The new implementation on&#xA;&lt;a href=&#34;https://reddad.ca/post/2019-08-08-burrows-wheeler/&#34;&gt;the same page&lt;/a&gt; reduces this complexity to \(O(n \log n)\) time&#xA;and \(O(n)\) space, making the form usable on larger texts. It is possible, as noted in the paper of&#xA;&lt;a href=&#34;https://arxiv.org/pdf/1201.3077.pdf&#34;&gt;Gil and Scott&lt;/a&gt;, that this time complexity can be reduced to \(O(n)\) by using linear time&#xA;suffix array construction algorithms.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Burrows-Wheeler transform and move-to-front compression</title>

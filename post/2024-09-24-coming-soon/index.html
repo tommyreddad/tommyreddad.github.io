@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Coming soon: a few exploratory projects · Tommy Reddad</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="some description ">
+    <meta name="author" content="Tommy Reddad">
+    <meta name="keywords" content="">
+    <link rel="canonical" href="https://reddad.ca/post/2024-09-24-coming-soon/">
+
+    
+    <link rel="shortcut icon" type="image/png" href="/img/icons/icon-16x16.png">
+    <link rel="shortcut icon" sizes="16x16" href="/img/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" href="/img/icons/icon-16x16.png">
+
+    
+    
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    
+    
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/style.min.6f4aa6626924a179d64ec47b4c5dd9cd7928ae66992ca21b27a5eb24b6873ca4.css"
+      integrity=""
+      crossorigin="anonymous"
+      />
+    
+    
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},   
+        {left: '$$', right: '$$', display: true},     
+        {left: '\\(', right: '\\)', display: false},  
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+
+    
+
+    
+    
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    
+
+</head>
+<body>
+
+
+<header class="site-header">
+  <div class="wrapper">
+    <a href="https://reddad.ca/" class="site-title">Tommy Reddad</a>
+    <nav class="site-nav">
+      <a class="page-link" href="https://reddad.ca//about/">About</a>
+<a class="page-link" href="https://reddad.ca//publications/">Publications</a>
+<a class="page-link" href="https://reddad.ca//archive/">Archive</a>
+
+    </nav>
+  </div>
+</header>
+
+
+<main class="page-content" aria-label="Content">
+  <div class="wrapper">
+    <article class="post">
+      
+      <header class="post-header">
+	<h1 class="post-title">Coming soon: a few exploratory projects</h1>
+	<p class="post-meta">
+	  Sep 28, 2024 •
+	  
+	  
+	  
+	  <a href="https://reddad.ca//tags/web">web</a>
+	  
+	  
+	</p>
+      </header>
+
+      <div class="post-content">
+	<p>I&rsquo;ve been messing around in my free time doing a bit of coding for fun
+and to explore areas of interest. It&rsquo;s a bit hard to motivate myself
+to code during my free time considering coding is also part of my day
+job. But my day job is not very technically interesting, so this is
+how I get to explore the fun of coding. I&rsquo;ll briefly describe a few of
+these projects which I have in mind.</p>
+<h2 id="compiler-design">Compiler design</h2>
+<p>I never studied compiler design and I don&rsquo;t really have a good idea
+about how they work. I&rsquo;m sure this is a very deep and interesting
+subject, and I&rsquo;m particularly interested in compiler optimizations.</p>
+<p>I&rsquo;ve decided to just roughly follow along the curriculum in a publicly
+posted course at my alma mater McGill University:
+<a href="https://www.cs.mcgill.ca/~cs520/2017/">https://www.cs.mcgill.ca/~cs520/2017/</a>. I noticed much of the course
+materials, assignments, and homeworks, are posted on that
+webpage. I&rsquo;ll also be reading the book recommended in the course
+outline, <em>Crafting a Compiler</em> by Fischer, Cytron, and LeBlanc &ndash;
+although it might be dated, and if so, I may refer to more
+contemporary sources.</p>
+<p>My goal here is to implement compilers for the MiniLang and GoLite
+languages, whose specifications are given on the course webpage. I may
+implement one or both of them via <a href="https://llvm.org/">LLVM</a>, since
+this seems like a modern and indeed lower-level approach.</p>
+<h2 id="exploring-rust">Exploring Rust</h2>
+<p>I&rsquo;d like to learn <a href="https://www.rust-lang.org/">Rust</a>, which is often
+described to me as the greatest language ever designed. I really don&rsquo;t
+know anything about it but I&rsquo;m doubtful.</p>
+<p>If I find it interesting, I may try to implement a hopefully useful
+data structure in this language.</p>
+<h2 id="shader-programming">Shader programming</h2>
+<p>I recently watched a <a href="https://www.youtube.com/watch?v=TrHHTQqmAaM">very interesting
+video</a> about the global
+illumination lighting algorithm Radiance Cascades, designed for and
+implemented in the video game Path Of Exile 2.</p>
+<p>I&rsquo;ve studied computer graphics programming before, and I&rsquo;ve always
+found it interesting. I have learned about and implemented the
+traditional radiance algorithm before, but the implementation was
+awful and deeply inefficient. It would be great to revisit this and
+get my hands dirty with some more practical shader programming.</p>
+<p>I also learned about Shadertoy (<a href="https://www.shadertoy.com/">https://www.shadertoy.com/</a>) which
+appears to make the distribution and development of little shaders
+really simple. It would be great to use this as a little playground
+for shader programming exploration.</p>
+<h2 id="nessnes-programming">NES/SNES programming</h2>
+<p>I have studied NES and SNES programming, but I haven&rsquo;t written or
+developed anything. Ever since childhood I&rsquo;ve been fascinated by the
+EarthBound battle screens and I&rsquo;ve since learned how they were
+implemented via HDMA (<a href="https://www.youtube.com/watch?v=zjQik7uwLIQ)">https://www.youtube.com/watch?v=zjQik7uwLIQ)</a>. It
+would be really cool to implement something myself, like an EarthBound
+battle screen style demo.</p>
+
+      </div>
+      
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <p>
+      &copy; 2024 - Tommy Reddad
+    </p>
+    <p>
+      Theme inspired by <a href="https://github.com/yous/whiteglass">whiteglass</a>.
+    </p>
+  </div>
+</footer>
+</body>
+</html>
+
